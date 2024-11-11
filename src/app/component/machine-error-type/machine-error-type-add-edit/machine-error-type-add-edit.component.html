@@ -1,0 +1,169 @@
+<ng-container>
+    <div class="editBoxDataCon active">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon">
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="machineErrorTypeAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="col-sm-12">
+                        <div class="editBoxFullTop">
+                            <div class="editBoxTitle">
+                                <span class="editIconBox">
+                                    <i class="fa fa-plus" *ngIf="!isMachineEdit" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil" *ngIf="isMachineEdit" aria-hidden="true"></i>
+                                </span>{{addEditForm}} Machine Error Type
+                            </div>
+                            <a class="editBoxClose" (click)="closeModal()">✖</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="editBoxgRidDesTextCon">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 ">
+                                    <div class="editBoxEmployeesDetCon">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="editBoxMattersTasksCon">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <mat-label>Error Name <sup>*</sup></mat-label>
+                                                                <mat-form-field class="form-control-mat"
+                                                                    floatLabel="never">
+                                                                    <input type="text" matInput
+                                                                        formControlName="errorName"
+                                                                        [(ngModel)]="machineErrorTypeModel.errorName"
+                                                                        placeholder='Enter Error Name'>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.errorName.errors"
+                                                                            [submitted]="fform.submitted"
+                                                                            [touched]="f.errorName.touched"
+                                                                            [required]="errorMessage.mandatory"
+                                                                            [maxlength]="errorMessage.maxlengthFiveHundred"
+                                                                            [pattern]="errorMessage.patternAlphaNumericSpaceHypen">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <mat-label>PLC Read address<sup>*</sup></mat-label>
+                                                                <mat-form-field class="form-control-mat"
+                                                                    floatLabel="never">
+                                                                    <input type="number" matInput
+                                                                        formControlName="address"
+                                                                        [(ngModel)]="machineErrorTypeModel.address"
+                                                                        placeholder='Enter NUmber PLC Read Address'>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.address.errors"
+                                                                            [submitted]="fform.submitted"
+                                                                            [touched]="f.address.touched"
+                                                                            [required]="errorMessage.mandatory"
+                                                                            [maxlength]="errorMessage.maxlengthFiveHundred">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <mat-label>Machine<sup>*</sup></mat-label>
+                                                                <mat-form-field class="form-control-mat"
+                                                                    floatLabel="never">
+                                                                    <mat-select
+                                                                        [(ngModel)]="machineErrorTypeModel.applicableMachineViews"
+                                                                        [compareWith]="comparer"
+                                                                        formControlName="applicableMachineViews"
+                                                                        name="applicableMachineViews"
+                                                                        class="mat-input-element"
+                                                                        placeholder="Select a Machine" multiple>
+                                                                        <mat-option *ngFor="let machine of machineList"
+                                                                            [value]="machine">
+                                                                            {{machine.name}}
+                                                                        </mat-option>
+                                                                    </mat-select>
+                                                                    <mat-error>
+                                                                        <app-error-message
+                                                                            [errors]="f.applicableMachineViews.errors"
+                                                                            [submitted]="fform.submitted"
+                                                                            [touched]="f.applicableMachineViews.touched"
+                                                                            [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <mat-label>PLC Address Type Enum<sup>*</sup></mat-label>
+                                                                <mat-form-field class="form-control-mat"
+                                                                    floatLabel="never">
+                                                                    <mat-select
+                                                                        [(ngModel)]="machineErrorTypeModel.type.key"
+                                                                        formControlName="type" class="mat-input-element"
+                                                                        placeholder="Select a PLC Address Type">
+                                                                        <mat-option *ngFor="let type of typeList"
+                                                                            [value]="type.key">
+                                                                            {{type.value}}
+                                                                        </mat-option>
+                                                                    </mat-select>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.type.errors"
+                                                                            [submitted]="fform.submitted"
+                                                                            [touched]="f.type.touched"
+                                                                            [required]="errorMessage.mandatory"
+                                                                            [maxlength]="errorMessage.maxlengthFiveHundred">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <mat-label>PLC Register Error Value</mat-label>
+                                                                <mat-form-field class="form-control-mat"
+                                                                    floatLabel="never">
+                                                                    <input type="text" matInput
+                                                                        formControlName="regErrorValue"
+                                                                        [(ngModel)]="machineErrorTypeModel.regErrorValue"
+                                                                        placeholder='Enter Number PLC Register Error Value'>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <mat-label>coil Error Value</mat-label>
+                                                                <mat-radio-group id="coilErrorValueFalse"
+                                                                    name="coilErrorValue"
+                                                                    formControlName="coilErrorValue"
+                                                                    [(ngModel)]="machineErrorTypeModel.coilErrorValue">
+                                                                    <mat-radio-button for="coilErrorValueTrue"
+                                                                        value=true>true</mat-radio-button>
+                                                                    <mat-radio-button for="coilErrorValueFalse"
+                                                                        value=false>false</mat-radio-button>
+                                                                </mat-radio-group>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 pr-0" *blockUI="'saveUpdateBtnBlockUI'">
+                                            <div class="btnCon text-right mt-3">
+                                                <button type="button" mat-raised-button (click)="closeModal()"
+                                                    class="mr-2 btn-secondary">Cancel</button>
+                                                <button type="submit" mat-raised-button
+                                                    color="primary">{{saveUpdateBtn}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -1,0 +1,51 @@
+.mat-card-header {
+    .mat-card-header-text {
+      margin: 0px;
+    }
+  }
+  mat-card-header{
+    align-items: center;
+  }
+  mat-card-actions {
+    position: absolute;
+    width: 100%;
+    bottom: 15px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    left: 0;
+    margin-left: 0px;
+  }
+  mat-card-title {
+    // color: $brand-neutral;
+    color: $black-color-200;
+    font-size: 16px !important;
+    a {
+      color: $black-color-200;
+      font-weight: 700;
+      &:hover {
+        color: $brand-neutral;
+      }
+    }
+  }
+  .mat-card-title {font-weight: 700;}
+
+  .mat-card .machine-status {font-size: 12px;}
+  .material-card {
+    margin-bottom: 30px;
+    .mat-card {
+      padding-bottom: 70px;
+    }
+  }
+  .card-action-drp {
+    position: absolute;
+    right: 5px;
+    margin-top: 2px;
+  }
+  .card-header-image {
+    background-size: cover;
+  }
+  .card-action-section {
+    padding: 3px 7px 7px 7px;
+  }
+
+  .mat-card {box-shadow: 0px 2px 6px #A8BF3D1F !important;}

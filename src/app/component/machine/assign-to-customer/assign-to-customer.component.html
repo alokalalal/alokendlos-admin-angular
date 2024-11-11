@@ -1,0 +1,142 @@
+<ng-container>
+    <div class="editBoxDataCon active">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon">
+            <div class="editBoxFull">
+                <form #fform="ngForm" [formGroup]="assignToForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    Machine Assign To Customer</div>
+                                <a class="editBoxClose" (click)="closeModal()">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <!-- <div class="form-group">
+                                                                    <label
+                                                                        class="txt-bold">Machine Name : {{dynamicComponentData.machineName}}</label>
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12 mt-4">
+                                                                <div class="form-group">
+                                                                    <label
+                                                                        class="txt-bold">Machine Id : {{dynamicComponentData.machineId}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-sm-12 col-md-12 mt-4">
+                                                                <div class="form-group">
+                                                                    <mat-label *ngIf ="isDisable">Barcode Structure Template<sup>*</sup> : {{machineView.barcodeStructureTemplateView?.barcodeStructureName}}</mat-label>
+                                                                    <app-searchable-dropdown *ngIf ="!isDisable"
+                                                                        [filteredDataModel]="machineView.barcodeStructureTemplateView"
+                                                                        [placeholder]="'Select Barcode Structure Template'"
+                                                                        [dropdownList]="barcodeTemplateList"
+                                                                        [initialValue]="selectedBarcodeTemplate"
+                                                                        (dropdownChangeEventEmitter)="changeBarcodeTemplate($event)"
+                                                                        [searchableDropdownControl]="$any(assignToForm).controls['barcodeTemplate']">
+                                                                    </app-searchable-dropdown>
+                                                                    
+                                                                </div>
+                                                            </div> -->
+                                                            
+                                                            <div class="col-sm-12 col-md-12 mt-4">
+                                                                <div class="form-group">
+                                                                    <mat-label *ngIf ="isDisable">Cutomer Name: {{machineView.customerView.name}}</mat-label>
+                                                                    <app-searchable-dropdown *ngIf ="!isDisable"
+                                                                        [filteredDataModel]="machineView.customerView"
+                                                                        [placeholder]="'Select Customer'"
+                                                                        [dropdownList]="customerList"
+                                                                        [initialValue]="selectedCustomer"
+                                                                        (dropdownChangeEventEmitter)="changeCustomer($event)"
+                                                                        [searchableDropdownControl]="$any(assignToForm).controls['customer']">
+                                                                    </app-searchable-dropdown>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.customer.errors"
+                                                                            [submitted]="fform.submitted"
+                                                                            [touched]="f.customer.touched"
+                                                                            [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label *ngIf ="isDisable">Branch Name : {{machineView.locationView.name}}</mat-label>
+                                                                    <app-searchable-dropdown *ngIf ="!isDisable"
+                                                                        [filteredDataModel]="machineView.locationView"
+                                                                        [placeholder]="'Select Branch'"
+                                                                        [dropdownList]="locationList"
+                                                                        [initialValue]="selectedLocation"
+                                                                        (dropdownChangeEventEmitter)="changeLocation($event)"
+                                                                        [searchableDropdownControl]="$any(assignToForm).controls['location']">
+                                                                    </app-searchable-dropdown>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.location.errors"
+                                                                            [submitted]="fform.submitted"
+                                                                            [touched]="f.location.touched"
+                                                                            [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Branch wise machine number<sup>*</sup></mat-label>
+                                                                    <!-- //this is for textbox for auto assign branch-wise machine number
+                                                                        <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <input type="text" [readonly]="true" matInput formControlName="branchMachineNumber" [(ngModel)]="machineView.branchMachineNumber" placeholder='Enter Branch Machine Number'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.branchMachineNumber.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.branchMachineNumber.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxNine" [minlength]="errorMessage.minlengtOne" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field> -->
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <mat-select placeholder="Branch wise machine number"
+                                                                                formControlName="branchMachineNumber"
+                                                                                [(ngModel)]="machineView.branchMachineNumber"
+                                                                                (ngModelChange)="changeBranchWiseMachineNumber($event)">
+                                                                            <mat-option *ngFor="let number of staticNumbers" [value]="number" [disabled]="isNumberInDropdown(number)">
+                                                                                {{number}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.branchMachineNumber.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.branchMachineNumber.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxNine" [minlength]="errorMessage.minlengtOne" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                 </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 pr-0" >
+                                                <div class="btnCon text-right mt-3 fixed-botton" *ngIf ="!isDisable">
+                                                    <button type="button" mat-raised-button (click)="closeModal()" 
+                                                        class="mr-2 btn-secondary" *blockUI="'saveUpdateBtnBlockUI'">Cancel</button>
+                                                    <button type="submit" mat-raised-button
+                                                        color="primary" *blockUI="'saveUpdateBtnBlockUI'">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

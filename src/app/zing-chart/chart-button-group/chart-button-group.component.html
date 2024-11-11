@@ -1,0 +1,105 @@
+<div class="container-icon-ul mb-0 pr-3">
+    <ul class="total-section">
+        <li class="float-left chart-total">
+            Total : {{ chartWrapperService.total || '-' }}
+        </li>
+    </ul>
+    <ul class="icon-ul m-0 p-0">
+        <li *ngIf="drillDownStatus$ | async">
+            <a href="#" onclick="return false;" (click)="removeDrillDown()">
+                <i class="material-icons">arrow_back_ios_new</i>
+            </a>
+        </li>
+        <!-- <li *ngIf="chartButtonGroup?.hasCopyButton">
+            <a
+                href="#"
+                onclick="return false;"
+                (click)="chartWrapperService.copyChart()"
+                matTooltip="Copy Chart"
+                matTooltipPosition="below"
+            >
+                <i class="material-icons">content_copy</i>
+            </a>
+        </li> -->
+        <!-- <li class="dropdown" *ngIf="chartButtonGroup?.chartTypeSelectors && !(drillDownStatus$ | async)">
+            <a href="#" data-toggle="dropdown"
+                ><i class="material-icons">{{ (chartTypeSelector$ | async)?.icon }}</i></a
+            >
+            <div class="dropdown-menu chart-button-group-dropdown">
+                <a
+                    class="dropdown-item check-icon"
+                    href="#"
+                    onclick="return false;"
+                    *ngFor="let chartTypeSelector of chartButtonGroup?.chartTypeSelectors"
+                    (click)="changeChartTypeSelector(chartTypeSelector)"
+                >
+                    <i class="material-icons chart-type-menu-icon">{{ chartTypeSelector.icon }}</i>
+                    {{ chartTypeSelector.name }}
+                </a>
+            </div>
+        </li> -->
+        <!-- <li class="dropdown" *ngIf="chartButtonGroup?.menuButton">
+            <a href="#" data-toggle="dropdown"><i class="material-icons">menu</i></a>
+            <div class="dropdown-menu chart-button-group-dropdown">
+                <a
+                    class="dropdown-item check-icon"
+                    *ngIf="chartButtonGroup.menuButton?.aggregateSection?.hasButton && !(drillDownStatus$ | async)"
+                    (click)="toggleAggregate()"
+                >
+                    <i class="material-icons" *ngIf="aggregate$ | async">check</i>
+                    Aggregate Charts</a
+                >
+                <span
+                    class="border-li"
+                    *ngIf="chartButtonGroup.menuButton?.aggregateSection?.hasButton && (drillDownStatus$ | async) === false"
+                ></span>
+                <a class="dropdown-item" *ngIf="chartButtonGroup.menuButton?.hasShowGuideButton">Show Guide</a>
+                <a class="dropdown-item check-icon" *ngIf="chartButtonGroup.menuButton?.totalSection?.hasButton" (click)="toggleTotal()">
+                    <i class="material-icons" *ngIf="chartButtonGroup.menuButton.totalSection?.isSelected">check</i>
+                    Show Totals</a
+                >
+                <a class="dropdown-item check-icon" *ngIf="chartButtonGroup.menuButton?.legendSection?.hasButton" (click)="toggleLegend()">
+                    <i class="material-icons" *ngIf="chartButtonGroup.menuButton.legendSection?.isSelected">check</i>
+                    Show Legend</a
+                >
+                <span
+                    class="border-li"
+                    *ngIf="
+                        chartButtonGroup.menuButton?.hasShowGuideButton ||
+                        chartButtonGroup.menuButton?.totalSection?.hasButton ||
+                        chartButtonGroup.menuButton?.legendSection?.hasButton
+                    "
+                ></span>
+                <a
+                    class="dropdown-item"
+                    *ngIf="chartButtonGroup.menuButton?.hasDownloadPDFButton"
+                    (click)="chartWrapperService.downloadPdf()"
+                    >Download PDF</a
+                >
+                <a
+                    class="dropdown-item"
+                    *ngIf="chartButtonGroup.menuButton?.hasDownloadCSVButton"
+                    (click)="chartWrapperService.downloadCsv()"
+                    >Download CSV</a
+                >
+                <a
+                    class="dropdown-item"
+                    *ngIf="chartButtonGroup.menuButton?.hasDownloadXLSButton"
+                    (click)="chartWrapperService.downloadXls()"
+                    >Download XLS</a
+                >
+                <span
+                    class="border-li"
+                    *ngIf="
+                        chartButtonGroup.menuButton?.hasDownloadPDFButton ||
+                        chartButtonGroup.menuButton?.hasDownloadCSVButton ||
+                        chartButtonGroup.menuButton?.hasDownloadXLSButton
+                    "
+                ></span>
+                <a class="dropdown-item" *ngIf="chartButtonGroup.menuButton?.hasPrintButton" (click)="chartWrapperService.onPrintChart()"
+                    >Print Chart</a
+                >
+            </div>
+        </li> -->
+    </ul>
+</div>

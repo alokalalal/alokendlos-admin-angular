@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFCompactDisplay-Thin.woff2') format('woff2'),
+        url('SFCompactDisplay-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFCompactDisplay-Medium.woff2') format('woff2'),
+        url('SFCompactDisplay-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+

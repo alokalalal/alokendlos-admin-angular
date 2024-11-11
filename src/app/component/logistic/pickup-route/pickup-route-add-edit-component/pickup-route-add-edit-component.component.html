@@ -1,0 +1,112 @@
+<ng-container>
+    <div class="editBoxDataCon" [ngClass]="{'active': isOpenModel == true}">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon">
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="pickupRouteAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    {{addEditForm}} Pickup Route</div>
+                                <a class="editBoxClose" (click)="closeModal()" href="javascript:void(0)">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Pickup Route Number<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"
+                                                                        floatLabel="never">
+                                                                        <input type="number" matInput
+                                                                            formControlName="pickupRouteNo"
+                                                                            [(ngModel)]="pickupRouteView.pickupRouteNo"
+                                                                            placeholder="Enter Pickup Route Number" maxlength="100" [ngClass]="'override'">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.pickupRouteNo.errors"
+                                                                                [submitted]="fform.submitted"
+                                                                                [touched]="f.pickupRouteNo.touched"
+                                                                                [required]="errorMessage.mandatory"
+                                                                                [maxlength]="errorMessage.maxlengthHundred"
+                                                                                [pattern]="errorMessage.patternAlphaNumericSpaceDot" 
+                                                                                [max]="errorMessage.maxNintyNine"
+                                                                                [min]="errorMessage.minlengtOne">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                        <mat-label>Area<sup>*</sup></mat-label>  
+                                                                        <mat-form-field class="form-control-mat"
+                                                                            floatLabel="never">                                            
+                                                                        <input type="area" matInput formControlName="area" [(ngModel)]="pickupRouteView.area" placeholder='Enter Area' maxlength="100" [ngClass]="'override'">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.area.errors"
+                                                                                [submitted]="fform.submitted"
+                                                                                [touched]="f.area.touched"
+                                                                                [required]="errorMessage.mandatory"
+                                                                                [maxlength]="errorMessage.maxlengthHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                             </div>
+                                                         <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group readonly-field">
+                                                                    <mat-label>Pickup Route Name<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat">
+                                                                    <input type="text" ng-disabled="all"  matInput formControlName="name" [(ngModel)]="pickupRouteView.name" placeholder='Enter Pickup Route Name' [ngClass]="'override'">
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.name.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.name.touched" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternAlphaNumericSpaceDot">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                         </div>
+                                                        <div class="col-sm-12 col-md-12 ">
+                                                            <div class="form-group">
+                                                                <mat-label>Comment</mat-label>  
+                                                                <mat-form-field class="form-control-mat" floatLabel="never">                                            
+                                                                    <input type="text" matInput formControlName="comment" [(ngModel)]="pickupRouteView.comment" placeholder='Enter Comment' [ngClass]="'override'">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.comment.errors" [submitted]="fform.submitted"
+                                                                                    [touched]="f.comment.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12" >
+                                                <div class="btnCon text-right mt-3 fixed-botton">
+                                                    <button type="button" mat-raised-button (click)="closeModal()"
+                                                        class="mr-2 btn-secondary" *blockUI="'saveUpdateBtnBlockUI'">Cancel</button>
+                                                    <button type="submit" mat-raised-button
+                                                        color="primary" *blockUI="'saveUpdateBtnBlockUI'">{{saveUpdateBtn}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -1,0 +1,27 @@
+.mat-card-avatar {
+    height: 40px;
+    width: 60px;
+    border-radius: 0% !important;
+    flex-shrink: 0;
+    object-fit: cover;
+margin: 0 auto;
+}
+
+.mat-card-avatar img{
+    width: 60px !important;
+}
+
+@media only screen and (min-width: 1200px) {
+    .editBoxCon.editBoxCon-lg{
+        width: 770px;
+    }
+    .editBoxCon-lg .editBoxFullTop{
+        width: 770px;
+    }
+    .editBoxCon-lg .fixed-botton{
+        width: 770px;
+    }   
+    .table-same-hight table td{
+        height: 51px;
+    } 
+}

@@ -1,0 +1,115 @@
+<ng-container>
+    <div class="editBoxDataCon active" >
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon" >            
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="machineAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    {{addEditForm}} Machine</div>
+                                <a class="editBoxClose" (click)="closeModal()">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" >
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row"  *ngIf="machineModel?.customerView?.name==undefined">
+                                                            <!-- <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Machine Id <sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="machineId" [(ngModel)]="machineModel.machineId" placeholder='Enter Machine Id'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.machineId.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.machineType.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthTwenty">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div> -->
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Machine Type</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                                                           
+                                                                        <mat-select [(ngModel)]="machineModel.machineType.key" formControlName="machineType"
+                                                                            name="machineType" class="mat-input-element" placeholder="Select Machine Type">
+                                                                            <mat-option *ngFor="let machine of machineTypeList" [value]="machine.key">
+                                                                                {{machine.value}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.machineType.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.machineType.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>   
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Accepted Materials</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <mat-select [(ngModel)]="machineModel.acceptedMaterials" [compareWith]="comparer" formControlName="acceptedMaterials" name="acceptedMaterials" 
+                                                                            class="mat-input-element"  placeholder="Select a Accepted Materials" multiple>
+                                                                            <mat-option *ngFor="let machine of materialEnumList" [value]="machine">
+                                                                            {{machine.value}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.acceptedMaterials.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.acceptedMaterials.touched" [required]="errorMessage.mandatory"
+                                                                                ></app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row" *ngIf="machineModel?.customerView?.name!=undefined">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Machine Id<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" [readonly]="isDisable" matInput formControlName="machineId" [(ngModel)]="machineModel.machineId">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Machine Type <sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" [readonly]="isDisable" matInput formControlName="machineType" [(ngModel)]="machineModel.machineType.value">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 pr-0" >
+                                                <div class="btnCon text-right mt-3 fixed-botton">
+                                                    <button type="button"mat-raised-button (click)="closeModal()"  class="mr-2 btn-secondary" *blockUI="'pageSectionBlockUI'">Cancel</button>
+                                                    <button  type="submit" mat-raised-button color="primary" *blockUI="'pageSectionBlockUI'">{{saveUpdateBtn}}</button>
+                                                    <!-- [disabled]="!machineAddEditForm.dirty || machineAddEditForm.invalid" -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

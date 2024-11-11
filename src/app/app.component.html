@@ -1,0 +1,10 @@
+
+<div class="min-height-at-loading" [ngClass] = "themeColor" [class.dark-theme]="darkThemeEnabled">
+    <router-outlet>
+        <div class="min-height-at-loading-div" *ngIf="!isNavigationEnd">
+            <div class="appComponentLoadingDiv">
+                <img src="assets/images/loader.gif" class="loadingImage" />
+            </div>
+        </div>
+    </router-outlet>
+</div>

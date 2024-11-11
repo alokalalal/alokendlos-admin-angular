@@ -1,0 +1,15 @@
+@import "/src/scss/style.scss";
+.shorting-section {width:200px;margin-right: 7px;}
+.shorting-section app-searchable-dropdown {width: calc(100% - 50px);display: flex;}
+
+// .shorting-drp .mat-form-field-wrapper{padding-bottom: 0px !important;}
+// .shorting-drp .form-control-mat .mat-input-element {border-radius: 0px 5px 5px 0px !important}
+
+.shorting-section app-searchable-dropdown.border-none  .mat-form-field-underline {display: none !important;}
+
+
+// .form-group.shorting-drp .form-control-mat .mat-input-element {height: 38px !important;}
+.shorting-btn .short-icon {font-size: 18px;margin-right: -5px;}
+.shorting-btn .short-arrow {font-size: 14px;}
+.shorting-btn {margin-right: 0px;padding: 8px;background-color: rgba($black-color, 0.08);height: 38px;border-radius: 5px 0px 0px 5px;cursor: pointer;border: 1px solid $filed-custome-border;float: left;}
+

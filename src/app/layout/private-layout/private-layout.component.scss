@@ -1,0 +1,59 @@
+@import "/src/scss/style.scss";
+
+.fixed-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: inline-block;
+    z-index: 99;
+    background: $white-color;
+    padding: 0px;
+    border-bottom: 1px solid $green-color-eee;
+}
+.header-padding {
+    padding-top: 48px;
+}
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    padding-left: 250px;
+    transition: all 0.3s;
+}
+.wrapper.active {
+    padding-left: 50px;
+}
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: calc(100vh - 48px);
+    transition: all 0.3s;
+}
+
+@media only screen and (max-width: 991px){
+    #content {
+        padding: 21px;
+    }
+}
+
+@media only screen and (max-width: 816px){
+    .header-padding {
+        padding-top: 90px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .header-padding {
+        padding-top: 90px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .header-padding {
+        padding-top: 140px;
+    }
+    .wrapper,
+    .wrapper.active {
+        padding-left: 0;
+    }
+}

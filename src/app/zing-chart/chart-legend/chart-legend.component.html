@@ -1,0 +1,22 @@
+<div *ngIf="legends && isLegendSectionVisible">
+        <label class="legend-label">
+            Legend
+        </label>
+        <div class="d-flex flex-wrap legend-button">
+            <div class="d-inherit" *ngFor="let legend of legends; let i = index">
+                <span class="btn btn-legend btn-sm legend-chart drill-down-legend" *ngIf="drillDownStatus$ | async">
+                    <i class="material-icons mr-1 mtn-2" [ngClass]="legend.className">lens</i>
+                    {{ legend.name }} 
+                </span>
+                <button
+                    mat-raised-button
+                    *ngIf="!(drillDownStatus$ | async)"
+                    [ngClass]="{ 'selected-legend': !legend.isSelected }"
+                    (click)="hideShowLegend(legend)"
+                >
+                    <i class="material-icons mr-1 mtn-2" [ngStyle]="{'color': legend.className}" >lens</i>
+                    {{ legend.name }}
+                </button>
+            </div>
+        </div>
+</div>

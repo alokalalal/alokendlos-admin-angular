@@ -1,0 +1,153 @@
+.check-box-list{
+    position: relative;
+    width: auto;
+    display: inline-block;
+    padding: 6px;
+    float: left;
+    /* background: #f7f7f7; */
+    line-height: 0;
+}
+.check-box-list input {
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    text-align: left;
+}
+
+.btn-con{
+    width: 100%;
+    display: inline-block;
+    margin-top: 24px;
+}
+.check-box-list-con {
+    width: 100%;
+    text-align: left;
+    margin: 0 auto;
+    display: inline-block;
+}
+.barcode-type-info {
+    width: auto;
+    display: inline-block;
+    background: #f7f7f7;
+    padding: 15px;
+    margin: 6px;
+}
+.color-box-value{
+    background: #f7f7f7;
+    width: 30px;
+    display: inline-block;
+    height: 30px;
+}
+.barcode-type-info-con{
+    width: auto;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 220px;
+}
+.check-box {
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    text-align: center;
+    border: 1px solid #a5a5a5;
+    display: inline-block;
+    border-radius: 4px;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 36px;
+}
+.check-box-list-group{
+    width: auto;
+    display: inline-block;
+    float: left;
+    position: relative;
+}
+.check-box-list-group.disabled:hover > .barcode-type-info-con{
+    display: block;    
+}
+.selected .check-box{
+    border-color: #000000;
+    background: #f1f1f1;
+}
+.selected.disabled .check-box{
+    background: transparent;
+}
+.check-box-list-group p{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12px;
+    line-height: normal;
+    color: #000000;
+}
+.mat-button-disabled{
+    background-color: #2D4EF5 !important;
+    opacity: 0.5;
+}
+@media only screen and (max-width: 1799px) {
+    .check-box-list input {
+        width: 32px;
+        height: 32px;
+    }
+    .check-box{
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+    }
+}
+@media only screen and (max-width: 1699px) {
+    .check-box-list input {
+        width: 30px;
+        height: 30px;
+    }
+    .check-box{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+}
+@media only screen and (max-width: 1599px) {
+    .check-box-list input {
+        width: 26px;
+        height: 26px;
+    }
+    .check-box{
+        width: 26px;
+        height: 26px;
+        line-height: 26px;
+    }
+}
+@media only screen and (max-width: 1499px) {
+    .check-box-list input {
+        width: 23px;
+        height: 23px;
+    }
+    .check-box{
+        width: 23px;
+        height: 23px;
+        line-height: 23px;
+    }
+}
+@media only screen and (max-width: 1399px) {
+    .check-box-list input {
+        width: 20px;
+        height: 20px;
+    }
+    .check-box{
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+    }
+}
+@media only screen and (max-width: 1299px) {
+    .check-box-list input {
+        width: 16px;
+        height: 16px;
+    }
+    .check-box{
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+    }
+}

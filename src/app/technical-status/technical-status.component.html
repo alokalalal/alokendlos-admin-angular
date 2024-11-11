@@ -1,0 +1,10 @@
+<div class="card-title-bar">
+    Technical Status
+</div>
+<app-chart-wrapper>
+    <div [ngSwitch]="(chartType$ | async)?.type">
+        <app-pie-chart scaleYLabel="Students" *ngSwitchCase="chartType.Pie"></app-pie-chart>
+        <!-- <app-column-chart scaleYLabel="Students" [minItemsDisplayWOAngle]="12" *ngSwitchCase="chartType.StackedColumn"></app-column-chart> -->
+        <!-- <app-line-area-chart scaleYLabel="Students" [minItemsDisplayWOAngle]="12" *ngSwitchDefault></app-line-area-chart> -->
+    </div>
+</app-chart-wrapper>

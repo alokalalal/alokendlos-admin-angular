@@ -1,0 +1,169 @@
+.searchFuncInput {
+  width: 100%;
+  max-width: 100%;
+  display: inline-block;
+  border: 1px solid $light-blue-opacity-0-1;
+  // color: $black-color-200;
+  // font-size: 14px;
+  line-height: normal;
+  padding: 6px 30px 6px 30px;
+  height: 38px;
+  background-color: rgba($black-color, 0.08);
+  background-position: 8px center;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  // opacity: 0.8;
+  border-radius: 5px;
+  &:focus {border: 1px solid $primary-blue-500; outline: 0;}
+}
+.searchFuncBoxCon {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  float: right;
+  .btn {
+    position: absolute !important;
+    right: 0;
+    top: 0;
+  }
+}
+input{
+  .form-control{
+      &.form-control-file {
+          background: transparent;
+          border: 0;
+          height: auto;
+          padding: 0;
+          line-height: 0;
+          display: inline-block;
+          font-size: 12px;
+          color: $dark-gray-color;
+        }
+  }
+}
+.form-control-mat .mat-input-element::placeholder,
+.searchFuncInput::placeholder {
+  color: $dark-gray-color;
+  opacity: 1;
+  font-size: 14px !important;
+}
+.form-control-mat .mat-input-element:-ms-input-placeholder,
+.searchFuncInput:-ms-input-placeholder {
+  color: $dark-gray-color;
+  font-size: 14px !important;
+}
+.mat-date-range-input {
+  //background-color: $white-color;
+  //color: $black-color;
+  //border: 1px solid $dark-gray-color;
+  //padding: 0 15px;
+  background-color: rgba($black-color, 0.08) !important;
+  color: $dark-gray-color;
+  border: 1px solid $light-blue-opacity-0-1;
+  padding: 0px 15px;
+  height: 40px;
+  border-radius: 5px;
+}
+.mat-form-field-type-mat-date-range-input {
+    .mat-form-field-suffix {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    .mat-form-field-wrapper {
+        padding-bottom: 0px !important;
+    }
+}
+.mat-date-range-input-container {
+  height: 40px;
+}
+.form-control-mat .mat-input-element.override {
+  background-color: rgba($white-opacity-0-8, 0.08) !important;
+  border: 1px solid grey;
+}
+.form-control-mat .mat-input-element{
+  background-color: rgba($black-color, 0.08) !important;
+  color: $dark-gray-color;
+  font-size: 14px;
+  line-height: normal;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid $light-blue-opacity-0-1;
+  width: 100%;
+  display: inline-block;
+  padding: 6px 15px;
+  box-sizing: border-box;
+}
+.mat-form-field-subscript-wrapper {
+  position: relative !important;
+  margin: 0 !important;
+  padding: 6px 0 0 !important;
+}
+.mat-form-field{
+  width: 100%;
+  font-weight: 400 !important;
+  color: $dark-gray-color !important;
+  font-size: 13px !important;
+  line-height: normal !important;
+    &.mat-form-field-invalid {
+        .mat-form-field-label {
+            color: $dark-gray-color !important;
+          }
+    }
+}
+.mat-form-field-underline {
+  position: initial !important;
+}
+.form-control-mat {
+  .mat-input-element-textarea {
+    background-color: $light-blue-opacity-0-1;
+    color: $dark-gray-color;
+    font-size: 14px;
+    line-height: normal;
+    /* height: 40px; */
+    border-radius: 0;
+    border: 1px solid $light-blue-opacity-0-1;
+    width: 100%;
+    display: inline-block;
+    padding: 6px 15px;
+    box-sizing: border-box;
+  }
+}
+.mat-form-field-appearance-outline {
+  .mat-form-field-infix {
+      padding: 1em 0 1em 0 !important;
+    }
+}
+.mat-form-field-infix {
+  border: 0 !important;
+  padding: 0 !important;
+}
+.mat-form-field-appearance-legacy {
+    .mat-form-field-underline {
+        height: 0 !important;
+      }
+}
+.mat-form-field-label {
+  top: 6px !important;
+  padding: 6px 15px !important;
+  font-weight: 400 !important;
+  position: relative !important;
+}
+.mat-form-field-label-wrapper {
+  top: -24px;
+  padding-top: 24px;
+}
+.mat-form-field-subscript-wrapper {
+  font-size: 13px;
+}
+
+
+.datepickerBg .mat-form-field-outline {background-color: rgba($black-color, 0.08); border-radius:5px;}
+.readonly-field{
+  input:hover{
+    cursor: default;
+  }
+  .mat-form-field-ripple{
+    background-color: transparent !important;
+  }
+}

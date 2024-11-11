@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFProDisplay-Regular.eot');
+    src: url('SFProDisplay-Regular.eot?#iefix') format('embedded-opentype'),
+        url('SFProDisplay-Regular.woff2') format('woff2'),
+        url('SFProDisplay-Regular.woff') format('woff'),
+        url('SFProDisplay-Regular.ttf') format('truetype'),
+        url('SFProDisplay-Regular.svg#SFProDisplay-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFProDisplay-Medium.eot');
+    src: url('SFProDisplay-Medium.eot?#iefix') format('embedded-opentype'),
+        url('SFProDisplay-Medium.woff2') format('woff2'),
+        url('SFProDisplay-Medium.woff') format('woff'),
+        url('SFProDisplay-Medium.ttf') format('truetype'),
+        url('SFProDisplay-Medium.svg#SFProDisplay-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFProDisplay-Black.eot');
+    src: url('SFProDisplay-Black.eot?#iefix') format('embedded-opentype'),
+        url('SFProDisplay-Black.woff2') format('woff2'),
+        url('SFProDisplay-Black.woff') format('woff'),
+        url('SFProDisplay-Black.ttf') format('truetype'),
+        url('SFProDisplay-Black.svg#SFProDisplay-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFProDisplay-Light.eot');
+    src: url('SFProDisplay-Light.eot?#iefix') format('embedded-opentype'),
+        url('SFProDisplay-Light.woff2') format('woff2'),
+        url('SFProDisplay-Light.woff') format('woff'),
+        url('SFProDisplay-Light.ttf') format('truetype'),
+        url('SFProDisplay-Light.svg#SFProDisplay-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('SFProDisplay-Semibold.eot');
+    src: url('SFProDisplay-Semibold.eot?#iefix') format('embedded-opentype'),
+        url('SFProDisplay-Semibold.woff2') format('woff2'),
+        url('SFProDisplay-Semibold.woff') format('woff'),
+        url('SFProDisplay-Semibold.ttf') format('truetype'),
+        url('SFProDisplay-Semibold.svg#SFProDisplay-Semibold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+

@@ -1,0 +1,14 @@
+@media only screen and (min-width: 1200px) {
+    .editBoxCon.editBoxCon-lg{
+        width: 900px;
+    }
+    .editBoxCon-lg .editBoxFullTop{
+        width: 900px;
+    }
+    .editBoxCon-lg .fixed-botton{
+        width: 900px;
+    }   
+    .table-same-hight table td{
+        height: 51px;
+    } 
+}

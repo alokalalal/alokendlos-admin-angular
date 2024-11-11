@@ -1,0 +1,98 @@
+<nav id="sidebar" class="side-menu-con active" [ngClass]="{'active': isSidebarOpen == false || isSidebarOpen == undefined}">
+    
+    <!-- <div class="sidebar-user-con border-bottom">
+        <div class="sidebar-user-full">
+            <div class="sidebar-user-icon">
+                <img src="assets/images/userImg.jpg" />
+                <span>{{loggedInUser.shortFormOfName}}</span>
+            </div>
+            <div class="sidebar-user-title">
+                <div class="sb-user-name">{{loggedInUser.name}}</div>
+                <div class="sb-user-des">{{loggedInUser.email}}</div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="sidebar-task-con">
+        <div class="sidebar-task-full">
+            <div class="task-full-col pr-3">
+                <div class="task-count">372</div>
+                <div class="task-text">Completed Tasks</div>
+            </div>
+            <div class="task-full-col">
+                <div class="task-count rlColor">11</div>
+                <div class="task-text rlColor">Open Tasks</div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="sidebar-menu-con" id="menuId">
+
+        <ul class="side-menu-ul">
+
+                <li [ngClass]="{'active' : menu.isActive}" *ngFor="let menu of menuArray" >
+                    <ng-container *ngIf ="menu.childMenu == undefined || (menu.childMenu != undefined && menu.childMenu.length == 0)">
+                        <a [routerLink]="[menu.url]" class="single-menu">
+                            <!-- <span class="menu-icon normal-icon"><img src="{{menu.iconUrl}}" /></span>
+                            <span class="menu-icon white-icon"><img src="{{menu.iconWhiteUrl}}"  /></span> -->
+                            <span class="menu-icon material-icons-outlined">{{menu.iconClassName}}</span>
+                            <span class="menu-text tooltip-lable"> {{menu.name}}</span>
+                        </a>
+                    </ng-container>
+                    <ng-container *ngIf ="menu.childMenu != undefined && menu.childMenu.length > 0">
+                            <a href="#Submenu{{menu.name | replace : ' ' : ''}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle sidebar-drp collapsed">
+                                <!-- <span class="menu-icon"><img src="{{menu.iconUrl}}" /></span> -->
+                                <span class="menu-icon material-icons-outlined">{{menu.iconClassName}}</span>
+                                <span class="menu-text"> {{menu.name}}</span>
+                            </a>
+                            <ul class="collapse sub-menu-ul" id="Submenu{{menu.name | replace : ' ' : ''}}" data-parent="#menuId">
+                                <li *ngFor="let childMenu of menu.childMenu">
+                                    <a [routerLink]="[childMenu.url]">{{childMenu.name}}</a>
+                                </li>
+                            </ul>
+                            <ul class="hover-sub-menu">
+                                <li *ngFor="let childMenu of menu.childMenu">
+                                    <a [routerLink]="[childMenu.url]">{{childMenu.name}}</a>
+                                </li>
+                            </ul>
+                    </ng-container>
+                </li>
+            
+        </ul>
+    </div>
+    <!-- <div class="side-menu-fixd-con">
+        <ul class="side-menu-ul">
+            <li>
+                <a href="javascript:void(0)">
+                    <span class="menu-icon"><img src="assets/images/settingsIcon.svg" /></span>
+                    <span class="menu-text"> Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#SubmenuConfiguration" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <span class="menu-icon"><img src="assets/images/configurationIcon.svg" /></span>
+                    <span class="menu-text"> Configuration</span>
+                </a>
+                <ul class="collapse sub-menu-ul" id="SubmenuConfiguration">
+                    <li>
+                        <a href="password-policy.html">Password Policy</a>
+                    </li>
+                    <li>
+                        <a href="security-policy.html">Security Policy</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Storage/Display Time</a>
+                    </li>
+                    <li>
+                        <a href="notification.html">Notification</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" (click)="doLogout()">
+                    <span class="menu-icon material-icons">logout</span>
+                    <span class="menu-text"> Sign Out</span>
+                </a>
+            </li>
+        </ul>
+    </div> -->
+</nav>

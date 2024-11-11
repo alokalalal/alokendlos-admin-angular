@@ -1,0 +1,112 @@
+<ng-container>
+    <div class="editBoxDataCon active">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon editBoxCon-lg table-same-hight">            
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    <!-- <span class="editIconBox">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </span> -->
+                                    Transaction Log List</div>
+                                <a class="editBoxClose" (click)="closeModal()" href="javascript:void(0)">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" >
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxMattersTasksCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-bordered mb-4">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><strong>Voucher Barcode:</strong></td>
+                                                                <td>{{transactioView?.barcode}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>Date:</strong></td>
+                                                                <td>{{transactioView?.dateEnd * 1000| date:'medium' }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>Total Value:</strong></td>
+                                                                <td>{{transactioView?.totalValue}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>Machine Id:</strong></td>
+                                                                <td>{{transactioView?.machineView?.machineId}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>Customer Name:</strong></td>
+                                                                <td>{{transactioView?.locationView?.customerView?.name}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div style="overflow-x:auto;">
+                                                        <table class="table custome-tbl mat-table table-width-auto table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Bottle Barcode</th>
+                                                                    <th>Material</th>
+                                                                    <th>Status</th>
+                                                                    <th>Reason</th>
+                                                                    <th>Volume(ml)</th>
+                                                                    <th>Weight(gm)</th>
+                                                                    <th>Image</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let transactionLog of transactionLogList">
+                                                                    <td><div style="width: 120px; word-wrap: break-word;" *ngIf="transactionLog.barcode != undefined">{{transactionLog.barcode}}</div></td>
+                                                                    <td><div *ngIf="transactionLog.material != undefined">{{transactionLog.material.value}}</div></td>
+                                                                    <td [ngClass]="{'text-success': transactionLog.status.value=='Accepted', 'text-danger': transactionLog.status.value=='Rejected'}">{{transactionLog.status.value}}</td>
+                                                                    <td>
+                                                                        <!-- <div [ngClass]="transactionLog.reason === 'success.accepted' ? 'text-success' : 'text-danger'">
+                                                                            {{transactionLog.reason === 'success.accepted' ? 'Success' : 'Error'}}
+                                                                        </div> -->
+                                                                        <ng-container [ngSwitch]="transactionLog.reason">                                                                      
+                                                                            <div *ngSwitchCase="'success.accepted'">-</div>
+                                                                            <div *ngSwitchCase="'error.withoutBarcode'" class="text-danger">Without Barcode</div>
+                                                                            <div *ngSwitchCase="'error.fakeObject'" class="text-danger">Fake Object</div>
+                                                                            <div *ngSwitchCase="'error.fraudDetected'" class="text-danger">Fraud Detected</div>
+                                                                            <div *ngSwitchCase="'error.invalidBarcode'" class="text-danger">Invalid Barcode</div>
+                                                                            <div *ngSwitchCase="'error.bottleWeigth'" class="text-danger">Bottle Weigth</div>
+                                                                            <div *ngSwitchCase="'error.mechanicalError'" class="text-danger">Mechanical Error</div>
+                                                                            <div *ngSwitchCase="'error.bottleOverWeight'" class="text-danger">Bottle OverWeight</div>
+                                                                            <div *ngSwitchCase="'error.objectNotDetected'" class="text-danger">ObjectNot Detected</div>
+                                                                            <div *ngSwitchCase="'error.mechanical'" class="text-danger">Mechanical Error</div>
+                                                                            <div *ngSwitchCase="'error.emergency'" class="text-danger">Emergency</div>
+                                                                            <div *ngSwitchCase="'error.aluminumn'" class="text-danger">Aluminum storage bin is full</div>
+                                                                            <div *ngSwitchCase="'error.glass'" class="text-danger">Glass storage bin is full</div>
+                                                                            <div *ngSwitchCase="'error.plastic'" class="text-danger">Plastic storage bin is full</div>
+                                                                            <div *ngSwitchDefault class="text-danger">Error</div>
+                                                                        </ng-container>
+                                                                    </td>
+                                                                    <td style="width: 1px;"> {{transactionLog.volumn}} </td>
+                                                                    <td style="width: 1px;"> {{transactionLog.weight}} </td>
+                                                                    <div mat-card-avatar class="profile-header-image" *ngIf="transactionLog.imageView && transactionLog.imageView.fileId != undefined">
+                                                                        <a href="#" onclick="return false;" (click)="click(transactionLog.imageView.fileId)">
+                                                                            <img [src]="appUrl.BASE_URL + apiurl.PUBLIC_URL + apiurl.DOWNLOAD_CLOUD_IMAGE + '?' + apiUrlParameter.FILE_ID  + transactionLog.imageView.fileId  + '&' + apiUrlParameter.MACHINE_ID  + transactioView.machineView.id" alt="transactionLog.imageView?.name" height="800px" weight="900px"/>
+                                                                        </a>
+                                                                    </div>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

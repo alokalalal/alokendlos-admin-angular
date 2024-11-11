@@ -1,0 +1,271 @@
+$primary-blue-50: #e7eafe !default;
+$primary-blue-100: #b6c1fc !default;
+$primary-blue-200: #8598f9 !default;
+$primary-blue-300: #556ff7 !default;
+$primary-blue-400: #556ff7 !default;
+$primary-blue-500: #2D4EF5 !default;
+$primary-blue-600: #0a2ddb !default;
+$primary-blue-700: #0823aa !default;
+$primary-blue-800: #0927bf !default;
+$primary-blue-900: #07209c !default;
+$primary-blue-a100: #06197a !default;
+$primary-blue-a200: #041257 !default;
+$primary-blue-a400: #020b34 !default;
+$primary-blue-a700: #010411 !default;
+
+// $primary-blue-50: #f5f7e8 !default;
+// $primary-blue-100: #e5ecc5 !default;
+// $primary-blue-200: #d4df9e !default;
+// $primary-blue-300: #c2d277 !default;
+// $primary-blue-400: #b5c95a !default;
+// $primary-blue-500: #a8bf3d !default;
+// $primary-blue-600: #a0b937 !default;
+// $primary-blue-700: #97b12f !default;
+// $primary-blue-800: #8da927 !default;
+// $primary-blue-900: #7d9b1a !default;
+// $primary-blue-a100: #f3ffd2 !default;
+// $primary-blue-a200: #e6ff9f !default;
+// $primary-blue-a400: #d9ff6c !default;
+// $primary-blue-a700: #d3ff52 !default;
+
+$mat-primary-blue: (
+  50: $primary-blue-50,
+  100: $primary-blue-100,
+  200: $primary-blue-200,
+  300: $primary-blue-300,
+  400: $primary-blue-400,
+  500: $primary-blue-500,
+  600: $primary-blue-600,
+  700: $primary-blue-700,
+  800: $primary-blue-800,
+  900: $primary-blue-900,
+  A100: $primary-blue-a100,
+  A200: $primary-blue-a200,
+  A400: $primary-blue-a400,
+  A700: $primary-blue-a700,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #000000,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+    // 50: rgba(black, 0.87),
+    // 100: rgba(black, 0.87),
+    // 200: rgba(black, 0.87),
+    // 300: rgba(black, 0.87),
+    // 400: rgba(black, 0.87),
+    // 500: white,
+    // 600: white,
+    // 700: white,
+    // 800: white,
+    // 900: white,
+    // A100: rgba(black, 0.87),
+    // A200: rgba(black, 0.87),
+    // A400: rgba(black, 0.87),
+    // A700: rgba(black, 0.87),
+  )
+);
+
+
+$primary-orange-50: #FBC69D !default;
+$primary-orange-100: #FABA89 !default;
+$primary-orange-200: #F9AF76 !default;
+$primary-orange-300: #F8A362 !default;
+$primary-orange-400: #F8984F !default;
+$primary-orange-500: #f78834 !default;
+$primary-orange-600: #F68128 !default;
+$primary-orange-700: #F57614 !default;
+$primary-orange-800: #EB6B0A !default;
+$primary-orange-900: #D76209 !default;
+$primary-orange-a100: #C45908 !default;
+$primary-orange-a200: #B05107 !default;
+$primary-orange-a400: #9D4807 !default;
+$primary-orange-a700: #893F06 !default;
+
+$mat-primary-orange: (
+  50: $primary-orange-50,
+  100: $primary-orange-100,
+  200: $primary-orange-200,
+  300: $primary-orange-300,
+  400: $primary-orange-400,
+  500: $primary-orange-500,
+  600: $primary-orange-600,
+  700: $primary-orange-700,
+  800: $primary-orange-800,
+  900: $primary-orange-900,
+  A100: $primary-orange-a100,
+  A200: $primary-orange-a200,
+  A400: $primary-orange-a400,
+  A700: $primary-orange-a700,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  )
+);
+
+
+$primary-red-50: #ffebee !default;
+$primary-red-100: #ffcdd2 !default;
+$primary-red-200: #ef9a9a !default;
+$primary-red-300: #e57373 !default;
+$primary-red-400: #ef5350 !default;
+$primary-red-500: #f44336 !default;
+$primary-red-600: #e53935 !default;
+$primary-red-700: #d32f2f !default;
+$primary-red-800: #c62828 !default;
+$primary-red-900: #b71c1c !default;
+$primary-red-a100:#ff8a80 !default;
+$primary-red-a200:#ff5252 !default;
+$primary-red-a400:#ff1744 !default;
+$primary-red-a700:#d50000 !default;
+
+$mat-primary-red: (
+  50: $primary-red-50,
+  100: $primary-red-100,
+  200: $primary-red-200,
+  300: $primary-red-300,
+  400: $primary-red-400,
+  500: $primary-red-500,
+  600: $primary-red-600,
+  700: $primary-red-700,
+  800: $primary-red-800,
+  900: $primary-red-900,
+  A100: $primary-red-a100,
+  A200: $primary-red-a200,
+  A400: $primary-red-a400,
+  A700: $primary-red-a700,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  )
+);
+
+$primary-purple-50: #f3e5f5 !default;
+$primary-purple-100: #e1bee7 !default;
+$primary-purple-200: #ce93d8 !default;
+$primary-purple-300: #ba68c8 !default;
+$primary-purple-400: #ab47bc !default;
+$primary-purple-500: #9c27b0 !default;
+$primary-purple-600: #8e24aa !default;
+$primary-purple-700: #7b1fa2 !default;
+$primary-purple-800: #6a1b9a !default;
+$primary-purple-900: #4a148c !default;
+$primary-purple-a100:#ea80fc !default;
+$primary-purple-a200:#e040fb !default;
+$primary-purple-a400:#d500f9 !default;
+$primary-purple-a700:#aa00ff !default;
+
+$mat-primary-purple: (
+  50: $primary-purple-50,
+  100: $primary-purple-100,
+  200: $primary-purple-200,
+  300: $primary-purple-300,
+  400: $primary-purple-400,
+  500: $primary-purple-500,
+  600: $primary-purple-600,
+  700: $primary-purple-700,
+  800: $primary-purple-800,
+  900: $primary-purple-900,
+  A100: $primary-purple-a100,
+  A200: $primary-purple-a200,
+  A400: $primary-purple-a400,
+  A700: $primary-purple-a700,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  )
+);
+
+$primary-grey-50: #fafafa !default;
+$primary-grey-100: #f5f5f5 !default;
+$primary-grey-200: #eeeeee !default;
+$primary-grey-300: #e0e0e0 !default;
+$primary-grey-400: #bdbdbd !default;
+$primary-grey-500: #9e9e9e !default;
+$primary-grey-600: #757575 !default;
+$primary-grey-700: #616161 !default;
+$primary-grey-800: #424242 !default;
+$primary-grey-900: #212121 !default;
+$primary-grey-a100:#ffffff !default;
+$primary-grey-a200:#eeeeee !default;
+$primary-grey-a400:#bdbdbd !default;
+$primary-grey-a700:#616161 !default;
+$mat-primary-grey: (
+  50: $primary-grey-50,
+  100: $primary-grey-100,
+  200: $primary-grey-200,
+  300: $primary-grey-300,
+  400: $primary-grey-400,
+  500: $primary-grey-500,
+  600: $primary-grey-600,
+  700: $primary-grey-700,
+  800: $primary-grey-800,
+  900: $primary-grey-900,
+  A100: $primary-grey-a100,
+  A200: $primary-grey-a200,
+  A400: $primary-grey-a400,
+  A700: $primary-grey-a700,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  )
+);
+@import '/src/assets/css/custom-colors';
+@import '/src/assets/css/mixins/custom_colors'

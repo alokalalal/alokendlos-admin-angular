@@ -1,0 +1,56 @@
+<ng-container>
+    <div class="editBoxDataCon" [ngClass]="{'active': isOpenModel == true}">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon">
+            <div class="editBoxFull">
+                    <div class="col-sm-12">
+                        <div class="editBoxFullTop">
+                            <div class="editBoxTitle"><span class="editIconBox"><i class="fa fa-pencil"
+                                        aria-hidden="true"></i></span>Image Cropper</div>
+                            <a class="editBoxClose" (click)="closeModel()" href="javascript:void(0)">✖</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="editBoxgRidDesTextCon">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 ">
+                                    <div class="editBoxEmployeesDetCon">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="editBoxMattersTasksCon">
+                                                    <div class="col-12 ">
+                                                        <image-cropper [imageChangedEvent]="imageChangedEvent"
+                                                        [maintainAspectRatio]="true" [aspectRatio]="5/3" format="jpeg"
+                                                        (imageCropped)="imageCropped($event)" [imageBase64]="viewCroppedImage"></image-cropper>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12" *blockUI="'saveUpdateBtnBlockUI'">
+                                            <div class="btnCon text-right mt-3" (click)="onSubmit()">
+                                                <button type="submit" class="btn">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+        <image-cropper [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true" [aspectRatio]="5/3" format="jpeg"
+        (imageCropped)="imageCropped($event)" [imageBase64]="viewCroppedImage"></image-cropper>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onSubmit()">Ok</button>
+</div> -->
+

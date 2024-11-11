@@ -1,0 +1,330 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content style="margin-top: 25px;">  
+                
+                
+            <div class="row">
+                <div class="col-sm-12" >
+                    <div class="titleTabBoxCon" >
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-6 align-self-center">
+                                <div class="titleBoxCon">
+                                    <h1>Configuration</h1>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-12 col-md-12 col-lg-6 align-self-center">
+                                <div class="searchFuncBoxCon">
+                                    <div class="searchFuncBox">
+                                        <ul class="filter-panel">
+                                            <li>
+                                                <form #fform="ngForm" [formGroup]="filterForm" (ngSubmit)="onSearch()">
+                                                    <input type="text" class="searchFuncInput" formControlName="fullTextSearch" name="fullTextSearch" placeholder="Search compute">
+                                                    < comment -- <button type="submit"  mat-button class="btn">Search</button>  -- >
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- <div class="cardHeaderCon mt-3 mb-2" >
+                <div class="card-form" *ngIf="isFilterEnabled" id="filter-div">
+                    <ul class="search-tag">
+                        <li class="mr-0" *ngFor="let searchFilter of filterList">
+                            <label *ngIf="searchFilter.fullTextSearch || searchFilter.fullTextSearch != ''" class="selectgroup-item "> 
+                                <span class="selectgroup-button searchBox" ><strong>Search By Name</strong> -
+                                    {{searchFilter.fullTextSearch}}
+                                    <i class="fa fa-times-circle srch-close-icon" (click)="advanceSearchFilterClose()"></i>
+                                </span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+            
+            <div class="row" *blockUI="'listBlockUi'">
+                <div class="col-sm-12"  >
+                    <div class="listGridDataCon" >
+                        <div class="table-responsive height-500" ></div>
+                    </div>
+                    <div *ngIf="1 > notificationList.length" >
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Sorry, we couldn't find any matches.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="listGridDataCon" *ngIf="notificationList.length > 0" style="margin-top: 8px;">
+            
+                        <div class="listBoxCon listGridShow " [ngClass]="{'active': isListOrGrid == 'list'}">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="tableCon">
+                                        <div class="table-responsive margin-tb">
+                                            <table class="table custome-tbl mat-table mat-elevation-z8">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="width-70" style="color: black;font-weight: bold;">Name</th>
+                                                        <th class="width-15" style="color: black;font-weight: bold;">Email</th>
+                                                        <th class="width-15" style="color: black;font-weight: bold;">Website</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let notification of notificationList; let i = index">
+                                                        <td>{{notification.name}}</td>
+                                                        <td>
+                                                            <div class="radioEditBox" *ngIf="accessRightsJson.isAccessRightEdit">
+                                                                <mat-slide-toggle [checked]="notification.email"  (change)="emailChange('email',$event,notification)"></mat-slide-toggle>
+                                                                <a *ngIf="notification.email" class="emailEditBtn" (click)="emailEdit('email',$event,notification)"><span><i class="fa fa-pencil"></i></span></a>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <ng-container *ngIf="accessRightsJson.isAccessRightEdit">
+                                                                <mat-slide-toggle [checked]="notification.push" (change)="pushChange('push',$event,notification)"></mat-slide-toggle>
+                                                            </ng-container>
+                                                        </td>
+                                                    </tr>
+            
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gridBoxCon listGridShow " [ngClass]="{'active': isListOrGrid == 'grid'}">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="employeesGridCon">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-lg-6" *ngFor="let emailAccount of notificationList">
+                                                <div class="employeesGridCol sameHight">
+                                                    <div class="gridFucIconCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="gridFucIconUlCon">
+                                                                    <ul class="gridFucIconUl">
+                                                                        <li><a href="javascript:void(0)" ><img
+                                                                                    src="assets/images/infoIcon.svg"></a>
+                                                                        </li>
+                                                                        <li><a href="javascript:void(0)"><img
+                                                                                    src="assets/images/printIcon.svg"></a>
+                                                                        </li>
+                                                                        <li><a href="javascript:void(0)"  [routerLink]="['/'+ appUrl.NOTIFICATION + '/' + appUrl.NOTIFICATION_EMAIL_ACCOUNT + '/' + appUrl.EDIT_OPERATION + emailAccount.id]">
+                                                                            <img src="assets/images/storageIcon.svg"></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="gridDesTextCon">
+                                                        <div class="row">
+                                                            <div class="col-9 col-sm-9 col-md-7 col-lg-8 col-xl-7">
+                                                                <div class="employeesDetCon">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12" >
+                                                                            <div class="empImgTextCon">
+                                                                                <div class="empImgCon">
+                                                                                    <span class="empImg">
+                                                                                        <img src="assets/images/userImg.jpg"></span>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <h3>{{emailAccount.name}}</h3>
+                                                                                    <div class="emileText">
+                                                                                        {{emailAccount.userName}}
+                                                                                    </div>
+                                                                                    <div class="codeText"> {{emailAccount.replyToEmail}}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="mattersTasksCon">
+                                                                                <div class="row">
+                                                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                                                        <div class="mattersTasksCol">
+                                                                                            <div class="maTaTitle">
+                                                                                                Matters
+                                                                                            </div>
+                                                                                            <div class="maTaCount">13
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                                                        <div class="mattersTasksCol">
+                                                                                            <div class="maTaTitle">Tasks
+                                                                                            </div>
+                                                                                            <div class="maTaCount rlColor">
+                                                                                                05</div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3 col-sm-3 col-md-5 col-lg-4  col-xl-5">
+                                                                <div class="barcodeBoxCon">
+                                                                    <a href="javascript:void(0)"><img
+                                                                            src="assets/images/barcodeIcon.png"></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <mat-paginator [length]="recordSize" [pageSize]="10" class="pagination" (page)="changePageSize($event)" [pageSizeOptions]="[10, 30, 60, 120]">
+                        </mat-paginator>
+            
+                    </div>
+                </div>
+            </div>
+            
+            <ng-container>
+                <div class="editBoxDataCon"  [ngClass]="{'active': isOpenEmailContent == true}" >
+                    <div class="editBoxOpacityBg"></div>
+                    <div class="editBoxCon">            
+                        <div class="editBoxFull">
+                            <form [formGroup]="emailContentForm" (ngSubmit)="onSubmit()" #vform="ngForm" id="emailContentAdd" class="model-form" novalidate>
+                                <div class="row" *blockUI="'emailContentModalBlockUi'">
+                                    <div class="col-sm-12">
+                                        <div class="editBoxFullTop">
+                                            <div class="editBoxTitle">
+                                                <!-- <span class="editIconBox"><i class="fa fa-pencil" aria-hidden="true"></i></span> -->
+                                                Email Content</div>
+                                            <a class="editBoxClose" href="javascript:void(0)" (click)="closeEmailContentModal()">✖</a>     
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="editBoxgRidDesTextCon">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12">
+                                                    <div class="editBoxEmployeesDetCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="editBoxMattersTasksCon">
+                                                                    <!-- <div class="formBoxCon">
+                                                                        <div class="tab-content">
+                                                                            <div class="tab-pane active" id="editBoxTabTab1">
+                                                                                <div class="formBoxTabCol"> -->
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-12 col-md-12">
+                                                                                            <div class="form-group">
+                                                                                                <mat-label>Subject<sup>*</sup></mat-label>
+                                                                                                <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                                                <input type="text" matInput class="form-control requiredInput" [(ngModel)]="emailContentModel.subject"
+                                                                                                formControlName="subject" placeholder="Subject">
+                                                                                                <mat-error>                                                                                           
+                                                                                                    <app-error-message [errors]="f.subject.errors" [submitted]="vform.submitted"
+                                                                                                        [touched]="f.subject.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthThousand">                                                                                                                                                                                   
+                                                                                                    </app-error-message>
+                                                                                                </mat-error>
+                                                                                                </mat-form-field>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-12 col-md-12">
+                                                                                            <div class="form-group">
+                                                                                                <mat-label>Select Email Account</mat-label>
+                                                                                                <mat-form-field class="form-control-mat" floatLabel="never">                                                                                           
+                                                                                                    <mat-select [(ngModel)]="emailContentModel.emailAccountView?.key!" formControlName="emailAccountView" 
+                                                                                                        name="emailAccountView" class="mat-input-element" placeholder="Select a Email Account">
+                                                                                                        <mat-option *ngFor="let emailAccount of emailAccountList" [value]="emailAccount.key">
+                                                                                                            {{emailAccount.value}}
+                                                                                                        </mat-option>
+                                                                                                    </mat-select>
+                                                                                                    <mat-error>
+                                                                                                        <app-error-message [errors]="f.emailAccountView.errors" [submitted]="vform.submitted"
+                                                                                                            [touched]="f.emailAccountView.touched" [required]="errorMessage.mandatory">
+                                                                                                        </app-error-message>
+                                                                                                    </mat-error>
+                                                                                                </mat-form-field>   
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-12 col-md-12 mb-4">
+                                                                                            <div class="form-group">
+                                                                                                <mat-label>Content<sup>*</sup></mat-label>
+                                                                                                <editor required="true" [(ngModel)]="emailContentModel.content" formControlName="content"  id="emailBody"
+                                                                                                initialValue="" [init]="emailBody" apiKey="vrmlibwkgc4z49mtk53mepztl6osuy1nmr13dw3c4q15y8s1">
+                                                                                                </editor>
+                                                                                                <mat-error>
+                                                                                                    <app-error-message [errors]="f.content.errors" [submitted]="vform.submitted"
+                                                                                                        [touched]="f.content.touched" [required]="errorMessage.mandatory">
+                                                                                                        <span><img src="assets/images/invalid.svg" alt="invalid"></span>
+                                                                                                    </app-error-message>
+                                                                                                </mat-error>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-12 col-md-12">
+                                                                                            <div class="form-group">
+                                                                                                <mat-label>Email Cc</mat-label>
+                                                                                                <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                                                <input type="text" matInput class="form-control requiredInput" [(ngModel)]="emailContentModel.emailCc"
+                                                                                                formControlName="emailCc" placeholder="Email Cc">
+                                                                                                <mat-error>
+                                                                                                    <app-error-message [errors]="f.emailCc.errors" [submitted]="vform.submitted"
+                                                                                                        [touched]="f.emailCc.touched" [required]="errorMessage.mandatory">
+                                                                                                    </app-error-message>
+                                                                                                </mat-error>
+                                                                                                </mat-form-field>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-12 col-md-12">
+                                                                                            <div class="form-group">
+                                                                                                <mat-label>Email Bcc</mat-label>
+                                                                                                <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                                                <input type="text" matInput class="form-control requiredInput" [(ngModel)]="emailContentModel.emailBcc"
+                                                                                                formControlName="emailBcc" placeholder="Email Bcc">
+                                                                                                <mat-error>
+                                                                                                    <app-error-message [errors]="f.emailBcc.errors" [submitted]="vform.submitted"
+                                                                                                        [touched]="f.emailBcc.touched" [required]="errorMessage.mandatory">
+                                                                                                    </app-error-message>
+                                                                                                </mat-error>
+                                                                                                </mat-form-field>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                <!-- </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="btnCon text-right mt-3 fixed-botton">
+                                                            <button type="button" mat-raised-button (click)="closeModal()" class="btn-secondary mr-2">Cancel</button>
+                                                            <button type="submit" mat-raised-button color="primary">{{saveUpdateBtn}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>                            
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+               
+            
+        </mat-card-content>
+    </mat-card>
+</div>

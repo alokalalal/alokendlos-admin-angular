@@ -1,0 +1,392 @@
+<ng-container>
+    <div class="editBoxDataCon" [ngClass]="{'active': isOpenModel == true}">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon" >            
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="customerLocationAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    {{addEditForm}} Customer Branch </div>
+                                <a class="editBoxClose" (click)="closeModal()" href="javascript:void(0)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" >
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">   
+                                                            <div class="col-12 mb-3">
+                                                                <div _ngcontent-iqb-c326="" class="form-group">
+                                                                    <mat-label>Customer Name</mat-label>
+                                                                    <label class="txt-bold">{{locationView.customerView?.name}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Branch Name<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <input type="text" matInput formControlName="name"  [(ngModel)]="locationView.name" placeholder='Enter Branch Name'>
+                                                                        <!-- <ng-container *ngIf="additionalData === true">
+                                                                            <input type="text" matInput formControlName="name"  [(ngModel)]="locationView.name" placeholder='Enter Branch Name'>
+                                                                        </ng-container>
+                                                                        <ng-container *ngIf="additionalData === false">
+                                                                            <input type="text" matInput formControlName="name"  [(ngModel)]="locationView.name" placeholder='Enter Branch Name' readonly>
+                                                                        </ng-container> -->
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.name.errors" [submitted]="fform.submitted" [pattern]="errorMessage.patternAlphaNumericSpaceHypen"
+                                                                                [touched]="f.name.touched" [maxlength]="errorMessage.maxlengthFiveHundred" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Branch Number<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <ng-container *ngIf="additionalData === true || addEditForm=='Add'">
+                                                                            <input type="text" matInput formControlName="branchNumber" [(ngModel)]="locationView.branchNumber" placeholder='Enter Branch Number'>
+                                                                        </ng-container>
+                                                                        <ng-container *ngIf="additionalData === false && addEditForm=='Edit'">
+                                                                            <input type="text" matInput formControlName="branchNumber" [(ngModel)]="locationView.branchNumber" placeholder='Enter Branch Number' readonly>
+                                                                        </ng-container>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.branchNumber.errors" [submitted]="fform.submitted" [touched]="f.branchNumber.touched"
+                                                                             [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengtFour" [minlength]="errorMessage.minlengtFour" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Address</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <!-- <ng-container *ngIf="additionalData === true">
+                                                                            <input type="text" matInput formControlName="address"  [(ngModel)]="locationView.address" placeholder='Enter Address'>
+                                                                        </ng-container>
+                                                                        <ng-container *ngIf="additionalData === false">
+                                                                            <input type="text" matInput formControlName="address"  [(ngModel)]="locationView.address" placeholder='Enter Address' readonly>    
+                                                                        </ng-container> -->
+                                                                        <input type="text" matInput formControlName="address"  [(ngModel)]="locationView.address" placeholder='Enter Address'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.address.errors" [submitted]="fform.submitted" [touched]="f.address.touched"
+                                                                               [maxlength]="errorMessage.maxlengthFiveHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Area</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <input type="text" matInput formControlName="area"  [(ngModel)]="locationView.area" placeholder='Enter Area'>
+                                                                        <!-- <ng-container *ngIf="additionalData === true">
+                                                                            <input type="text" matInput formControlName="area"  [(ngModel)]="locationView.area" placeholder='Enter Area'>
+                                                                        </ng-container>
+                                                                        <ng-container *ngIf="additionalData === false">
+                                                                            <input type="text" matInput formControlName="area"  [(ngModel)]="locationView.area" placeholder='Enter Area' readonly>
+                                                                        </ng-container> -->
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.area.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.area.touched" [maxlength]="errorMessage.maxlengthHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6" *ngIf="countrylist">
+                                                                <div class="form-group readonly-field">
+                                                                    <mat-label>Country</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                    <input type="text" matInput formControlName="country" readonly value="Israel">
+                                                                    </mat-form-field> 
+                                                                    <!-- <mat-field>Israel</mat-field> -->
+                                                                    <!-- <app-searchable-dropdown class="mat-select-label-none"
+                                                                        [filteredDataModel]="locationView.countryView"
+                                                                        [placeholder]="'Select a Country'"
+                                                                        [dropdownList]="countrylist"
+                                                                        [initialValue]="selectedCountry"
+                                                                        (dropdownChangeEventEmitter)="changeCountry($event)"
+                                                                        [searchableDropdownControl]="$any(customerLocationAddEditForm).controls['countryView']">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.countryView.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.countryView.touched" [required]="errorMessage.mandatory" >
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </app-searchable-dropdown> -->
+                                                                </div>
+                                                            </div>
+                                                          <div class="col-sm-12 col-md-6" *ngIf="locationView.stateView != undefined && locationView.countryView?.key != undefined && locationView.countryView?.value == 'Israel' && statelist">
+                                                                <div class="form-group">
+                                                                    <mat-label>Province<sup>*</sup></mat-label>
+                                                                    <app-searchable-dropdown class="mat-select-label-none"
+                                                                        [filteredDataModel]="locationView.stateView"
+                                                                        [placeholder]="'Select a Province'"
+                                                                        [dropdownList]="statelist"
+                                                                        [initialValue]="selectedState"
+                                                                        (dropdownChangeEventEmitter)="changeState($event)"
+                                                                        [searchableDropdownControl]="$any(customerLocationAddEditForm).controls['stateView']">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.stateView.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.stateView.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </app-searchable-dropdown>
+                                                                    <!-- <ng-container *ngIf="additionalData === true">
+                                                                        <app-searchable-dropdown class="mat-select-label-none"
+                                                                            [filteredDataModel]="locationView.stateView"
+                                                                            [placeholder]="'Select a Province'"
+                                                                            [dropdownList]="statelist"
+                                                                            [initialValue]="selectedState"
+                                                                            (dropdownChangeEventEmitter)="changeState($event)"
+                                                                            [searchableDropdownControl]="$any(customerLocationAddEditForm).controls['stateView']">
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="f.stateView.errors" [submitted]="fform.submitted"
+                                                                                    [touched]="f.stateView.touched" [required]="errorMessage.mandatory">
+                                                                                </app-error-message>
+                                                                            </mat-error>
+                                                                        </app-searchable-dropdown>
+                                                                    </ng-container>
+
+                                                                    <ng-container *ngIf="additionalData === false">
+                                                                        <app-searchable-dropdown class="mat-select-label-none"
+                                                                            [filteredDataModel]="locationView.stateView"
+                                                                            [placeholder]="'Select a Province'"
+                                                                            [dropdownList]="statelist"
+                                                                            [initialValue]="selectedState"
+                                                                            (dropdownChangeEventEmitter)="changeState($event)"
+                                                                            [searchableDropdownControl]="$any(customerLocationAddEditForm).controls['stateView']" style="pointer-events: none;">
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="f.stateView.errors" [submitted]="fform.submitted"
+                                                                                    [touched]="f.stateView.touched" [required]="errorMessage.mandatory">
+                                                                                </app-error-message>
+                                                                            </mat-error>
+                                                                        </app-searchable-dropdown>
+                                                                    </ng-container> -->
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-sm-12 col-md-6" *ngIf="locationView != undefined && locationView.countryView != undefined && locationView.countryView.key != 87">
+                                                                <div class="form-group">
+                                                                    <mat-label>Province</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <input type="text" matInput formControlName="stateName" [(ngModel)]="locationView.stateName" placeholder='Enter State'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.stateName.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.stateName.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div> -->
+                                                            <div class="col-sm-12 col-md-6" *ngIf="locationView.cityView != undefined && locationView.stateView?.key != undefined && locationView.countryView?.value == 'Israel' && citylist">
+                                                                <div class="form-group">
+                                                                    <mat-label>City<sup>*</sup></mat-label>
+                                                                    <app-searchable-dropdown
+                                                                        [filteredDataModel]="locationView.cityView"
+                                                                        [placeholder]="'Select a City'"
+                                                                        [dropdownList]="citylist" [initialValue]="selectedCity"
+                                                                        (dropdownChangeEventEmitter)="changeCity($event)"
+                                                                        [searchableDropdownControl]="$any(customerLocationAddEditForm).controls['cityView']">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.cityView.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.cityView.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </app-searchable-dropdown>
+                                                                    <!-- <ng-container *ngIf="additionalData === true">
+                                                                        <app-searchable-dropdown
+                                                                        [filteredDataModel]="locationView.cityView"
+                                                                        [placeholder]="'Select a City'"
+                                                                        [dropdownList]="citylist" [initialValue]="selectedCity"
+                                                                        (dropdownChangeEventEmitter)="changeCity($event)"
+                                                                        [searchableDropdownControl]="$any(customerLocationAddEditForm).controls['cityView']">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.cityView.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.cityView.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </app-searchable-dropdown>
+
+                                                                    </ng-container>
+
+                                                                    <ng-container *ngIf="additionalData === false">
+
+                                                                        <app-searchable-dropdown
+                                                                        [filteredDataModel]="locationView.cityView"
+                                                                        [placeholder]="'Select a City'"
+                                                                        [dropdownList]="citylist" [initialValue]="selectedCity"
+                                                                        (dropdownChangeEventEmitter)="changeCity($event)"
+                                                                        [searchableDropdownControl]="$any(customerLocationAddEditForm).controls['cityView']" style="pointer-events: none;">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.cityView.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.cityView.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </app-searchable-dropdown>
+                                                                    </ng-container> -->
+
+                                                                     
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-sm-12 col-md-6" *ngIf="locationView != undefined && locationView.countryView != undefined && locationView.stateView?.key != undefined  && !citylist">
+                                                                <div class="form-group">
+                                                                    <mat-label>City</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <input type="text" matInput formControlName="cityName" [(ngModel)]="locationView.cityName" placeholder='Enter City'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.cityName.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.cityName.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div> -->
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Pincode<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <input type="text" matInput formControlName="pincode" [(ngModel)]="locationView.pincode" placeholder='Enter Pincode'>
+                                                                        <!-- <ng-container *ngIf="additionalData === true">
+                                                                            <input type="text" matInput formControlName="pincode" [(ngModel)]="locationView.pincode" placeholder='Enter Pincode'>
+                                                                        </ng-container>
+                                                                        <ng-container *ngIf="additionalData === false">
+                                                                            <input type="text" matInput formControlName="pincode" [(ngModel)]="locationView.pincode" placeholder='Enter Pincode' readonly>
+                                                                        </ng-container> -->
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.pincode.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.pincode.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthSeven" [minlength]="errorMessage.minlengtSeven" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row"> 
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Pickup Route<sup>*</sup></mat-label>
+                                                                    <app-searchable-dropdown class="mat-select-label-none"
+                                                                        [filteredDataModel]="locationView.pickupRouteView"
+                                                                        [placeholder]="'Select a Pickup Route'"
+                                                                        [dropdownList]="pickupRoutelist"
+                                                                         [initialValue]="selectedPickupRoute"
+                                                                        (dropdownChangeEventEmitter)="changePickupRoute($event)"
+                                                                        [searchableDropdownControl]="$any(customerLocationAddEditForm).controls['pickupRouteView']">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.pickupRouteView.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.pickupRouteView.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </app-searchable-dropdown>
+                                                                </div>
+                                                            </div>
+
+
+                                                        <div class="col-sm-12 col-md-6">
+                                                            <div class="form-group">
+                                                                <mat-label>Position in Route</mat-label>
+                                                                <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                    <input type="text" matInput formControlName="positionRoute"  [(ngModel)]="locationView.positionRoute" placeholder='Position in Route'>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.positionRoute.errors" [submitted]="fform.submitted" [pattern]="errorMessage.patternNumeric"
+                                                                            [touched]="f.positionRoute.touched" [max]="errorMessage.maxNintyNine" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 mb-50">
+                                                            <div class="form-group">
+                                                                <mat-label>Work During Weekends</mat-label>
+                                                                <div class="radioList">
+                                                                    <mat-radio-group id="workDuringWeekends"
+                                                                        name="workDuringWeekends"
+                                                                        formControlName="workDuringWeekends" [(ngModel)]="locationView.workDuringWeekends">
+                                                                        <mat-radio-button for="workDuringWeekends"
+                                                                            [value]=true>Yes</mat-radio-button>
+                                                                        <mat-radio-button for="workDuringWeekends"
+                                                                            [value]=false style="margin-left: 80px;">NO</mat-radio-button>
+                                                                    </mat-radio-group>  
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.workDuringWeekends.errors" [submitted]="fform.submitted" [pattern]="errorMessage.patternAlphaNumericSpaceHypen"
+                                                                            [touched]="f.workDuringWeekends.touched" [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>                                         
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 mb-50">
+                                                            <div class="form-group">
+                                                                <mat-label>Pickup Everyday</mat-label>
+                                                                <div class="radioList">
+                                                                    <mat-radio-group id="pickupEveryday"
+                                                                        name="pickupEveryday"
+                                                                        formControlName="pickupEveryday" [(ngModel)]="locationView.pickupEveryday">
+                                                                        <mat-radio-button for="pickupEveryday"
+                                                                            [value]=true>Yes</mat-radio-button>
+                                                                        <mat-radio-button for="pickupEveryday"
+                                                                            [value]=false style="margin-left: 80px;">NO</mat-radio-button>
+                                                                    </mat-radio-group>   
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.pickupEveryday.errors" [submitted]="fform.submitted" [touched]="f.pickupEveryday.touched" [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>                                                  
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <mat-label>Number of Glass Tanks</mat-label>
+                                                                <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                    <input type="number" matInput formControlName="numberOfGlassTanks"  [(ngModel)]="locationView.numberOfGlassTanks" placeholder='Enter Number of Glass Tanks'>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.numberOfGlassTanks.errors" [submitted]="fform.submitted"
+                                                                            [touched]="f.numberOfGlassTanks.touched" [max]="errorMessage.maxNine" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <mat-label>Glass fullness Percentage for Pickup</mat-label>
+                                                                <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                    <input type="number" matInput formControlName="glassFullnessPercentageForPickup"  [(ngModel)]="locationView.glassFullnessPercentageForPickup" placeholder='Enter Glass fullness Percentage for Pickup '>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.glassFullnessPercentageForPickup.errors" [submitted]="fform.submitted"
+                                                                            [touched]="f.glassFullnessPercentageForPickup.touched" [max]="errorMessage.maxNintyNine" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="btnCon text-right mt-3 fixed-botton">
+                                                    <button type="button" mat-raised-button (click)="closeModal()"  class="mr-2 btn-secondary" *blockUI="'saveUpdateBtnBlockUI'">Cancel</button>
+                                                    <button type="submit" mat-raised-button color="primary" *blockUI="'saveUpdateBtnBlockUI'">{{saveUpdateBtn}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </ng-container>

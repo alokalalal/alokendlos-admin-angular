@@ -1,0 +1,123 @@
+// Reference link https://v9.material.angular.io/guide/theming#defining-a-theme
+@use '@angular/material' as mat;
+
+// This includes all common styles that are used by multiple components. 
+// This should only be included once in your application. If this mixin is 
+// included multiple times, your application will end up with multiple copies 
+// of these common styles.
+
+
+/*Note : The same density styles are generated multiple times. Read more about how style duplication can be avoided in a dedicated guide. https://github.com/angular/components/blob/master/guides/duplicate-theming-styles.md*/
+mat.$theme-ignore-duplication-warnings: true;
+
+$custom-typography: mat.define-typography-config(
+  $font-family: "'Lato', sans-serif",
+  $headline: mat.define-typography-level(18px, 36px, 700),
+);
+@include mat.all-component-typographies($custom-typography);
+
+// blue-theme this is used as default theme
+$mat-primary-blue-light: mat.define-palette($mat-primary-blue);
+$mat-primary-blue-dark: mat.define-palette($mat-primary-blue);
+$mat-primary-blue-accent: mat.define-palette($mat-primary-blue, A200, A100, A400);
+
+$primary-blue-light: mat.define-light-theme((
+ color: (
+   primary: $mat-primary-blue-light,
+   accent: $mat-primary-blue-accent,
+ )
+));
+$primary-blue-dark: mat.define-dark-theme((
+ color: (
+   primary: $mat-primary-blue-dark,
+   accent: $mat-primary-blue-accent,
+ )
+));
+
+
+// PRIMARY ORANGE
+$mat-primary-orange-light: mat.define-palette($mat-primary-orange);
+$mat-primary-orange-dark: mat.define-palette($mat-primary-orange);
+$mat-primary-orange-accent: mat.define-palette($mat-primary-orange, A200, A100, A400);
+
+$primary-orange-light: mat.define-light-theme((
+ color: (
+   primary: $mat-primary-orange-light,
+   accent: $mat-primary-orange-accent,
+ )
+));
+$primary-orange-dark: mat.define-dark-theme((
+ color: (
+   primary: $mat-primary-orange-dark,
+   accent: $mat-primary-orange-accent,
+ )
+));
+
+// PRIMARY RED
+$mat-primary-red-light: mat.define-palette($mat-primary-red);
+$mat-primary-red-dark: mat.define-palette($mat-primary-red);
+$mat-primary-red-accent: mat.define-palette($mat-primary-red, A200, A100, A400);
+
+$primary-red-light: mat.define-light-theme((
+ color: (
+   primary: $mat-primary-red-light,
+   accent: $mat-primary-red-accent,
+ )
+));
+$primary-red-dark: mat.define-dark-theme((
+ color: (
+   primary: $mat-primary-red-dark,
+   accent: $mat-primary-red-accent,
+ )
+));
+
+
+// PRIMARY PURPLE
+$mat-primary-purple-light: mat.define-palette($mat-primary-purple);
+$mat-primary-purple-dark: mat.define-palette($mat-primary-purple);
+$mat-primary-purple-accent: mat.define-palette($mat-primary-purple, A200, A100, A400);
+
+$primary-purple-light: mat.define-light-theme((
+ color: (
+   primary: $mat-primary-purple-light,
+   accent: $mat-primary-purple-accent,
+ )
+));
+$primary-purple-dark: mat.define-dark-theme((
+ color: (
+   primary: $mat-primary-purple-dark,
+   accent: $mat-primary-purple-accent,
+ )
+));
+/*==========================================================================================*/
+.light-theme-type {
+  &.blue-theme {
+    @include mat.all-component-themes($primary-blue-light);
+    // @include set-color-variable($body-bg-color);
+  }
+  &.orange-theme {
+    @include mat.all-component-themes($primary-orange-light);
+  }
+  &.red-theme {
+    @include mat.all-component-themes($primary-red-light);
+  }
+  
+  &.purple-theme {
+    @include mat.all-component-themes($primary-purple-light);
+  }
+}
+.dark-theme-type {
+  &.blue-theme {
+    @include mat.all-component-themes($primary-blue-dark);
+    // @include set-color-variable($body-bg-color-red);
+  }
+  &.red-theme {
+    @include mat.all-component-themes($primary-red-dark);
+  }
+  &.orange-theme {
+    @include mat.all-component-themes($primary-orange-dark);
+  }
+  &.purple-theme {
+    @include mat.all-component-themes($primary-purple-dark);
+  }
+}

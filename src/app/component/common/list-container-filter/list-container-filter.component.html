@@ -1,0 +1,20 @@
+<div class="tabBoxCon">
+    <!-- <ul class="tabBoxUl">
+        <li *ngFor="let button of buttonArray">
+            <a href="javascript:void(0)" (click)="filterData(button)" [ngClass]="{'active': button.isSelected}">{{button.name}}1</a>
+        </li>
+        
+    </ul> -->
+    <mat-form-field class="form-control-mat pt-1" floatLabel="never">
+        <mat-label>Select Any One</mat-label>
+        <mat-select  [(ngModel)]="dropdownFilterControl" name="dropdownFilterControl" ngDefaultControl class="mat-input-element" >
+          <mat-option *ngFor="let button of buttonArray" [value]="button.value"  [ngClass]="{'active': button.isSelected}" (click)="filterData(button)">
+            {{button.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+        
+        <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style" color="primary">
+          <mat-button-toggle *ngFor="let button of buttonArray" value="bold" (click)="filterData(button)" color="primary">{{button.name}}</mat-button-toggle>
+        </mat-button-toggle-group> -->
+</div>

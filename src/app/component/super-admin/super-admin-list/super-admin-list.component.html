@@ -1,0 +1,68 @@
+<div class="row">
+  <!-- <div class="col-sm-12">
+      <div class="breadcrumbCon">
+          <ul class="breadcrumbUl">
+              <li><a href="javascript:void(0)">User</a></li>
+              <li><a href="javascript:void(0)" >list</a></li>
+          </ul>
+      </div>
+  </div> -->
+  <div class="col-sm-12">
+      <div class="titleTabBoxCon">
+          <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-4 align-self-center">
+                  <div class="titleBoxCon">
+                      <h1>Super Admin</h1>
+                  </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-8 d-flex align-self-center">
+                  <ul class="filter-panel">
+                      <li>
+                          <app-full-text-search [placeHolder]="'Search By Name'"
+                              (fulltextsearch)="fulltextsearch($event)"></app-full-text-search>
+                      </li>
+                      <li>
+                          <mat-icon matBadgeColor="primary" class="float-right filter-icon ml-2"
+                              data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                              aria-controls="collapseExample">filter_alt</mat-icon>
+                      </li>
+                      <li>
+                          <mat-icon matBadgeColor="primary" class="float-right filter-icon ml-2"
+                              (click)="listComponent.changeListGrid('list')"><i class="fa fa-list"
+                                  aria-hidden="true"></i></mat-icon>
+                      </li>
+                      <li>
+                          <mat-icon matBadgeColor="primary" class="float-right filter-icon ml-2"
+                              (click)="listComponent.changeListGrid('grid')"><i class="fa fa-th-large"
+                                  aria-hidden="true"></i></mat-icon>
+                      </li>
+                      <li>
+                          <div class="addNewBtnCon"><a *ngIf="accessRightsJson?.isAccessRightAdd" (click)="add()"
+                                  class="addNewBtn"><span class="material-icons-outlined">add</span></a> </div>
+                      </li>
+                  </ul>
+              </div>
+              <div class="col-12">
+                  <div class="collapse" id="collapseExample">
+                      <div class="card card-body">
+                          <div class="col-12 col-md-4">
+                              <list-container-filter [buttonArray]="tabFilterButtonArray" (filter)="tabFilter($event)">
+                              </list-container-filter>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- <div class="col-sm-12 col-md-12 col-lg-5 align-self-center">
+                  <div class="addNewBtnCon"><a *ngIf="accessRightsJson?.isAccessRightAdd" (click)="add()" class="addNewBtn">Add New</a> </div><app-full-text-search [placeHolder] = "'Search By Name'" (fulltextsearch) = "fulltextsearch($event)"></app-full-text-search>
+              </div> -->
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- <app-filter (filterListPassEvent)="filterList($event)" [apiUrl]='apiUrl' [pagination]='pagination'></app-filter> -->
+<div #dynamicComponentContainer></div>
+<app-list [service]='superAdminService' [columns]="columns" [defaultView]="'list'"
+  (commonEventEmitterData)="getCommonEventEmitterFunction($event)"
+  (removeSearchObjectEventEmitterData)="removeSearchObjectEvent($event)" [accessRightsJson]="accessRightsJson">
+</app-list>

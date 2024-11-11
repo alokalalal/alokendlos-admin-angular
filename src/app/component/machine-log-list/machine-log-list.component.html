@@ -1,0 +1,73 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content>
+            <card-or-list-view #cardOrListViewComponent *blockUI="'listContainerBlockUi'"
+                [listContainer]="listContainer" (addEventEmitter)="addEventEmitCall()"
+                (searchEventEmitter)="searchEventEmitCall()" (addExport)="export()" [start]="start" [pageSize]="pageSize"
+                [recordSize]="recordSize">
+                <ng-template listItem let-items>
+                    <div class="table-responsive" *ngIf="cardOrListViewComponent?.items != undefined">
+                        <table mat-table class="mat-elevation-z8" class="table"
+                            [dataSource]="cardOrListViewComponent.items" matSort (matSortChange)="sortData($event)">
+                            <thead>
+                                <ng-container matColumnDef="resetDate">
+                                    <th mat-sort-header="createDate" id="resetDate" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Reset Date </th>
+                                    <td mat-cell *matCellDef="let item" >
+                                        <span *ngIf="item.resetDate!=0" >{{item.resetDate  * 1000| date:'medium'}}</span>
+                                        <span *ngIf="item.hardResetDate!=0" >{{item.hardResetDate  * 1000| date:'medium'}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="hardReset">
+                                    <th mat-sort-header="hardReset" id="hardReset" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Type of Reset</th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <span *ngIf="item.hardReset==true" class="text-danger">Hard</span>
+                                            <span *ngIf="item.hardReset==false">Soft</span>
+                                        </td>
+                                </ng-container>
+                                <ng-container matColumnDef="materialName">
+                                    <th mat-sort-header="materialType" id="materialName" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                      Material Name </th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <span >{{item.materialType.value}}</span>
+                                        </td>
+                                </ng-container>
+                                <ng-container matColumnDef="materialCount">
+                                    <th mat-sort-header="materialCount" id="materialCount" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                      Material Count </th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <span >{{item.materialCount}}</span>
+                                        </td>
+                                </ng-container>
+                                <ng-container matColumnDef="customerName">
+                                    <th mat-sort-header="customerName" id="customerName" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Customer Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.locationView?.customerView?.name}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="branchName">
+                                    <th mat-sort-header="branchName" id="branchName" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Branch Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.locationView?.name}}</span>
+                                    </td>
+                                </ng-container>
+                            </thead>
+                            <tbody>
+                                <tr mat-header-row
+                                    *matHeaderRowDef="['resetDate','hardReset','materialName','materialCount','customerName','branchName']">
+                                </tr>
+                                <tr mat-row
+                                    *matRowDef="let row; columns: ['resetDate','hardReset','materialName','materialCount','customerName','branchName'];">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-template>
+            </card-or-list-view>
+        </mat-card-content>
+    </mat-card>
+</div>

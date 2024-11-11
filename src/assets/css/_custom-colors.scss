@@ -1,0 +1,75 @@
+$primary: $primary-blue-500 !global;
+$brand-neutral: $primary !global;
+
+$primary-text-color: #333 !global;
+$mat-custom-text-color:(
+  50:$primary-text-color
+);
+
+$body-bg-color : #f9f9fd !global;
+
+$white-color : #fff !global;
+$white-opacity-0-8 : rgba($white-color,0.8) !global; 
+
+$black-color : #000 !global;
+$black-opacity-0-1 : rgba($black-color,0.1) !global;
+$black-opacity-0-3 : rgba($black-color,0.3) !global;
+$black-opacity-0-87 : rgba($black-color,0.87) !global;
+
+$gray-color : #c7c7c7 !global;
+$gray-opacity-0-25 : rgba($gray-color,0.25) !global;
+
+$light-blue-color : #3d70b2 !global;
+$light-blue-opacity-0-1 : rgba($light-blue-color,0.1) !global;
+$light-blue-opacity-0-5 : rgba($light-blue-color,0.5) !global;
+
+$light-blue-gray-color : #323c47 !global;
+$light-blue-gray-opacity-0-5 : rgba($light-blue-gray-color,0.5) !global;
+
+$purple-color : #242672 !global;
+$purple-opacity-0-1 : rgba($purple-color,0.1) !global;
+
+$light-skyblue-color : #5596e6 !global;
+$light-skyblue-opacity-0-25 : rgba($light-skyblue-color,0.25) !global;
+
+$light-purple-opacity-0-12 : rgba($brand-neutral, 0.12) !global;
+
+$dark-gray-color : #5a6872 !global;
+
+$table-border-color : #e5e9f1 !global;
+
+$filed-custome-border: #3d70b21a !global;
+
+$error-color : #f44336 !global;
+
+$light-red-color : #ff505a !global;
+
+$success-color : #007e34 !global;
+
+$light-green-color : #11ce8c !global;
+
+$warning-color : #f2ae14 !global;
+
+$cyan-color : #19a1c3 !global;
+
+$skyblue-color : #54c1fb !global;
+
+$dark-skyblue-color : #078ae8 !global;
+
+$dark-cyan-black-color : #152935 !global;
+
+$light-purple-color : #6d71f8 !global;
+
+// jk ----
+$black-color-200: #231F20;
+$black-color-500: #525252;
+$green-color: #04D12B;
+$red-color: #F63640;
+$yellow-color: #FBA500;
+$light-green-color-1: #a8bf3d;
+$light-green-color-2: #2D4EF5;
+$blue-color: #1363DF;
+$orange-color: #FBA500;
+
+$green-color-eee: #eff5df;
+

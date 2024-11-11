@@ -1,0 +1,119 @@
+<ng-container>
+    <div class="editBoxDataCon active" >
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon" >            
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="barcodeStructureAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    {{addEditForm}} Field</div>
+                                <a class="editBoxClose" (click)="closeModal()">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" >
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Field Name</mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="fieldName" [(ngModel)]="barcodeStructureModel.fieldName" placeholder='Enter Field'>
+                                                                    <mat-error>
+                                                                        <app-error-message [errors]="f.fieldName.errors" [submitted]="fform.submitted"
+                                                                            [touched]="f.fieldName.touched" [required]="errorMessage.mandatory">
+                                                                        </app-error-message>
+                                                                    </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Length of Fields</mat-label>
+                                                                    <span>{{selectedLength}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Select Field Type <sup>*</sup></mat-label>                                                                    
+                                                                    <mat-radio-group
+                                                                    aria-labelledby="example-radio-group-label"
+                                                                    class="example-radio-group"
+                                                                    formControlName="barcodeType" 
+                                                                    [(ngModel)]="barcodeStructureModel?.barcodeType.key">
+                                                                    <mat-radio-button class="example-radio-button" *ngFor="let barcodeType of structureTypes" [value]="barcodeType.key" [checked]="barcodeType.key == barcodeStructureModel.barcodeType.key">
+                                                                        {{barcodeType.value}}
+                                                                    </mat-radio-button>
+                                                                    </mat-radio-group>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12" *ngIf="barcodeStructureModel.barcodeType?.key ==1">
+                                                                <div class="form-group">
+                                                                    <mat-label>Value <sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="value" [(ngModel)]="barcodeStructureModel.value" placeholder='Enter Value'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.value.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.value.touched" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12" *ngIf="barcodeStructureModel.barcodeType?.key ==3">
+                                                                <div class="form-group">
+                                                                    <mat-label>Start Value <sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="value" [(ngModel)]="barcodeStructureModel.value" placeholder='Enter Start Value'>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <mat-label>End Value <sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="endValue" [(ngModel)]="barcodeStructureModel.endValue" placeholder='Enter End Value'>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12" *ngIf="barcodeStructureModel.barcodeType?.key ==2">
+                                                                <div class="form-group">
+                                                                    <mat-label>Machine Data <sup>*</sup></mat-label>                                                                    
+                                                                    <mat-radio-group
+                                                                    aria-labelledby="example-radio-group-label"
+                                                                    class="example-radio-group"
+                                                                    formControlName="dynamicValue" 
+                                                                    [(ngModel)]="barcodeStructureModel.dynamicValue">
+                                                                    <mat-radio-button class="example-radio-button" *ngFor="let dynamicValue of dynamicValueList" [value]="dynamicValue">
+                                                                        {{dynamicValue.value}}
+                                                                    </mat-radio-button>
+                                                                    </mat-radio-group>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 pr-0" >
+                                                <div class="btnCon text-right mt-3 fixed-botton">
+                                                    <button type="button"mat-raised-button (click)="closeModal()"  class="mr-2 btn-secondary" *blockUI="'pageSectionBlockUI'">Cancel</button>
+                                                    <button  type="submit" mat-raised-button color="primary" *blockUI="'pageSectionBlockUI'">{{saveUpdateBtn}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

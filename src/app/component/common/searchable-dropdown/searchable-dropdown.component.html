@@ -1,0 +1,13 @@
+<mat-form-field class="form-control-mat" floatLable="never">
+    <mat-select [formControl]="searchableDropdownControl" [(ngModel)]="filteredDataModel" [compareWith]="comparer"
+        (selectionChange)="dropdownChangeEventEmitter.emit(filteredDataModel)" [placeholder]="placeholder" #searchableSelect>
+        <mat-option>
+            <ngx-mat-select-search ngModel (ngModelChange)="filterLists($event)" [placeholderLabel]="placeholder"
+                noEntriesFoundLabel="No Matches Found"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let option of filteredList | async; let index = index" [value]="option">
+            <span *ngIf="option.name">{{option.name}}</span>
+            <span *ngIf="option.value">{{option.value}}</span>
+        </mat-option>
+    </mat-select>
+</mat-form-field>

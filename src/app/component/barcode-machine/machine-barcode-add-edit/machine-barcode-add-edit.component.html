@@ -1,0 +1,111 @@
+<ng-container>
+    <div class="editBoxDataCon" [ngClass]="{'active': isOpenModel == true}">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon">
+            <div class="editBoxFull">
+                <form #fform="ngForm" [formGroup]="machineBarcodeFileAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    {{addEditForm}} Machine Barcode</div>
+                                <a class="editBoxClose" (click)="closeModal()" href="javascript:void(0)">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6" *ngIf="isEditData">
+                                                                <div class="form-group">
+                                                                    <mat-label>Machine Barcode Name<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"
+                                                                        floatLabel="never">
+                                                                        <input type="text" matInput
+                                                                            formControlName="barcodeFileName"
+                                                                            [(ngModel)]="barcodeMachineView.barcodeFileName"
+                                                                            placeholder="Enter Machine Barcode Name" maxlength="100" [ngClass]="'override'">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.barcodeFileName.errors"
+                                                                                [submitted]="fform.submitted"
+                                                                                [touched]="f.barcodeFileName.touched"
+                                                                                [required]="errorMessage.mandatory"
+                                                                                [maxlength]="errorMessage.maxlengthHundred"
+                                                                                [pattern]="errorMessage.patternAlphaNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-sm-6 col-md-6" *ngIf="!isEditData">
+                                                                <div class="form-group readonly-field" >
+                                                                        <mat-label>Machine Barcode Name</mat-label> 
+                                                                        <mat-form-field class="form-control-mat">                                             
+                                                                        <input type="text" matInput formControlName="barcodeFileName" [(ngModel)]="barcodeMachineView.barcodeFileName" placeholder='Machine Barcode Name' readonly>                                                                        
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div> -->
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <div class="form-group" *blockUI="'imageUploadBlockUi'">
+                                                                    <div class="form-group">
+                                                                        <mat-label>Select a file<sup>*</sup></mat-label>
+                                                                        <div class="custom-file mb-6 customFileLogoBox" *ngIf="!barcodeMachineView.fileView || !barcodeMachineView.fileView.id">
+                                                                            <input type="file" class="custom-file-input" name="barcodeFile" id="barcodeFile"  formControlName="barcodeFile" (change)="onFileSelected($event)">
+                                                                            <label class="custom-file-label" for="barcodeFile">Upload files</label>
+                                                                            <br><br>
+                                                                            <mat-hint style="margin-left:-100px;">.csv only</mat-hint>
+                                                                                <mat-error>
+                                                                                    <app-error-message [errors]="f.barcodeFile.errors" [submitted]="fform.submitted"
+                                                                                    [touched]="f.barcodeFile.touched" [required]="errorMessage.mandatory"></app-error-message>
+                                                                                </mat-error>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-sm-12 col-md-12 mb-12" *ngIf="barcodeMachineView.fileView && barcodeMachineView.fileView.fileId != undefined">
+                                                                {{barcodeMachineView.fileView.name}}<br><br>
+                                                            </div> -->
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <a href="assets/Sample-machine-barcode-file.csv"><button type="button" mat-raised-button
+                                                                    color="primary">Download Sample CSV<span class="material-icons-outlined">download</span></button></a>
+                                                                </div>
+                                                             </div>
+                                                             
+                                                             <div class="col-sm-12 col-md-12">
+                                                                <br>
+                                                                <div class="form-group">
+                                                                    <mat-label><b>Instructions before upload</b></mat-label>  
+                                                                    * Repetitive bar  code not allowed <br>
+                                                                    * Material type, volume and weight is mandatory<br>
+                                                                    * In csv empty row not allowed 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12" >
+                                                <div class="btnCon text-right mt-3 fixed-botton">
+                                                    <button type="button" mat-raised-button (click)="closeModal()"
+                                                        class="mr-2 btn-secondary" *blockUI="'saveUpdateBtnBlockUI'">Cancel</button>
+                                                    <button type="submit" mat-raised-button
+                                                        color="primary" *blockUI="'saveUpdateBtnBlockUI'">{{saveUpdateBtn}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

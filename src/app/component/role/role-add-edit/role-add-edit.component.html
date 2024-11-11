@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="breadcrumbCon">
+            <ul class="breadcrumbUl">
+                <li><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.ROLE + '/' +this.appUrl.LIST_OPERATION]"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+                <li class="beforNone"><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.DASHBOARD + '/' +this.appUrl.LIST_OPERATION]">Dashboard</a></li>
+                <li><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.ROLE + '/' +this.appUrl.LIST_OPERATION]">Role List</a></li>
+                <li>Role {{addEditForm}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="titleTabBoxCon">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-6 align-self-center">
+                    <div class="titleBoxCon">
+                        <h1>{{addEditForm}} Role</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="employeesGridCol sameHight mt-3">
+    <div class=" p-3">
+        <div class="row" *blockUI="'pageSectionBlockUI'">
+            <div class="col-sm-12">
+                <form [formGroup]="roleForm" (ngSubmit)="onSubmit()" #fform="ngForm" id="roleAddEdit"
+                    novalidate>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="formCon">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <mat-label>Role Name</mat-label>
+                                            <mat-form-field class="form-control-mat" floatLabel="never">
+                                                <input type="text" matInput formControlName="name"  [(ngModel)]="roleModel.name"
+                                                        placeholder='Enter Role Name' [ngClass]="'override'">
+                                                <mat-error>
+                                                    <app-error-message [errors]="f.name.errors" [submitted]="fform.submitted"
+                                                        [touched]="f.name.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthThirty" [pattern]="errorMessage.patternAlphaNumericSpace"
+                                                        ></app-error-message>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group-mat">
+                                            <mat-label>Is Customer Role
+                                                <sup>*</sup> 
+                                                <!-- <span class="tooltipBoxCon"><img src="assets/images/infoIcon.svg">
+                                                <span class="tooltiptext">Tooltip text</span></span> -->
+                                            </mat-label>
+                                            <div class="radioList">
+                                                <mat-radio-group id="isCustomerRoleTrue"
+                                                    name="customerRole" formControlName="customerRole"
+                                                    [(ngModel)]="roleModel.customerRole">
+                                                    <mat-radio-button for="isCustomerRoleTrue"
+                                                        [value]=true>Yes</mat-radio-button>
+                                                    <mat-radio-button for="isCustomerRoleTrue"
+                                                        [value]=false>No</mat-radio-button>
+                                                </mat-radio-group>                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="">
+                                <h5>Access Control</h5>
+                                <div class="tableCon">
+                                    <div class="table-responsive">
+                                        <table class="table smThTr textCenter">
+                                            <thead>
+                                                <tr>
+                                                    <th class="width-5 "></th>
+                                                    <th class="width-35 mdTh">Module</th>
+                                                    <th class="width-5" *ngFor="let right of rightslist">{{right.name}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let roleModuleCheckboxRow of roleModuleRightsCheckboxView">
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                formControlName="isAllSelected"
+                                                                id="isAll{{roleModuleCheckboxRow.moduleId}}"
+                                                                [checked]="roleModuleCheckboxRow['selectAllRights']"
+                                                                (click)="selectAllCheckbox(roleModuleCheckboxRow)" name="value">
+                                                            <label class="custom-control-label"
+                                                                for="isAll{{roleModuleCheckboxRow.moduleId}}"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {{roleModuleCheckboxRow.moduleName}}
+                                                    </td>
+                                                    <td
+                                                        *ngFor="let roleModuleCheckbox of roleModuleCheckboxRow.roleModuleRights">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="r{{roleModuleCheckbox.rightsView.id}}m{{roleModuleCheckbox.moduleView.id}}"
+                                                                name="value2" [checked]="roleModuleCheckbox['isSelected']"
+                                                                [disabled]="roleModuleCheckbox['isDisable']"
+                                                                (click)="inverseSelectionOfRight(roleModuleCheckbox)">
+                                                            <label class="custom-control-label"
+                                                                for="r{{roleModuleCheckbox.rightsView.id}}m{{roleModuleCheckbox.moduleView.id}}"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="btnCon text-left mt-3" >
+                                <span class="btnBlockUICon">
+                                <button mat-raised-button class="btn-secondary mr-2"  [routerLink]="['/' + appUrl.ROLE + '/' + appUrl.LIST_OPERATION]" *blockUI="'roleSaveUpdateBtnBlockUI'">Cancel</button>
+                                <button mat-button  mat-raised-button color="primary" type="submit" *blockUI="'roleSaveUpdateBtnBlockUI'">{{saveUpdateBtn}}</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,496 @@
+<div #dynamicComponentContainer></div>
+<div class="row machine-detail">
+    <div class="col-sm-12 mt-3 mb-3">
+        <div class="titleTabBoxCon">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-10 align-self-center">
+                    <ul class="breadcrumbUl">
+                        <li><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.MACHINE + '/' +this.appUrl.LIST_OPERATION]"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+                        <li class="beforNone"><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.DASHBOARD + '/' +this.appUrl.LIST_OPERATION]">Dashboard</a></li>
+                        <li><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.MACHINE + '/' +this.appUrl.LIST_OPERATION]">Machine List</a></li>
+                        <li>Machine Detail</li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-2 d-flex align-self-center" *ngIf="machineView.customerView?.name==undefined">
+                    <ul class="filter-panel">
+                        <li>
+                            <div class="addNewBtnCon"><a (click)="edit()" class="addNewBtn"><span
+                                        class="material-icons-outlined">edit</span></a> </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-sm-12">
+                    <br>
+                    <mat-label><b>Select Date Range</b></mat-label>
+                      <mat-form-field class="dateIconBig">
+                        <mat-date-range-input [max]="defaultEndDate" [rangePicker]="picker">
+                            <input readonly matStartDate [(ngModel)]="startDate" placeholder="Start date">
+                            <input readonly matEndDate [(ngModel)]="endDate" placeholder="End date" (dateChange)="filterDateChange()">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker [startAt]="startDate" disabled="false"></mat-date-range-picker>
+                    </mat-form-field>                       
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="list-box-view-con">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-xl-4 d-flex">
+                    <div class="card-view  w-100 same-box mb-4">
+                        <span class="material-icons machine-status float-right success-msg"
+                            *ngIf="machineView.machineActivityStatus?.key == 1">
+                            circle
+                        </span>
+                        <span class="material-icons machine-status float-right warning-msg"
+                            *ngIf="machineView.machineActivityStatus?.key == 2">
+                            circle
+                        </span>
+                        <span class="material-icons machine-status float-right error-msg"
+                            *ngIf="machineView.machineActivityStatus?.key == 3">
+                            circle
+                        </span>
+                        <div class="card-title-bar" style="color: black;font-weight: bold;">
+                            Machine Details
+                        </div> 
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <mat-card-subtitle>
+                                            <p class="mb-0" style="color: black;font-weight: bold;">Machine Id </p>
+                                        </mat-card-subtitle> 
+                                    </div>
+                                    <div class="col-8">
+                                        <mat-card-subtitle>
+                                            <div class="branch-name-txt" style="color: black;font-weight: bold;">
+                                                <p class="mr-3 mb-0">:</p>
+                                                {{machineView.machineId}}
+                                            </div> 
+                                        </mat-card-subtitle> 
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <mat-card-title class="branch-name-txt-box">Branch Name </mat-card-title>
+                                    </div>
+                                    <div class="col-8">
+                                        <mat-card-title class="branch-name-txt-box">
+                                            <div class="branch-name-txt">
+                                                <p class="mr-3 mb-0">:</p>
+                                                {{machineView.locationView?.name}}
+                                            </div> 
+                                        </mat-card-title>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <mat-card-subtitle>
+                                            <p class="mb-0">Branch Number </p>
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-8">
+                                        <mat-card-subtitle>
+                                            <div class="branch-name-txt">
+                                                <p class="mr-3 mb-0">:</p>
+                                                {{machineView.locationView?.branchNumber}}
+                                            </div> 
+                                        </mat-card-subtitle>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <mat-card-subtitle class="mb-0">
+                                            <p class="mb-0">Create Date </p>
+                                        </mat-card-subtitle>  
+                                    </div>
+                                    <div class="col-8">
+                                        <mat-card-subtitle class="mb-0">
+                                            <div class="branch-name-txt">
+                                                <p class="mr-3 mb-0">:</p>
+                                                {{+machineView.createDate * 1000 | date:'medium'}}
+                                            </div> 
+                                        </mat-card-subtitle>  
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4 pr-0">
+                                        <mat-card-subtitle class="mb-0">
+                                            <p class="d-flex mb-2 mt-4">Barcode Template Name</p>
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-8"> 
+                                        <p class="d-flex mb-2 mt-4">
+                                            <span class="allocated-txt"> 
+                                                <span class="mr-3">:</span>
+                                                    {{machineView.barcodeTemplateView?.name}}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <mat-card-subtitle>
+                                            <p class="mb-0">Branch wise Machine Numbers</p>
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-8">
+                                        <mat-card-subtitle>
+                                            <div class="branch-name-txt">
+                                                <p class="mr-3 mb-0">:</p>
+                                                {{machineView.branchMachineNumber}}
+                                            </div> 
+                                        </mat-card-subtitle>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <mat-card-subtitle>
+                                            <p class="mb-0">Assigned Barcode File</p>
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-8">
+                                        <mat-card-subtitle>
+                                            <div class="branch-name-txt">
+                                                <p class="mr-3 mb-0">:</p>
+                                                {{machineView?.machineBarcodeFileView?.barcodeFileName}}
+                                            </div> 
+                                        </mat-card-subtitle>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4 pr-0">
+                                        <mat-card-subtitle class="mb-0">
+                                            <p class="d-flex mb-2 mt-4">Machine Last seen time</p>
+                                        </mat-card-subtitle>
+                                    </div>
+                                    <div class="col-8"> 
+                                        <p class="d-flex mb-2 mt-4">
+                                            <span class="allocated-txt" *ngIf="machineView.transactionView && machineView.transactionView.dateStart != undefined"> 
+                                                <span class="mr-3">:</span>
+                                                <span>
+                                                    {{machineView.transactionView.dateStart * 1000 | date:'medium'}}
+                                                </span>                                                
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-12 allocated-client-detials" *ngIf="machineView.customerView?.id">
+                                <hr>
+                                <h3 class="mat-card-title"><strong>Customer Details</strong></h3>
+                                
+                                <p class="d-flex"><span
+                                        class="material-icons-outlined">person</span>{{machineView.customerView?.name}}</p>
+                                <p class="d-flex"><span class="material-icons-outlined">room</span>
+                                    {{machineView.locationView?.address ? machineView.locationView?.address + ", " : ""}}
+                                    {{machineView.locationView?.area ? machineView.locationView?.area + " - " : ""}}
+                                    <ng-container *ngIf="machineView.locationView?.cityView; else cityNameTemplate">
+                                        {{machineView.locationView?.cityView?.value ? machineView.locationView?.cityView?.value + " - " : ""}}
+                                    </ng-container>
+                                    <ng-template #cityNameTemplate>
+                                        {{machineView.locationView?.cityName ? machineView.locationView?.cityName + " - " : ""}}
+                                    </ng-template>
+                                        
+                                    <ng-container *ngIf="machineView.locationView?.stateView; else stateNameTemplate">
+                                        {{machineView.locationView?.stateView?.value ? machineView.locationView?.stateView?.value + " - " : ""}}
+                                    </ng-container>
+                                    <ng-template #stateNameTemplate>
+                                        {{machineView.locationView?.stateName ? machineView.locationView?.stateName + " - " : ""}}
+                                    </ng-template>
+                                    {{machineView.locationView?.pincode}}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- <br/>
+                        <p class="d-flex"
+                            *ngIf="machineView.transactionView && machineView.transactionView.dateStart != undefined">
+                            <span class="material-icons-outlined">event</span>
+                            <span>
+                                {{machineView.transactionView.dateStart * 1000 | date:'medium'}}
+                            </span>
+                        </p> -->
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-4 d-flex">
+                    <div class="card-view w-100 same-box mb-4">
+                        <div class="h-100">
+                            <div class="card-title-bar">
+                                Counters
+                            </div>     
+                            <div class="row" *blockUI="'machineDetailView'">
+                                <div class="col-4">
+                                    <ul class="counters-list">
+                                        <li>
+                                            <div class="icon-box green">
+                                                <!-- <img src="assets/icons/icon-bottles.svg" alt=""> -->
+                                                <div class="counter-count-txt-box">
+                                                    <p class="count-txt mb-0">{{dashboardView.totalBottle}}</p> 
+                                                    <p class="type-txt mb-0">Bottles</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-8 p-0">
+                                    <ul class="counters-list">
+                                        <li class="justify-content-end">
+                                            <div class="icon-box green"  *ngIf="isMaterialAccepted(2, machineView)">
+                                                <div class="img-count-box">
+                                                    <mat-icon svgIcon="plastic"></mat-icon>
+                                                    <div class="counter-count-txt-box">
+                                                        <p class="type-txt mb-0">Plastic</p>
+                                                        <p class="count-txt mb-0">{{dashboardView.totalPatBottleCount}}</p> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="icon-box green" *ngIf="isMaterialAccepted(1, machineView)">
+                                                <div class="img-count-box">
+                                                    <mat-icon svgIcon="glass"></mat-icon>
+                                                    <div class="counter-count-txt-box">
+                                                        <p class="type-txt mb-0">Glass</p>
+                                                        <p class="count-txt mb-0">{{dashboardView.totalGlassBottleCount}}</p> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="icon-box green" *ngIf="isMaterialAccepted(3, machineView)">
+                                                <div class="img-count-box">
+                                                    <mat-icon svgIcon="aluminum"></mat-icon>
+                                                    <div class="counter-count-txt-box">
+                                                        <p class="type-txt mb-0">Aluminum</p>
+                                                        <p class="count-txt mb-0">{{dashboardView.totalAluBottleCount}}</p> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-4">
+                                    <ul class="counters-list machine-detail-counters-list">
+                                        <li>
+                                            <div class="icon-box blue">
+                                                <!-- <img src="assets/icons/icon-voucher.svg" alt=""> -->
+                                                <div class="counter-count-txt-box">
+                                                    <p class="count-txt mb-0">{{dashboardView.voucherBarcode}}</p> 
+                                                    <p class="type-txt mb-0">Vouchers</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-8 p-0"></div>
+                                <div class="col-4">
+                                    <ul class="counters-list machine-detail-counters-list">
+                                        <li>
+                                            <div class="icon-box yellow">
+                                                <div class="amount-icon-count-box">
+                                                    <img src="assets/icons/israeli-shekel.svg" alt="">
+                                                    <div class="counter-count-txt-box">
+                                                        <p class="count-txt">
+                                                            {{dashboardView.totalValue}}
+                                                        </p> 
+                                                        <p class="type-txt mb-0">Amount</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-8 p-0">
+                                    <ul class="counters-list machine-detail-counters-list">
+                                        <li class="justify-content-end">
+                                            <div class="icon-box yellow" *ngIf="isMaterialAccepted(2, machineView)">
+                                                <div class="img-count-box">
+                                                    <mat-icon svgIcon="plastic" class="icon-yellow"></mat-icon>
+                                                    <div class="counter-count-txt-box">
+                                                        <p class="type-txt mb-0">Plastic</p>
+                                                        <p class="count-txt mb-0">
+                                                            <img src="assets/icons/israeli-shekel.svg" alt="">
+                                                            {{dashboardView.totalPatBottleValue}}
+                                                        </p> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="icon-box yellow" *ngIf="isMaterialAccepted(1, machineView)">
+                                                <div class="img-count-box">
+                                                    <mat-icon svgIcon="glass" class="icon-yellow"></mat-icon>
+                                                    <div class="counter-count-txt-box">
+                                                        <p class="type-txt mb-0">Glass</p>
+                                                        <p class="count-txt mb-0">
+                                                            <img src="assets/icons/israeli-shekel.svg" alt="">
+                                                            {{dashboardView.totalGlassBottleValue}}
+                                                        </p> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="icon-box yellow" *ngIf="isMaterialAccepted(3, machineView)">
+                                                <div class="img-count-box">
+                                                    <mat-icon svgIcon="aluminum" class="icon-yellow"></mat-icon>
+                                                    <div class="counter-count-txt-box">
+                                                        <p class="type-txt mb-0">Aluminum</p>
+                                                        <p class="count-txt mb-0">
+                                                            <img src="assets/icons/israeli-shekel.svg" alt="">
+                                                            {{dashboardView.totalAluBottleValue}}
+                                                        </p> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-4 d-flex">
+                    <div class="card-view w-100 same-box mb-4">
+                        <div class="card-title-bar">
+                            Bin Full Status 
+                        </div>    
+                        <div class="spinner-img-title-count-list">                           
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-lg-12 mb-4 spinner-img-title-count-con"
+                                    *ngIf="machineView.patBottlePercentage && isMaterialAccepted(2, machineView)">
+                                    <div class="spinner-img">
+                                        <div class="spinner-container basic-container">
+                                            <div class="spinner-background"><img
+                                                    src="assets/images/Plasticbottle.svg" /></div>
+                                            <mat-progress-spinner #spinner
+                                                [ngClass]="{'mat-success' : machineView.patBottlePercentage < 50, 'mat-warning' : machineView.patBottlePercentage < 80 && machineView.patBottlePercentage > 50,'mat-error' : machineView.patBottlePercentage > 80 }"
+                                                [mode]="'determinate'" [value]="machineView.patBottlePercentage" [diameter]="60"
+                                                [strokeWidth]="4">
+                                            </mat-progress-spinner>
+                                        </div>
+                                    </div>
+                                    <div class="spinner-title">
+                                        Plastic
+                                    </div>
+                                    <div class="spinner-count"
+                                        [ngClass]="{'success-msg' : machineView.patBottlePercentage < 50, 'warning-msg' : machineView.patBottlePercentage < 80 && machineView.patBottlePercentage > 50,'error-msg' : machineView.patBottlePercentage > 80 }">
+                                        {{machineView.patBottleCount}} ({{machineView.patBottlePercentage}}%) <span>Bottles</span>
+                                    </div>
+                                    <!-- <div class="bottle-count"
+                                        [ngClass]="{'success-msg' : machineView.patBottlePercentage < 50, 'warning-msg' : machineView.patBottlePercentage < 80 && machineView.patBottlePercentage > 50,'error-msg' : machineView.patBottlePercentage > 80 }">
+                                        {{machineView.patBottleCount}} Bottles
+                                    </div> -->
+                                </div>
+                                <div class="col-12 col-md-12 col-lg-12 mb-4 spinner-img-title-count-con"
+                                    *ngIf="machineView.glassBottlePercentage && isMaterialAccepted(1, machineView)">
+                                    <div class="spinner-img">
+                                        <div class="spinner-container basic-container">
+                                            <div class="spinner-background"><img src="assets/images/Glassbottle.svg" /></div>
+                                            <mat-progress-spinner #spinner
+                                                [ngClass]="{'mat-success' : machineView.glassBottlePercentage < 50, 'mat-warning' : machineView.glassBottlePercentage < 80 && machineView.glassBottlePercentage > 50,'mat-error' : machineView.glassBottlePercentage > 80 }"
+                                                [mode]="'determinate'" [value]="machineView.glassBottlePercentage" [diameter]="60"
+                                                [strokeWidth]="4">
+                                            </mat-progress-spinner>
+                                        </div>
+                                    </div>
+                                    <div class="spinner-title">
+                                        Glass
+                                    </div>
+                                    <div class="spinner-count"
+                                        [ngClass]="{'success-msg' : machineView.glassBottlePercentage < 50, 'warning-msg' : machineView.glassBottlePercentage < 80 && machineView.glassBottlePercentage > 50,'error-msg' : machineView.glassBottlePercentage > 80 }">
+                                        {{machineView.glassBottleCount}} ({{machineView.glassBottlePercentage}}%) <span>Bottles</span>
+                                    </div>
+                                    <!-- <div class="bottle-count"
+                                        [ngClass]="{'success-msg' : machineView.glassBottlePercentage < 50, 'warning-msg' : machineView.glassBottlePercentage < 80 && machineView.glassBottlePercentage > 50,'error-msg' : machineView.glassBottlePercentage > 80 }">
+                                        {{machineView.glassBottleCount}} Bottles
+                                    </div> -->
+                                </div>
+                                <div class="col-12 col-md-12 col-lg-12 spinner-img-title-count-con"
+                                    *ngIf="machineView.aluBottlePercentage && isMaterialAccepted(3, machineView)">
+                                    <div class="spinner-img">
+                                        <div class="spinner-container basic-container">
+                                            <div class="spinner-background"><img
+                                                    src="assets/images/Aluminumbottle.svg" /></div>
+                                            <mat-progress-spinner #spinner
+                                                [ngClass]="{'mat-success' : machineView.aluBottlePercentage < 50, 'mat-warning' : machineView.aluBottlePercentage < 80 && machineView.aluBottlePercentage > 50,'mat-error' : machineView.aluBottlePercentage > 80 }"
+                                                [mode]="'determinate'" [value]="machineView.aluBottlePercentage" [diameter]="60"
+                                                [strokeWidth]="4">
+                                            </mat-progress-spinner>
+                                        </div>
+                                    </div>
+                                    <div class="spinner-title">
+                                        Aluminium
+                                    </div>
+                                    <div class="spinner-count"
+                                        [ngClass]="{'success-msg' : machineView.aluBottlePercentage < 50, 'warning-msg' : machineView.aluBottlePercentage < 80 && machineView.aluBottlePercentage > 50,'error-msg' : machineView.aluBottlePercentage > 80 }">
+                                        {{machineView.aluBottleCount}} ({{machineView.aluBottlePercentage}}%) <span>Bottles</span>
+                                    </div>
+                                    <!-- <div class="bottle-count"
+                                        [ngClass]="{'success-msg' : machineView.aluBottlePercentage < 50, 'warning-msg' : machineView.aluBottlePercentage < 80 && machineView.aluBottlePercentage > 50,'error-msg' : machineView.aluBottlePercentage > 80 }">
+                                        {{machineView.aluBottleCount}} Bottles
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+    <mat-button-toggle-group #group="matButtonToggleGroup" value="transaction" (change)="onTabChange($event)">
+        <mat-button-toggle value="transaction" (click)="setFilterDisable()">
+            Transaction
+        </mat-button-toggle>
+        <mat-button-toggle value="error" (click)="setFilterDisableError()">
+            Error
+        </mat-button-toggle>
+        <mat-button-toggle value="machinelog">
+            Bin Fullness Logs
+        </mat-button-toggle>
+        <mat-button-toggle value="machineCapacity">
+            Machine Capacity
+        </mat-button-toggle>
+        <mat-button-toggle value="mqttConfiguration">
+            MQTT Configuration
+        </mat-button-toggle>
+        <mat-button-toggle value="plcConfiguration">
+            PLC Configuration
+        </mat-button-toggle>
+        <mat-button-toggle value="locationHistory">
+            Location History
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div *ngIf="group.value == 'transaction' || group.value == undefined " class="col-sm-12 material-card mb-1 p-0">
+        <app-transaction-list *ngIf="machineView.machineId!=undefined" [machineView]="machineView"></app-transaction-list>
+    </div>
+    <div *ngIf="group.value == 'error'" class="col-sm-12 material-card  mb-1 p-0">
+        <app-error-list *ngIf="machineView.machineId!=undefined" [machineView]="machineView"></app-error-list>  
+    </div>
+    <div  *ngIf="group.value == 'machinelog'" class="col-sm-12 material-card  mb-1 p-0">
+        <app-machine-log-list *ngIf="machineView.machineId!=undefined" [machineView]="machineView"></app-machine-log-list>  
+    </div>
+    <div  *ngIf="group.value == 'machineCapacity'" class="col-sm-12 material-card  mb-1 p-0">
+        <app-machine-capacity-list *ngIf="machineView.machineId!=undefined" [machineView]="machineView"></app-machine-capacity-list>  
+    </div>
+    <div  *ngIf="group.value == 'mqttConfiguration'" class="col-sm-12 material-card  mb-1 p-0">
+        <app-mqtt-configuration-list *ngIf="machineView.machineId!=undefined" [machineView]="machineView"></app-mqtt-configuration-list>  
+    </div>
+    <div  *ngIf="group.value == 'plcConfiguration'" class="col-sm-12 material-card  mb-1 p-0">
+        <app-plc-configuration-list *ngIf="machineView.machineId!=undefined" [machineView]="machineView"></app-plc-configuration-list>  
+    </div>
+    <div  *ngIf="group.value == 'locationHistory'" class="col-sm-12 material-card  mb-1 p-0">
+        <app-location-history-component *ngIf="machineView.machineId!=undefined" [machineView]="machineView"></app-location-history-component>  
+    </div>
+</div>

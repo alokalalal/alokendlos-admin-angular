@@ -1,0 +1,10 @@
+<app-chart-button-group *ngIf="chartWrapperService?.chartType"></app-chart-button-group>
+<div class="chart-legend-con">
+    <div class="chart-legend-left">
+        <ng-content></ng-content>
+    </div>
+    <div class="chart-legend-right">
+        <app-chart-legend></app-chart-legend>
+    </div>
+</div>
+<app-chart-action-section *ngIf="chartWrapperService?.chartType"></app-chart-action-section>

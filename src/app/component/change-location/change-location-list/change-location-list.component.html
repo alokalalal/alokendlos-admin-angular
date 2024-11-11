@@ -1,0 +1,127 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content style="margin-top: -8px;">  
+            <card-or-list-view #cardOrListViewComponent *blockUI="'listContainerBlockUi'"
+                [listContainer]="listContainer" (addEventEmitter)="addEventEmitCall()"
+                (searchEventEmitter)="searchEventEmitCall()" (addExport)="export()" [start]="start" [pageSize]="pageSize"
+                [recordSize]="recordSize">
+                <ng-template listItem let-items style="margin-top: -10px;">
+                    <div class="table-responsive" *ngIf="cardOrListViewComponent?.items != undefined">
+                        <table mat-table class="mat-elevation-z8" class="table" [dataSource]="cardOrListViewComponent.items"  matSort (matSortChange)="sortData($event)">
+                            <thead>
+                                <ng-container matColumnDef="machineId">
+                                    <th mat-sort-header="machineId" id="machineId" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        Machine Id </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.machineView.machineId}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="customer">
+                                    <th mat-sort-header="customerName" id="customer" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        Old Customer Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.oldCustomerView.name}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="bname">
+                                    <th mat-sort-header="oldBranchName" id="bname" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        Old Branch Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.oldLocationView.name}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="barcodeTemplateName">
+                                    <th mat-sort-header="barcodeTemplateName" id="barcodeTemplateName" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                       Old Barcode Template Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.oldBarcodeTemplateView?.name}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="machineNo">
+                                    <th mat-sort-header="branchWiseMachineNumber" id="machineNo" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        Branch Wise Machine Number </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.oldBranchMachineNumber}}</span>
+                                    </td>
+                                </ng-container> 
+                                <ng-container matColumnDef="timeStamp">
+                                    <th mat-sort-header="requestDate" id="timeStamp" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        Requested Timestamp </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.requestDate * 1000| date:'medium'}}</span>
+                                    </td>
+                                </ng-container>  
+                                <ng-container matColumnDef="resolve">
+                                    <th mat-sort-header="status" id="resolve" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        Status</th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <p *ngIf="item.status.key === 3 || item.status.key === 4" class="alert alert-success small-alert mb-0" role="alert">{{item.status.value}}</p>
+                                            <p *ngIf="item.status.key === 1 " class="alert alert-warning small-alert mb-0" role="alert">{{item.status.value}}</p>
+                                            <p *ngIf="item.status.key === 2" class="alert alert-danger small-alert mb-0" role="alert">{{item.status.value}}</p>
+                                        </td>
+                                </ng-container>
+                                <ng-container matColumnDef="newcustomer">
+                                    <th mat-sort-header="newCustomerName" id="newcustomer" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        New Customer Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.customerView?.name}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="newbname">
+                                    <th mat-sort-header="branchName" id="newbname" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        New Branch Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.locationView?.name}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="newbarcodeTemplateName">
+                                    <th mat-sort-header="newbarcodeTemplateName" id="barcodeTemplateName" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                       New Barcode Template Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.barcodeTemplateView?.name}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="action">
+                                    <th id="action" class="width-20" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        Action </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <ng-container >
+                                            <button mat-icon-button  color="primary" (click)="accept(item)" *ngIf="item.status.key=== 1" matTooltip="Accept Change Location Request">
+                                                <mat-icon>check_circle_outline</mat-icon>
+                                            </button>
+                                        </ng-container>
+                                        <ng-container >
+                                            <button mat-icon-button  color="primary" (click)="editLocation(item,1)" *ngIf="item.status.key=== 3"  matTooltip="Assign To New Customer">
+                                                <mat-icon>shortcut</mat-icon>
+                                            </button>
+                                        </ng-container>
+                                        <ng-container >
+                                            <button mat-icon-button  color="primary" (click)="reject(item)" *ngIf="item.status.key=== 1 || item.status.key=== 3" matTooltip="Reject Change Location Request">
+                                                <mat-icon>highlight_off</mat-icon>
+                                            </button>
+                                        </ng-container>
+                                        <ng-container >
+                                            <button mat-icon-button  color="primary" (click)="editLocation(item,0)" *ngIf="item.status.key=== 2 || item.status.key=== 4" matTooltip="View Change Location Request">
+                                                <mat-icon>remove_red_eye</mat-icon>
+                                            </button>
+                                        </ng-container>
+                                        </td>
+                                </ng-container> 
+                            </thead>
+                            <tbody>
+                                <tr mat-header-row
+                                    *matHeaderRowDef="['machineId','customer','bname','barcodeTemplateName','machineNo','timeStamp','resolve','newcustomer','newbname','newbarcodeTemplateName','action']">
+                                </tr>
+                                <tr mat-row
+                                    *matRowDef="let row; columns: ['machineId','customer','bname','barcodeTemplateName','machineNo','timeStamp','resolve','newcustomer','newbname','newbarcodeTemplateName','action'];">
+                                </tr>
+                            </tbody>
+            
+                        </table>
+                    </div>
+                </ng-template>
+            </card-or-list-view>
+        </mat-card-content>
+    </mat-card>
+</div>

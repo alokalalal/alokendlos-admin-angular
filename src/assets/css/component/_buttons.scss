@@ -1,0 +1,6 @@
+$btn-font-size:50px !default;
+
+.light-theme-type.blue-theme .mat-raised-button:not([class*=mat-elevation-z]) {box-shadow: none;}
+
+mat-card-actions button span {color: $black-color-200;}
+.mat-raised-button.mat-primary span {color: $white-color;}

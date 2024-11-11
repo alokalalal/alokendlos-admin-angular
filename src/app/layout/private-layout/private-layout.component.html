@@ -1,0 +1,14 @@
+<div class="header-padding"></div>
+<header class="fixed-header">
+    <app-header [menuArray]="headerMenuArray" (openCloseSidebar)=openCloseSidebarFunction($event)></app-header>
+</header>
+<div class="wrapper active" [ngClass]="{'active': isSidebarOpen == false || isSidebarOpen == undefined}">
+    <app-sidebar [menuArray]="menuArray" [isSidebarOpen]='isSidebarOpen'></app-sidebar>
+    <!-- Page Content  -->
+    <div id="content" class="content-box-con">
+        <div class="content-box">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

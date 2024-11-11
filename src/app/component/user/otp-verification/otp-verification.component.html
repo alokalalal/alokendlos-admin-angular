@@ -1,0 +1,33 @@
+<div class="formBoxCenter">
+<div class="formBoxLogoCon">
+<img src="assets/images/logoForm.png">
+</div>
+<div class="formBoxCon">
+<form #fform="ngForm" [formGroup]="otpForm" (ngSubmit)="otpSubmit()" >
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group wrapperBoxCon">
+            <label>OTP</label>
+            <ng-otp-input  #ngOtpInput  (onInputChange)="onOtpChange($event)" 
+                [config]="{length: 6,isPasswordInput: false,disableAutoFocus: true}">
+            </ng-otp-input>
+
+        </div>
+    </div>
+    <div class="col-sm-12" *blockUI="'resendOtpBtnBlockUI'">
+        <div class="form-group">
+            <div class="formLinkText">Not received your code? &nbsp;<a href="javascript:void(0)" (click)="resendCode()">Resend Code</a></div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="form-group mb-0">
+            <div class="btnCon text-center" *blockUI="'otpBtnBlockUI'">
+                <button type="submit" mat-raised-button class="btn">Verify OTP</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+</div>

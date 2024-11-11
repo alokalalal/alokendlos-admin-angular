@@ -1,0 +1,90 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content style="margin-top: 25px;">  
+            <div class="row" >
+                <div class="col-sm-12">
+                    <div class="pageBoxCon">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="formBoxCon" *blockUI="'configurationBlockUI'">
+                                    <form #sform="ngForm" [formGroup]="urlForm" (ngSubmit)="updateUrl()">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="formBoxCol">
+                                                    <h1>File Path</h1>
+                                                    <div class="employeesGridCol sameHight mt-3">
+                                                        <div class="p-3">
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <mat-label>Default File Path  <sup>*</sup></mat-label>
+                                                                        <mat-form-field class="form-control-mat" floatLabel="never">                                                        
+                                                                            <input type="text" matInput formControlName="defaultFilePath" [(ngModel)]="defaultFilePath" placeholder="Default File Path"
+                                                                                class="form-control">
+                                                                            <mat-hint>Please Provide File Path</mat-hint>
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="s.defaultFilePath.errors" [submitted]="sform.submitted"
+                                                                                    [touched]="s.defaultFilePath.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                                </app-error-message>
+                                                                            </mat-error>
+                                                                        </mat-form-field>                                                  
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <mat-label>Captcha Image File Path <sup>*</sup></mat-label>
+                                                                        <mat-form-field class="form-control-mat" floatLabel="never">                                                        
+                                                                            <input type="text"  matInput class="form-control"
+                                                                            formControlName="captchaImagePath"  [(ngModel)]="captchaImagePath" placeholder="Captcha Image File Path">
+                                                                            <mat-hint>Please Provide Captcha Image File Path</mat-hint>
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="s.captchaImagePath.errors" [submitted]="sform.submitted"
+                                                                                    [touched]="s.captchaImagePath.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                                </app-error-message>
+                                                                            </mat-error>
+                                                                        </mat-form-field>    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-6" *ngIf="defaultTimeZone != undefined && defaultTimeZone.key != undefined">
+                                                                    <div class="form-group">
+                                                                        <mat-label>Time Zone</mat-label>
+                                                                        <mat-form-field class="form-control-mat" floatLabel="never">                                                        
+                                                                            <mat-select  formControlName="defaultTimeZone" [(ngModel)]="defaultTimeZone.key" name="defaultTimeZone" class="mat-input-element">
+                                                                                <mat-option *ngFor="let timezon of timeZoneList" [value]="timezon.key">
+                                                                                    {{timezon.value}}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="s.defaultTimeZone.errors" [submitted]="sform.submitted"
+                                                                                    [touched]="s.defaultTimeZone.touched" [required]="errorMessage.mandatory">
+                                                                                </app-error-message>
+                                                                            </mat-error>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <div class="formBoxCol">
+                                                                        <div class="btnCon text-left mt-3">
+                                                                            <span class="btnBlockUICon" *blockUI="'configurationBlockUiBtn'">
+                                                                            <button mat-button type="submit" mat-raised-button color="primary">Update</button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>      
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

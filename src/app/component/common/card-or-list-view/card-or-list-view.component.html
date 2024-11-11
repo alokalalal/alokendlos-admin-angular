@@ -1,0 +1,192 @@
+<div class="row">
+    <div class="col-sm-12 mt-3 mb-3">
+        <div class="titleTabBoxCon">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-3 col-xl-4 align-self-center">
+                    <div class="titleBoxCon">
+                        <h1>{{listContainer.pageTitle}}</h1>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-9 col-xl-8 d-flex align-self-center">
+                    <ul class="filter-panel">
+                        <ng-container *ngFor="let filter of listContainer.advanceSearchFilterConfig | keyvalue">
+                            <li *ngIf="filter.value.type == 'fullTextSearch'">
+                                <div class="searchFuncBoxCon">
+                                    <form (ngSubmit)="filterData(filter)">
+                                        <input type="text" class="searchFuncInput" name="fullTextSearch"
+                                            [(ngModel)]="filter.value.value" placeholder="{{filter.value.placeHolder}}">
+                                    </form>
+                                </div>
+                            </li>
+                        </ng-container>
+
+                        <ng-container *ngFor="let filter of listContainer.advanceSearchFilterConfig | keyvalue">
+                            <li *ngIf="filter.value.type === 'date-range' && hasAdvanceFilter==true" >
+                                <div class="col-12 col-md-12" style="position: 10px;top: 10px;">
+                                    <mat-form-field class="dateIconBig">
+                                        <mat-date-range-input [max]="defaultEndDate" [rangePicker]="picker">
+                                            <input readonly matStartDate [(ngModel)]="startDate" placeholder="Select a Date Range">
+                                            <input readonly  matEndDate [(ngModel)]="endDate"
+                                                (dateChange)="filterDateChange(filter,startDate, endDate)"  >
+                                                
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+                                    </mat-form-field>
+                                </div>
+                            </li>
+                        </ng-container>
+                        
+                        <li *ngIf="hasAdvanceFilter">
+                            <mat-icon matBadgeColor="primary" class="float-right filter-icon ml-2"
+                                data-toggle="collapse" href="#collapseAdvanceFilter" role="button" aria-expanded="false"
+                                aria-controls="collapseAdvanceFilter" matTooltip="Filters">
+                                filter_alt
+                            </mat-icon>
+                        </li>
+                        <li *ngIf="listContainer.hasDisplayStyleButtons">
+                            <mat-icon matBadgeColor="primary" class="float-right filter-icon ml-2"
+                            matTooltip="List View"
+                                (click)="changeDisplayStyle('list')"><i class="fa fa-list" aria-hidden="true"></i>
+                            </mat-icon>
+                        </li>
+                        <li *ngIf="listContainer.hasDisplayStyleButtons">
+                            <mat-icon matBadgeColor="primary" class="float-right filter-icon ml-2"
+                            matTooltip="Grid View"
+                                (click)="changeDisplayStyle('card')"><i class="fa fa-th-large" aria-hidden="true"></i>
+                            </mat-icon>
+                        </li>
+                        <li *ngIf="listContainer.accessRightsJson.isAccessRightAdd">
+                            <div class="addNewBtnCon"><a (click)="add()" class="addNewBtn"  matTooltip="Add"><span
+                                        class="material-icons-outlined">add</span></a> </div>
+                        </li>
+                        <li *ngIf="listContainer.hasDisplayExportButton">
+                            <button class="common-export-to-excel-btn float-right ml-2" mat-raised-button color="primary" (click)="export()"  matTooltip="Export">
+                                <i class="fa fa-file-excel-o mr-2 fontSize" aria-hidden="true"></i> Export to Excel
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <div class="col-lg-12 text-right" *ngIf="listContainer.hasDisplayExportButton">
+                    <button class="common-export-to-excel-btn" mat-raised-button color="primary" (click)="export()">
+                        <i class="fa fa-file-excel-o mr-2 fontSize" aria-hidden="true"></i> Export to Excel
+                    </button>
+                </div> -->
+                <div class="col-12">
+                    <div class="collapse" id="collapseAdvanceFilter">
+                        <div class="card card-body">
+                            <div class="row">
+                                <ng-container *ngFor="let filter of listContainer.advanceSearchFilterConfig | keyvalue">
+                                    <ng-container *ngIf="filter.value.type == 'select'">
+                                        <div class="col-12 col-md-4">
+                                            <app-searchable-dropdown name="dropdownFilterControl"
+                                                [filteredDataModel]="filter.value.value"
+                                                [placeholder]="filter.value.placeHolder"
+                                                [dropdownList]="filter.value.options"
+                                                (dropdownChangeEventEmitter)="filterSearchableDropdownChange(filter,$event)">
+                                            </app-searchable-dropdown>
+                                        </div>
+                                    </ng-container>
+                                    <!-- <ng-container *ngIf="filter.value.type === 'date-range'">
+                                        <div class="col-12 col-md-4">
+                                            <mat-form-field class="dateIconBig">
+                                            <mat-date-range-input [max]="defaultEndDate" [rangePicker]="picker">
+                                                <input readonly matStartDate [(ngModel)]="startDate" placeholder="Enter a date range">
+                                                <input readonly  matEndDate [(ngModel)]="endDate"
+                                                    (dateChange)="filterDateChange(filter,startDate, endDate)"  >
+                                                    
+                                            </mat-date-range-input>
+                                            <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                                            <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+                                        </mat-form-field>
+                                        </div>
+                                    </ng-container> -->
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12" *ngIf="isFilterApplied">
+        <div class="cardHeaderCon mb-2 mt-n1">
+            <div class="card-form" id="filter-div">
+                <ul class="search-tag">
+                    <ng-container *ngFor="let filter of listContainer.advanceSearchFilterConfig | keyvalue">
+                        <li *ngIf="filter.value.isApplied">
+                            <label class="selectgroup-item">
+                                <span
+                                    class="selectgroup-button searchBox"><strong>{{filter.value.searchByLable}}</strong>
+                                    -
+                                    <ng-container *ngIf="filter.value.type == 'text' || filter.value.type == 'fullTextSearch'">
+                                        {{filter.value.appliedValue}}
+                                    </ng-container>
+                                    <ng-container *ngIf="filter.value.type == 'select'">
+                                        <ng-container *ngFor="let option of filter.value.options">
+                                            <ng-container *ngIf="option.key === filter.value.appliedValue">
+                                                {{option.value}}
+                                            </ng-container>
+                                        </ng-container>
+                                    </ng-container>
+                                    <ng-container *ngIf="filter.value.type == 'date-range'">
+                                        {{filter.value.value[0]?.value * 1000| date:'MM/d/yyyy'}} - {{filter.value.value[1]?.value * 1000| date:'MM/d/yyyy'}}
+                                    </ng-container>
+                                    <i class="fa fa-times-circle srch-close-icon" (click)="removeFilter(filter)"></i>
+                                </span>
+                            </label>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div *ngIf="isNoDataFound">
+            <p>
+                Sorry, we couldn't find any matches.
+            </p>
+        </div>
+        <ng-container [ngSwitch]="listContainer.defaultDisplayStyle" *ngIf="!isNoDataFound">
+            <div class="listGridDataCon">
+                <ng-container *ngSwitchCase="'card'">
+                    <div class="gridBoxCon listGridShow"
+                        [ngClass]="{'active': listContainer.defaultDisplayStyle == 'card'}">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                    <div class="employeesGridCon">
+                                        <div class="row">
+                                            <ng-container *ngFor="let item of items">
+                                                <ng-container
+                                                    *ngTemplateOutlet="cardItemTemplate; context: {$implicit: item}">
+                                                </ng-container>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="'list'">
+                    <div class="listBoxCon listGridShow"
+                        [ngClass]="{'active': listContainer.defaultDisplayStyle == 'list'}">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="tableCon">
+                                    <div class="row">
+                                        <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: items}">
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <mat-paginator class="pagination" [length]="recordSize" [pageSize]="pageSize"
+                        (page)="changePageSize($event)" [pageSizeOptions]="[10, 30, 60, 120]"  *ngIf="listContainer.hasDisplayStylePagination">
+                    </mat-paginator>
+            </div>
+        </ng-container>
+    </div>
+</div>

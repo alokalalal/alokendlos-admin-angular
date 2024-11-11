@@ -1,0 +1,124 @@
+<ng-container>
+    <div class="editBoxDataCon active" >
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon" >            
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="machineCapacityAddForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    {{addEditForm}} Machine Capacity</div>
+                                <a class="editBoxClose" (click)="closeModal()">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" >
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Storage Capacity Of Plastic Bin<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="plasticCapacity" [(ngModel)]="machineCapacityModel.plasticCapacity" placeholder='plasticCapacity'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.plasticCapacity.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.plasticCapacity.touched" [max]="errorMessage.maxTwoThousandFiveHundred" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Storage Capacity Of Glass Bin<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="glassCapacity" [(ngModel)]="machineCapacityModel.glassCapacity" placeholder='glassCapacity'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.glassCapacity.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.glassCapacity.touched" [max]="errorMessage.maxTwoThousandFiveHundred" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Storage Capacity Of Aluminum Bin<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="aluminiumnCapacity" [(ngModel)]="machineCapacityModel.aluminiumnCapacity" placeholder='aluminiumnCapacity'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.aluminiumnCapacity.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.aluminiumnCapacity.touched" [max]="errorMessage.maxTwoThousandFiveHundred" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Printer Paper Capacity<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="printCapacity" [(ngModel)]="machineCapacityModel.printCapacity" placeholder='printCapacity'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.printCapacity.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.printCapacity.touched" [max]="errorMessage.maxTwoThousandFiveHundred" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Maximum Number of Container Allowed One Transaction<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="maxTransaction" [(ngModel)]="machineCapacityModel.maxTransaction" placeholder='maxTransaction'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.maxTransaction.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.maxTransaction.touched" [max]="errorMessage.maxTwoThousandFiveHundred" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Number of Containers For AutoCleaning<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"  floatLabel="never">
+                                                                        <input type="text" matInput formControlName="maxAutoCleaning" [(ngModel)]="machineCapacityModel.maxAutoCleaning" placeholder='maxAutoCleaning'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.maxAutoCleaning.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.maxAutoCleaning.touched" [max]="errorMessage.maxTwoThousandFiveHundred" [min]="errorMessage.minlengtOne" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 pr-0" >
+                                                <div class="btnCon text-right mt-3 fixed-botton">
+                                                    <button type="button"mat-raised-button (click)="closeModal()"  class="mr-2 btn-secondary" *blockUI="'pageSectionBlockUI'">Cancel</button>
+                                                    <button  type="submit" mat-raised-button color="primary" *blockUI="'pageSectionBlockUI'">{{saveUpdateBtn}}</button>
+                                                    <!-- [disabled]="!machineAddEditForm.dirty || machineAddEditForm.invalid" -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

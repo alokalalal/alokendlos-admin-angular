@@ -1,0 +1,208 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content>
+            
+            <card-or-list-view #cardOrListViewComponent *blockUI="'listContainerBlockUi'"
+                [listContainer]="listContainer" (addEventEmitter)="addEventEmitCall()"
+                (searchEventEmitter)="searchEventEmitCall()" (addExport)="export()" [start]="start" [pageSize]="pageSize"
+                [recordSize]="recordSize">
+    
+    <ng-template listItem let-items>
+
+        <div class="col-lg-12 text-right">
+            
+            <button class="common-export-to-excel-btn" mat-raised-button (click)="assignBarcodeEdit()" color="primary">
+                <!-- <i class="fa fa-file-excel-o mr-2 fontSize" aria-hidden="true"></i>  -->
+                <mat-icon>shortcut</mat-icon>
+                Assign
+            </button>
+        
+        </div>
+
+        <div class="table-responsive" *ngIf="cardOrListViewComponent?.items != undefined">
+            
+            <table mat-table class="mat-elevation-z8" class="table" [dataSource]="cardOrListViewComponent.items" matSort (matSortChange)="sortData($event)">
+                <thead>
+
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                          <mat-checkbox
+                               [checked]="selectAllRow"
+                               [(ngModel)]="selectAllRow"
+                               (change)="selectAll()">
+                          </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox id="{{row.id}}" [(ngModel)]="row.isSelect" (change)="onChangeChechbox(row)">
+                                
+                            </mat-checkbox>
+                        </td>
+                      </ng-container>
+                      
+                    <ng-container matColumnDef="machineId">
+
+                        <th mat-sort-header="machineId" id="machineId" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                            Machine Id
+                             </th>
+                        <td mat-cell *matCellDef="let item">
+                            &nbsp;<span>{{item.machineId}}</span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="customerName">
+                        <th mat-sort-header="customerName" id="customerName" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                            Customer Name </th>
+                        <td mat-cell *matCellDef="let item">
+                            <span>{{item.customerView?.name}}</span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="city">
+                        <th mat-sort-header="city" id="city" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                            City </th>
+                        <td mat-cell *matCellDef="let item">
+                            <span>{{item.locationView?.cityView.value}}</span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="branchName">
+                        <th mat-sort-header="branchName" id="branchName" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                            Branch Name </th>
+                        <td mat-cell *matCellDef="let item">
+                            <span>{{item.locationView?.name}}</span>
+                        </td>
+                    </ng-container>  
+                    <ng-container matColumnDef="barcodeTemplateView">
+                        <th mat-sort-header="barcodeTemplateName" id="barcodeTemplateView" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                            Barcode Template Name </th>
+                        <td mat-cell *matCellDef="let item">
+                            <span>{{item.barcodeTemplateView?.name}}</span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="barcodeMachineNo">
+                        <th mat-sort-header="branchWiseMachineNumber" id="barcodeTemplateView" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                            Machine No </th>
+                        <td mat-celll *matCellDef="let item">
+                            <span>{{item.branchMachineNumber}}</span>
+                        </td>
+                    </ng-container> 
+                    <ng-container matColumnDef="action">
+                        <th id="action" class="width-20" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                          Action </th>
+                        <td mat-cell *matCellDef="let element">
+                          <ng-container>
+                            <button mat-icon-button (click)="edit(element)" color="primary" matTooltip="Assign Barcode Template">
+                              <mat-icon>shortcut</mat-icon>
+                            </button>
+                          </ng-container>
+                          </td>
+                          </ng-container>  
+                </thead>
+
+                <tbody>
+                    <tr mat-header-row
+                        *matHeaderRowDef="['select','machineId','customerName','city','branchName','barcodeTemplateView','barcodeMachineNo','action']">
+                    </tr>
+                    <tr mat-row
+                        *matRowDef="let row; columns: ['select','machineId','customerName','city','branchName','barcodeTemplateView','barcodeMachineNo','action']">
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </ng-template>
+</card-or-list-view>
+</mat-card-content>
+</mat-card>
+</div>
+
+
+<ng-container>
+    <div class="editBoxDataCon"  [ngClass]="{'active': isOpenBarcodeContent == true}" >
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon">            
+            <div class="editBoxFull">
+                <form [formGroup]="barcodeTemplateForm" (ngSubmit)="onSubmit()" #vform="ngForm" id="barcodeTemplateAdd" class="model-form" novalidate>
+                    <div class="row" *blockUI="'barcodeTemplateModelBlockUi'">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    Barcode Template</div>
+                                <a class="editBoxClose" href="javascript:void(0)" (click)="closeBarcodeTemplateModal()">✖</a>     
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12 col-md-12">
+                                                                                <div class="form-group">
+                                                                                    <mat-label>Select Barcode Template</mat-label>
+                                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                                                           
+                                                                                        <mat-select [(ngModel)]="machineModel?.barcodeTemplateView.id" formControlName="barcodeTemplateView"
+                                                                                            name="id" class="mat-input-element" placeholder="Select Barcode Template">
+                                                                                            <mat-option *ngFor="let barcodeTemplateModel of barcodeTemplateList" [value]="barcodeTemplateModel.id">
+                                                                                                {{barcodeTemplateModel.name}}
+                                                                                            </mat-option>
+                                                                                        </mat-select>
+                                                                                        <mat-error>
+                                                                                            <app-error-message [errors]="f.barcodeTemplateView.errors" [submitted]="vform.submitted"
+                                                                                                [touched]="f.barcodeTemplateView.touched" [required]="errorMessage.mandatory">
+                                                                                            </app-error-message>
+                                                                                        </mat-error>
+                                                                                    </mat-form-field>   
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <mat-label>Select Barcode File</mat-label>
+                                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                                                        
+                                                                                        <mat-select [(ngModel)]="machineModel?.machineBarcodeFileView.id" formControlName="machineBarcodeFileView"
+                                                                                            name="barcodeMachineId" class="mat-input-element" placeholder="Select Barcode File">
+                                                                                            <mat-option *ngFor="let barcodeMachineModel of machineBarcodeList" [value]="barcodeMachineModel.id">
+                                                                                                <!-- <ng-container *ngIf="barcodeMachineModel.fileView?.id !== null">
+                                                                                                    {{ barcodeMachineModel.fileView?.name}}
+                                                                                                  </ng-container> -->
+                                                                                                  <ng-container *ngIf="barcodeMachineModel.barcodeFileName !== null">
+                                                                                                    {{ barcodeMachineModel.barcodeFileName}}
+                                                                                                  </ng-container>
+                                                                                            </mat-option>
+                                                                                        </mat-select>
+                                                                                        <mat-error>
+                                                                                            <app-error-message [errors]="f.machineBarcodeFileView.errors" [submitted]="vform.submitted"
+                                                                                                [touched]="f.machineBarcodeFileView.touched" [required]="errorMessage.mandatory">
+                                                                                            </app-error-message>
+                                                                                        </mat-error>
+                                                                                    </mat-form-field>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <mat-label>Password</mat-label>
+                                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                                                        
+                                                                                        <input matInput type="text"  [(ngModel)]="machineModel.password" formControlName="password"
+                                                                                            name="password" class="mat-input-element" placeholder="Select Password"/>
+                                                                                    </mat-form-field>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="btnCon text-right mt-3 fixed-botton">
+                                                <button type="button" mat-raised-button (click)="closeModal()" class="btn-secondary mr-2">Cancel</button>
+                                                <button type="submit" mat-raised-button color="primary">Assign</button>
+                                            </div>
+                                        </div>
+                                    </div>                            
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

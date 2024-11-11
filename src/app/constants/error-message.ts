@@ -1,0 +1,46 @@
+export class ErrorMessage {
+    public static mandatory = "Mandatory: This cannot be left blank.";
+    public static alphaWithSpace = "Alphabets & space are allowed.";
+	public static alphaWithSpaceDot = "Alphabets, space & dots are allowed.";
+	public static patternAlphaNumeric = "Only Alphabets & Numerics are allowed.";
+	public static patternAlphaNumericSpace = "Alphabets, Numbers & space are allowed.";
+	public static patternAlphaNumericSpaceDot = "Alphabets, Numbers, space, dot are allowed.";
+	public static patternAlphaNumericSpaceHypen = "Alphabets, Numbers, space, hypen are allowed.";
+	public static patternAlphaNumericHypen = "Alphabets, Numbers, - are allowed.";
+	public static patternAlphaNumericSpaceDotHypenAnd = "Alphabets, Numbers & space, dot(.), &(and) hypen(-) are allowed.";
+	public static patternNumeric = "Only numeric value is allowed.";
+	public static patternEmail = "Email must be a valid email address";
+	public static maxlengthTwenty = "You have reached maximum limit of 20 allowed characters.";
+	public static maxlengthHundred = "You have reached maximum limit of 100 allowed characters.";
+	public static maxlengthFiveHundred = "You have reached maximum limit of 500 allowed characters..";
+	public static maxlengthThousand = "You have reached maximum limit of 1000 allowed characters..";
+	public static maxlengthSix = "You have reached maximum limit of 6 allowed characters..";
+	public static maxlengthTen = "You have reached maximum limit of 10 allowed characters..";
+	public static maxlengthThirty = "You have reached maximum limit of 30 allowed characters..";
+	public static maxlengthFifty = "You have reached maximum limit of 50 allowed characters..";
+	public static maxlengthSixteen = "You have reached maximum limit of 16 allowed characters..";
+	public static minlengtFour = "Please Enter Atleast 4 Characters..";
+	public static minlengtSix = "Please Enter Atleast 6 Characters..";
+	public static minlengtSeven = "Please Enter Atleast 7 Characters..";
+	public static minlengthTen = "Please Enter Atleast 10 Characters..";
+	public static maxlengtSix = "You have reached maximum limit 6 Characters..";
+	public static minlengtTen = "Please Enter Atleast 10 Characters..";
+	public static regexNumbersOnly = " Only Numbers are allowed..";
+    public static maxlengthWebsite = "You have reached maximum limit of 2048 allowed characters..";
+    public static patternWebsite = "Please Enter valid Website";
+    public static patternMobile = "Please Enter valid mobile";
+	public static patternLoginId = "Please Enter Valid User Login Id";
+	public static maxlengtFour = "You have reached maximum limit 4 Characters..";
+	public static minlengtTwo = "Please Enter Atleast 2 Characters..";
+	public static maxlengtTwo = "You have reached maximum limit 2 Characters..";
+	public static maxThirty = "You Can not Enter more than 30.";
+	public static maxlengtOne = "You have reached maximum limit 1 Characters..";
+	public static minlengtOne = "Please Entered Atleast 1 Characters..";
+	public static maxlengthSeven = "You have reached maximum limit of 7 allowed characters..";
+	public static minlengtEight = "Please Enter Atleast 8.";
+	public static maxNintyNine = "You Can not Enter more than 99.";
+	public static maxNine = "You Can not Enter more than 9.";
+	public static maxTwoThousandFiveHundred = "You Can not Enter more than 2500.";
+	public static patternAlphaNumericSpaceDotNotAllowed = "Space, dot, capital letters are not allowed, Only AlphaNumeric are not allowed, first Character start from Alphabet";
+
+}

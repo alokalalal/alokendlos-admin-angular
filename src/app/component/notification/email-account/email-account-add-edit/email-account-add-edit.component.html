@@ -1,0 +1,176 @@
+<ng-container>
+    <div class="editBoxDataCon" [ngClass]="{'active': isOpenModel == true}">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon" >            
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="emailAccountAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    <!-- <span class="editIconBox">
+                                        <i class="fa fa-plus" *ngIf="!isEmailAccountEdit" aria-hidden="true"></i>
+                                        <i class="fa fa-pencil" *ngIf="isEmailAccountEdit" aria-hidden="true"></i>
+                                    </span> -->
+                                    {{addEditForm}} Email Account</div>
+                                <a class="editBoxClose" (click)="closeModal()">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" >
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">                                    
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Name</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                        <input type="name" matInput formControlName="name" [(ngModel)]="emailAccountView.name" placeholder='Enter Name'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.name.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.name.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Host</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                               
+                                                                        <input type="text" matInput formControlName="host"  [(ngModel)]="emailAccountView.host" placeholder='Enter Host Name'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.host.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.host.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthFiveHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Port</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                
+                                                                        <input type="text" matInput formControlName="port" [(ngModel)]="emailAccountView.port"  placeholder='Enter Port Number'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.port.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.port.touched" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>User Name</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                               
+                                                                        <input type="text" matInput formControlName="userName" [(ngModel)]="emailAccountView.userName" placeholder='Enter User Name'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.userName.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.userName.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Password</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                
+                                                                        <input type="text" matInput formControlName="password" [(ngModel)]="emailAccountView.password"  placeholder='Enter Password'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.password.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.password.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthFiveHundred" [minlength]="errorMessage.minlengtSix">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Email From</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                
+                                                                        <input type="text" matInput formControlName="emailFrom" [(ngModel)]="emailAccountView.emailFrom"  placeholder='Enter Email From'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.emailFrom.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.emailFrom.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthFiveHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Reply To Email</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                               
+                                                                        <input type="text" matInput formControlName="replyToEmail" [(ngModel)]="emailAccountView.replyToEmail"  placeholder='Enter Email From'>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.replyToEmail.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.replyToEmail.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Authentication Method</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                
+                                                                        <mat-select [(ngModel)]="emailAccountView.authenticationMethod?.key!" formControlName="authenticationMethod" 
+                                                                            name="authenticationMethod" class="mat-input-element" placeholder="Select a Authentication Method">
+                                                                            <mat-option *ngFor="let authenticationMethod of authmethoddropdownlist" [value]="authenticationMethod.key">
+                                                                            {{authenticationMethod.value}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.authenticationMethod.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.authenticationMethod.touched" [required]="errorMessage.mandatory" 
+                                                                                ></app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Authentication Security</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                                
+                                                                        <mat-select [(ngModel)]="emailAccountView.authenticationSecurity?.key!" formControlName="authenticationSecurity" 
+                                                                            name="authenticationSecurity" class="mat-input-element" placeholder="Select a Authentication Security">
+                                                                            <mat-option *ngFor="let authenticationSecurity of securitydropdownlist" [value]="authenticationSecurity.key">
+                                                                            {{authenticationSecurity.value}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.authenticationSecurity.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.authenticationSecurity.touched" [required]="errorMessage.mandatory" 
+                                                                                ></app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12" >
+                                            <div class="btnCon text-right mt-3 fixed-botton">
+                                                <button type="button" mat-raised-button (click)="closeModal()"  class="btn-secondary mr-2" *blockUI="'saveUpdateBtnBlockUI'">Cancel</button>
+                                                <button type="submit" mat-raised-button color="primary" *blockUI="'saveUpdateBtnBlockUI'">{{saveUpdateBtn}}</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

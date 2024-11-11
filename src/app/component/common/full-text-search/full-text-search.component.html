@@ -1,0 +1,6 @@
+<div class="searchFuncBoxCon">
+    <form (ngSubmit)="fulltextsearch.emit(searchInput)">
+        <input type="text" class="searchFuncInput" name="fullTextSearch" [(ngModel)] = "searchInput" placeholder="{{placeHolder}}">
+        <!-- <button type="submit" mat-button class="btn">Search</button>  -->
+    </form>
+</div>

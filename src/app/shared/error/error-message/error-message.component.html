@@ -1,0 +1,30 @@
+<small *ngIf="errors" class="mandatory">
+    <div *ngIf="errors.required && (submitted || touched)">
+        <span class="errorImg">*</span>
+        {{required}}
+    </div>
+    <div *ngIf="errors.maxlength && (submitted || touched)">
+        <span class="errorImg">*</span>
+        {{maxlength}}
+    </div>
+    <div *ngIf="errors.minlength && (submitted || touched)">
+        <span class="errorImg">*</span>
+        {{minlength}}
+    </div>
+    <div *ngIf="errors.pattern && (submitted || touched)">
+        <span class="errorImg">*</span>
+        {{pattern}}
+    </div>
+    <div *ngIf="errors.email && (submitted || touched)">
+        <span class="errorImg">*</span>
+        {{email}}
+    </div>
+    <div *ngIf="errors.max && (submitted || touched)">
+        <span class="errorImg">*</span>
+        {{max}}
+    </div>
+    <div *ngIf="errors.min && (submitted || touched)">
+        <span class="errorImg">*</span>
+        {{min}}
+    </div>
+</small>

@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  font-size: 17px;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+.content {
+  position: relative;
+  bottom: 0;
+  background: rgba(255, 253, 253, 0.95);
+  color: #f1f1f1;
+  
+}
+.formBoxLogoCon1 {
+  text-align: center;
+  margin-top: -50px;
+  margin-bottom: 40px;
+  overflow: hidden;
+}

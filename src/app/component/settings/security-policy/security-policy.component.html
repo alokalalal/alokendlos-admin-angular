@@ -1,0 +1,106 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content style="margin-top: 25px;">  
+            <div class="row" *blockUI="'pageSectionBlockUI'">
+                <div class="col-sm-12" >
+                    <div class="pageBoxCon" >
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="formBoxCon">
+                                    <form [formGroup]="securityPolicyForm" (ngSubmit)="updateSecurityPolicy()" #fform="ngForm"
+                                        id="securityPolicyId" novalidate>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="formBoxCol">
+                                                    <h1>Security change</h1>
+                                                    <div class="employeesGridCol sameHight mt-3">
+                                                        <div class="p-3">
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-md-6">
+                                                                    <div class="form-group-mat">
+                                                                        <label>Do you want to keep device authentication security
+                                                                            <sup>*</sup> 
+                                                                            <span class="tooltipBoxCon"><img src="assets/images/infoIcon.svg">
+                                                                            <span class="tooltiptext">Enabling device authentication security adds an extra layer of protection to your account by requiring authentication from a trusted device</span></span>
+                                                                        </label>
+                                                                        <div class="radioList">
+                                                                            <mat-radio-group id="securityChangeYes"
+                                                                                name="twoFactorAuth" formControlName="twoFactorAuth"
+                                                                                [(ngModel)]="twoFactorAuth.value">
+                                                                                <mat-radio-button for="securityChangeYes"
+                                                                                    value=1>Yes</mat-radio-button>
+                                                                                <mat-radio-button for="securityChangeNo"
+                                                                                    value=0>NO</mat-radio-button>
+                                                                            </mat-radio-group>
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="sp.deviceCooKie.errors"
+                                                                                    [submitted]="fform.submitted" [required]="errorMessage.mandatory"
+                                                                                    [touched]="sp.twoFactorAuth.touched">
+                                                                                </app-error-message>
+                                                                            </mat-error>                                                       
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-6" *ngIf="twoFactorAuth.value == 1">
+                                                                    <div class="form-group">
+                                                                        <mat-label>
+                                                                            Trust a device for defined period (in second) <sup>*</sup>
+                                                                        </mat-label>
+                                                                        <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                            <input type="text" matInput class="form-control"                                                           
+                                                                                formControlName="deviceCooKie"
+                                                                                placeholder="Trust a device for defined period (in second)"
+                                                                                [(ngModel)]="deviceCooKie.value">
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="sp.deviceCooKie.errors"
+                                                                                    [submitted]="fform.submitted"
+                                                                                    [touched]="sp.deviceCooKie.touched"
+                                                                                    [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred" [pattern]="errorMessage.patternNumeric">
+                                                                                </app-error-message>
+                                                                            </mat-error>
+                                                                        </mat-form-field>                                                    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <mat-label>User session will be timeouted after specified number of inactivity minutes <sup>*</sup> </mat-label>
+                                                                        <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                            <input type="text" matInput class="form-control"
+                                                                            placeholder="User session will be timeouted after specified number of inactivity minutes" [(ngModel)]="sessionInactive.value"
+                                                                            formControlName="sessionInactive">    
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="sp.sessionInactive.errors"
+                                                                                    [submitted]="fform.submitted"
+                                                                                    [touched]="sp.sessionInactive.touched"
+                                                                                    [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred" [pattern]="errorMessage.patternNumeric">
+                                                                                </app-error-message>
+                                                                            </mat-error>                                      
+                                                                        </mat-form-field>                                                                                          
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <div class="formBoxCol">
+                                                                        <div class="btnCon text-left mt-3">
+                                                                            <span class="btnBlockUICon" *blockUI="'saveUpdateBlockUI'">
+                                                                                <button mat-button type="submit" mat-raised-button color="primary">Update</button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>                                            
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

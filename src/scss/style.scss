@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+@include mat.core();
+@import 'theme/core/variables/colors';
+@import 'theme/core/theme';
+@import '/src/assets/css/components';
+@import '/src/assets/css/mixins';
+@import '/src/assets/css/styles.scss';

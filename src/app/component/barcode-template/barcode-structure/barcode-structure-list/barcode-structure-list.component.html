@@ -1,0 +1,78 @@
+<div #dynamicComponentContainer></div>
+<form #checkboxForm="ngForm" (submit)="addEventEmitCall()">
+  <div class="titleBoxCon mb-4">
+    <h1>Add Fields</h1>
+  </div>
+  <div class="check-box-list-con">
+
+    <div class="check-box-list-group" [ngClass]="{'selected':item.selected == true,'disabled':item.disable == true}"
+      *ngFor="let item of totalBarcodeNumberObjects ; let i = index">
+      <p>{{item.index}}</p>
+      <div class="check-box-list" (click)="selectDiv(item)" [ngStyle]="{'background':item.color}">
+        <div class="check-box"> {{item.value}}</div>
+      </div>
+      <div class="barcode-type-info-con">
+        <div class="barcode-type-info">
+          <span>Field Name : - {{item.fieldName}}</span><br>
+          <span>Length : - {{item.length}}</span><br>
+          <span>Type : - {{item.barcodeType?.value}}</span><br>
+          <span>Value : - {{item.value}}</span><br>
+          <span>End Value : - {{item.endValue}}</span><br>
+          <span>index : - {{item.index}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-con text-right">
+    <button type="submit" mat-raised-button color="primary" *ngIf="!isViewPage"
+      [disabled]="selectedStructurIndexList.length == 0">Define</button>
+  </div>
+</form>
+<div class="table-responsive">
+  <table mat-table [dataSource]="listDataSource" class="mat-elevation-z8 w-100 table">
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef> Colour </th>
+      <td mat-cell *matCellDef="let element; let i = index"> <span class="color-box-value"
+          [ngStyle]="{'background':element.color}"></span> </td>
+    </ng-container>
+    <ng-container matColumnDef="fieldName">
+      <th mat-header-cell *matHeaderCellDef> Field Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.fieldName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="barcodeType">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.barcodeType.value}} </td>
+    </ng-container>
+    <ng-container matColumnDef="length">
+      <th mat-header-cell *matHeaderCellDef> Length </th>
+      <td mat-cell *matCellDef="let element"> {{element.length}} </td>
+    </ng-container>
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef> Value </th>
+      <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+    </ng-container>
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> Index </th>
+      <td mat-cell *matCellDef="let element"> {{element.index}} </td>
+    </ng-container>
+    <ng-container matColumnDef="action" *ngIf="!isViewPage">
+      <th id="action" class="width-20" mat-header-cell *matHeaderCellDef>
+       Action </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container>
+          <button mat-icon-button (click)="edit(element)" color="primary">
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+        </ng-container>
+        <ng-container>
+          <button mat-icon-button (click)="delete(element)" color="primary">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-container>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

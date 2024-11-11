@@ -1,0 +1,141 @@
+<ng-container>
+    <div class="editBoxDataCon" [ngClass]="{'active': isOpenModel == true}">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon">
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="customerAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    {{addEditForm}} Customer</div>
+                                <a class="editBoxClose" (click)="closeModal()" href="javascript:void(0)">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Customer Name<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"
+                                                                        floatLabel="never">
+                                                                        <input type="name" matInput
+                                                                            formControlName="name"
+                                                                            [(ngModel)]="customerView.name"
+                                                                            placeholder="Enter Customer Name" maxlength="100" [ngClass]="'override'">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.name.errors"
+                                                                                [submitted]="fform.submitted"
+                                                                                [touched]="f.name.touched"
+                                                                                [required]="errorMessage.mandatory"
+                                                                                [maxlength]="errorMessage.maxlengthHundred"
+                                                                                [pattern]="errorMessage.patternAlphaNumericSpaceDotNotAllowed">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group" *blockUI="'imageUploadBlockUi'">
+                                                                    <div>
+                                                                        <mat-label>Upload Logo<sup>*</sup></mat-label>
+                                                                    </div>
+                                                                    <div class="custom-file mb-4 customFileLogoBox" *ngIf="!customerView.logo || !customerView.logo.fileId">
+                                                                        <input type="file" class="custom-file-input" 
+                                                                            name="customFileLogo" id="customFileLogo"
+                                                                            (change)="uploadImage($event)"  formControlName="customFileLogo">
+                                                                            <label class="custom-file-label" for="customFileLogo">Add files</label>
+                                                                            <br><br><br>
+                                                                            <mat-hint><sup style="color: red;">*</sup> Max height: {{maxHeight}}px, max width: {{maxWidth}}px.</mat-hint>
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="f.customFileLogo.errors" [submitted]="fform.submitted"
+                                                                                    [touched]="f.customFileLogo.touched" [required]="errorMessage.mandatory"></app-error-message>
+                                                                            </mat-error>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 mb-4"
+                                                                *ngIf="customerView.logo && customerView.logo.fileId != undefined">
+                                                                <img class="grid-image card-img-top medium upload-image"
+                                                                    [src]="appUrl.BASE_URL + apiurl.PUBLIC_URL + apiurl.DOWNLOAD_LOGO + '?' + apiUrlParameter.FILE_ID  + customerView.logo.fileId + '&' + apiUrlParameter.REQUIRED_COMPRESS_IMAGE + 'false'  | bypassSecurityTrustResourceUrl"
+                                                                    alt="customerView.logo?.name" />
+                                                                    <span class="material-icons remove-img-icon" (click)="RemoveImage()">close</span>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12 "  *ngIf="isEditData">
+                                                                <div class="form-group">
+                                                                        <mat-label>Spoc Person Name<sup>*</sup></mat-label>  
+                                                                        <mat-form-field class="form-control-mat"
+                                                                            floatLabel="never">                                            
+                                                                        <input type="sname" matInput formControlName="sname" [(ngModel)]="customerView?.userView.name" placeholder='Enter Spoc Person Name' maxlength="100" [ngClass]="'override'">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.sname.errors"
+                                                                                [submitted]="fform.submitted"
+                                                                                [touched]="f.sname.touched"
+                                                                                [required]="errorMessage.mandatory"
+                                                                                [maxlength]="errorMessage.maxlengthHundred"
+                                                                                [pattern]="errorMessage.patternAlphaNumericSpaceDot">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                             </div>
+                                                         <div class="col-sm-12 col-md-12 " *ngIf="!isEditData">
+                                                            <div class="form-group readonly-field">
+                                                                    <mat-label>Spoc Person Name</mat-label>  
+                                                                    <mat-form-field class="form-control-mat">                                            
+                                                                    <input type="text" ng-disabled="all"  matInput formControlName="sname" [(ngModel)]="customerView?.userView.name" placeholder='Enter Spoc Person Name' readonly>
+                                                                </mat-form-field>
+                                                            </div>
+                                                         </div>
+                                                        <div class="col-sm-12 col-md-12 "  *ngIf="isEditData">
+                                                            <div class="form-group">
+                                                                <mat-label>Email <sup>*</sup></mat-label>  
+                                                                <mat-form-field class="form-control-mat" floatLabel="never">                                            
+                                                                    <input type="text" matInput formControlName="email" [(ngModel)]="customerView?.userView.email" placeholder='Enter Spoc Person Email' [ngClass]="'override'">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.email.errors" [submitted]="fform.submitted"
+                                                                                    [touched]="f.email.touched" [required]="errorMessage.mandatory" [email]='errorMessage.patternEmail'>
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12" *ngIf="!isEditData">
+                                                            <div class="form-group readonly-field" >
+                                                                    <mat-label>Email</mat-label> 
+                                                                    <mat-form-field class="form-control-mat">                                             
+                                                                    <input type="text" matInput formControlName="email" [(ngModel)]="customerView?.userView.email" placeholder='Enter Spoc Person Email' readonly>
+                                                                    
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12" >
+                                                <div class="btnCon text-right mt-3 fixed-botton">
+                                                    <button type="button" mat-raised-button (click)="closeModal()"
+                                                        class="mr-2 btn-secondary" *blockUI="'saveUpdateBtnBlockUI'">Cancel</button>
+                                                    <button type="submit" mat-raised-button
+                                                        color="primary" *blockUI="'saveUpdateBtnBlockUI'">{{saveUpdateBtn}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

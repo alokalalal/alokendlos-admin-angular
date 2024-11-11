@@ -1,0 +1,139 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content style="margin-top: -8px;">
+            <card-or-list-view #cardOrListViewComponent *blockUI="'listContainerBlockUi'"
+                [listContainer]="listContainer" (addEventEmitter)="addEventEmitCall()"
+                (searchEventEmitter)="searchEventEmitCall()" (addExport)="export()" [start]="start" [pageSize]="pageSize"
+                [recordSize]="recordSize">
+                <ng-template listItem let-items>
+
+                    <div class="table-responsive" *ngIf="cardOrListViewComponent?.items != undefined" matSort (matSortChange)="sortData($event)">
+                        <table mat-table class="mat-elevation-z8" class="table"
+                            [dataSource]="cardOrListViewComponent.items">
+                            <thead>
+                                <ng-container matColumnDef="customerName">
+                                    <th mat-sort-header="customerName" id="customerName" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                        Customer Name </th>
+                                    <td mat-cell *matCellDef="let item">
+                                      <span>{{item.locationView?.customerView?.name}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="branchName">
+                                  <th mat-sort-header="branchName" id="branchName" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                      Branch Name </th>
+                                  <td mat-cell *matCellDef="let item">
+                                    <span>{{item.locationView?.name}}</span>
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="branchId">
+                                <th mat-sort-header="branchId" id="branchId" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                  Branch Number </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.locationView?.branchNumber}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="machineId">
+                              <th mat-sort-header="machineId" id="machineId" class="width-70" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                  Machine&nbsp;Id&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                              <td mat-cell *matCellDef="let item">
+                                <span>{{item.machineView.machineId}}</span>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="date">
+                            <th mat-sort-header="createDate" id="date" class="width-5" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                Date </th>
+                            <td mat-cell *matCellDef="let item">
+                                <span>{{item.createDate * 1000| date:'mediumDate' }}</span>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="plastic">
+                          <th mat-sort-header="plastic" id="plastic" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Plastic&nbsp;Upto 1.5L {{hasTotalCountData ? '[' + totalReportView.totalSmallPatBottleCount + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                            <span>{{item.smallPatBottleCount}}</span>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="plastic1.5">
+                          <th mat-sort-header="plastic1.5" id="plastic1.5" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Plastic&nbsp;1.5L& Above {{hasTotalCountData ? '[' + totalReportView.totalBigPatBottleCount + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                            <span>{{item.bigPatBottleCount}}</span>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="totalPlastic">
+                          <th mat-sort-header="totalPlastic" id="totalPlastic" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Total&nbsp;Plastic {{hasTotalCountData ? '[' + totalReportView.totalPatBottleCount + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                              <span>{{item.patBottleCount}}</span>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="glass">
+                          <th mat-sort-header="glass" id="glass" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Glass&nbsp;Upto 1.5L {{hasTotalCountData ? '[' + totalReportView.totalSmallGlassBottleCount + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                            <span>{{item.smallGlassBottleCount}}</span>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="glass1.5">
+                          <th mat-sort-header="glass1.5" id="glass1.5" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Glass&nbsp;1.5&nbsp;L& Above {{hasTotalCountData ? '[' + totalReportView.totalBigGlassBottleCount + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                            <span>{{item.bigGlassBottleCount}}</span>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="totalGlass">
+                          <th mat-sort-header="totalGlass" id="totalGlass" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Total Glass {{hasTotalCountData ? '[' + totalReportView.totalGlassBottleCount + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                              <span>{{item.glassBottleCount}}</span>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="totalAluminium">
+                          <th mat-sort-header="totalAluminium" id="totalAluminium" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Total&nbsp;Aluminium {{hasTotalCountData ? '[' + totalReportView.totalAluBottleCount + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                              <span>{{item.aluBottleCount}}</span>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="total">
+                          <th mat-sort-header="total" id="total" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Total <br>
+                              {{hasTotalCountData ? '[' + totalReportView.allTotalBottleCount + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                              <span>{{item.totalBottleCount}}</span>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="amount">
+                          <th mat-sort-header="amount" id="amount" class="width-15 justify-content-center" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                              Amount <br>
+                              {{hasTotalCountData ? '[' + totalReportView.allTotalValue + ']' : ''}}
+                          </th>
+                          <td mat-cell *matCellDef="let item">
+                            <span>{{item.totalValue}}</span>
+                        </td>
+                        </ng-container>
+                            </thead>
+                            <tbody>
+                                <tr mat-header-row
+                                    *matHeaderRowDef="['customerName','branchName','branchId','machineId','date','plastic','plastic1.5','totalPlastic','glass','glass1.5','totalGlass','totalAluminium','total','amount']">
+                                </tr>
+                                <tr mat-row
+                                    *matRowDef="let row; columns: ['customerName','branchName','branchId','machineId','date','plastic','plastic1.5','totalPlastic','glass','glass1.5','totalGlass','totalAluminium','total','amount'];">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-template>
+            </card-or-list-view>
+        </mat-card-content>
+    </mat-card>
+</div>

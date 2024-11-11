@@ -1,0 +1,52 @@
+<div class="row">
+    <!-- <div class="col-sm-12">
+        <div class="breadcrumbCon">
+            <ul class="breadcrumbUl">
+                <li><a href="javascript:void(0)">User</a></li>
+                <li><a href="javascript:void(0)" >list</a></li>
+            </ul>
+        </div>
+    </div> -->
+    <div class="col-sm-12">
+        <div class="titleTabBoxCon">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-4 align-self-center">
+                    <div class="titleBoxCon">
+                        <h1>Barcode</h1>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-8 d-flex align-self-center">
+
+                    <ul class="filter-panel">
+                        <!-- <li>
+                            <app-full-text-search [placeHolder]="'Search By Transaction Id'"
+                                (fulltextsearch)="transactionIdSearch($event)"></app-full-text-search>
+                        </li> -->
+                        <li>
+                            <mat-icon matBadgeColor="primary" class="float-right filter-icon ml-2"
+                                data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                                aria-controls="collapseExample">filter_alt</mat-icon>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <div class="col-12 col-md-4">
+                                <list-container-filter [buttonArray]="tabFilterButtonArray" (filter)="machineFilter($event)">
+                                </list-container-filter>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #dynamicComponentContainer></div>
+<app-list [service]='barcodeService' [columns]="columns"
+    (commonEventEmitterData)="getCommonEventEmitterFunction($event)"
+    (removeSearchObjectEventEmitterData)="removeSearchObjectEvent($event)" [accessRightsJson]="accessRightsJson">
+</app-list>

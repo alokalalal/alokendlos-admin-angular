@@ -1,0 +1,135 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content>  
+                <card-or-list-view #cardOrListViewComponent *blockUI="'listContainerBlockUi'"
+                [listContainer]="listContainer" (addEventEmitter)="addEventEmitCall()"
+                (searchEventEmitter)="searchEventEmitCall()" (addExport)="export()" [start]="start" [pageSize]="pageSize"
+                [recordSize]="recordSize">
+            <ng-template listItem let-items>
+                 <div class="table-responsive" *ngIf="cardOrListViewComponent?.items != undefined">
+                    <table mat-table class="mat-elevation-z8" class="table" *blockUI="'listContainerBlockUi'" [dataSource]="cardOrListViewComponent.items" matSort (matSortChange)="sortData($event)">
+                        <thead>
+                            <ng-container matColumnDef="customerView">
+                                <th id="customerView" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    Store&nbsp;Chain 
+                                </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.locationView?.customerView?.name}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="locationView">
+                                <th id="locationView" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    Branch
+                                </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.locationView?.name}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="routeName">
+                                <th mat-sort-header="routeName" id="routeName" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    Pickup Route Name
+                                </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.locationView?.pickupRouteView?.value}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="machineView">
+                                <th id="machineView" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    Machine ID 
+                                </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.machineView?.machineId}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="fullResetDate">
+                                <th mat-sort-header="fullResetDate" id="fullResetDate" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    Date&nbsp;Stamp&nbsp;of Last Full Reset
+                                </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.date * 1000| date:'medium' }}</span>
+                                </td>
+                            </ng-container>
+                           <!--  <ng-container matColumnDef="timeForReset">
+                                <th mat-sort-header="timeForReset" id="timeForReset" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    Time Stamp of Reset
+                                </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{ item.date * 1000 | date:'mediumTime' }}</span>
+                                </td>
+                            </ng-container> -->
+                            <ng-container matColumnDef="hoursFromLastTimeStempTillNow">
+                                <th mat-sort-header="hoursFromLastTimeStempTillNow" id="hoursFromLastTimeStempTillNow" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    Hours&nbsp;From&nbsp;Last Time Stemp Till Now
+                                </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.hoursFromLastTimeStempTillNow}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="numberOfPlasticBinResetsSinceFullReset">
+                                <th id="numberOfPlasticBinResetsSinceFullReset" class="width-15" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    No.of&nbsp;Plastic&nbsp;Bin Resets Since Full Reset 
+                                </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.numberOfPlasticBinResetsSinceFullReset}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="numberOfAluminumBinResetsSinceFullReset">
+                                <th id="numberOfAluminumBinResetsSinceFullReset" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    No.of&nbsp;Aluminum Bin Resets Since Full Reset </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.numberOfAluminumBinResetsSinceFullReset}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="numberOfGlassBinResetsSinceFullReset">
+                                <th id="numberOfGlassBinResetsSinceFullReset" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    No.of&nbsp;Glass Bin Resets Since Full Reset</th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.numberOfGlassBinResetsSinceFullReset}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="numberOfPlasticBottlesSinceLastFullReset">
+                                <th id="numberOfPlasticBottlesSinceLastFullReset" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    No.of&nbsp;plastic bottles Since Last Full Reset </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.numberOfPlasticBottlesSinceLastFullReset}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="numberOfAluminumBottlesSinceLastFullReset">
+                                <th id="numberOfAluminumBottlesSinceLastFullReset" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    No.of&nbsp;Aluminum Bottles Since Last Full Reset </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.numberOfAluminumBottlesSinceLastFullReset}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="numberOfGlassBottlesSinceLastFullReset">
+                                <th id="numberOfGlassBottlesSinceLastFullReset" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    No.of&nbsp;Glass Bottles Since Last&nbsp;Full&nbsp;Reset </th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.numberOfGlassBottlesSinceLastFullReset}}</span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="total">
+                                <th id="total" class="width-60" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;">
+                                    Total</th>
+                                <td mat-cell *matCellDef="let item">
+                                    <span>{{item.numberOfPlasticBottlesSinceLastFullReset + item.numberOfAluminumBottlesSinceLastFullReset + item.numberOfGlassBottlesSinceLastFullReset}}</span>
+                                </td>
+                            </ng-container>
+                        </thead>
+        
+                        <tbody>
+                            <!-- <tr mat-header-row *matHeaderRowDef="['customerView','locationView','routeName','machineView','fullResetDate','timeForReset','hoursFromLastTimeStempTillNow','numberOfPlasticBinResetsSinceFullReset','numberOfAluminumBinResetsSinceFullReset','numberOfGlassBinResetsSinceFullReset','numberOfPlasticBottlesSinceLastFullReset','numberOfAluminumBottlesSinceLastFullReset','numberOfGlassBottlesSinceLastFullReset','total']"></tr>
+                            <tr mat-row *matRowDef="let row; columns: ['customerView','locationView','routeName','machineView','fullResetDate','timeForReset','hoursFromLastTimeStempTillNow','numberOfPlasticBinResetsSinceFullReset','numberOfAluminumBinResetsSinceFullReset','numberOfGlassBinResetsSinceFullReset','numberOfPlasticBottlesSinceLastFullReset','numberOfAluminumBottlesSinceLastFullReset','numberOfGlassBottlesSinceLastFullReset','total'];"></tr> -->
+
+                            <tr mat-header-row *matHeaderRowDef="['customerView','locationView','routeName','machineView','fullResetDate','hoursFromLastTimeStempTillNow','numberOfPlasticBinResetsSinceFullReset','numberOfAluminumBinResetsSinceFullReset','numberOfGlassBinResetsSinceFullReset','numberOfPlasticBottlesSinceLastFullReset','numberOfAluminumBottlesSinceLastFullReset','numberOfGlassBottlesSinceLastFullReset','total']"></tr>
+                            <tr mat-row *matRowDef="let row; columns: ['customerView','locationView','routeName','machineView','fullResetDate','hoursFromLastTimeStempTillNow','numberOfPlasticBinResetsSinceFullReset','numberOfAluminumBinResetsSinceFullReset','numberOfGlassBinResetsSinceFullReset','numberOfPlasticBottlesSinceLastFullReset','numberOfAluminumBottlesSinceLastFullReset','numberOfGlassBottlesSinceLastFullReset','total'];"></tr>
+                        </tbody>
+        
+                    </table>
+                </div>
+            </ng-template> 
+        </card-or-list-view>
+        </mat-card-content>
+    </mat-card>
+</div>

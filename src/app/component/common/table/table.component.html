@@ -1,0 +1,56 @@
+<div *ngIf="list == undefined ||  list.filteredData == undefined || list.filteredData.length == 0">
+    <table class="mat-elevation-z8" class="table">
+        <tbody>
+            <tr>
+                <td>Sorry, we couldn't find any matches.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="listGridDataCon" *ngIf="list != undefined && list.filteredData != undefined && list.filteredData.length != 0">
+    <div class="listBoxCon listGridShow active">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tableCon">
+
+                    <div class="table-responsive">
+                        <table mat-table class="mat-elevation-z8" class="table" [dataSource]="list">
+
+                            <thead>
+                                <ng-container *ngFor="let i = index; let column of columns"
+                                    matColumnDef="{{column.columnDef}}">
+                                    <th class="{{column.class}}" mat-header-cell *matHeaderCellDef>
+                                        {{column.header}} </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <span *ngIf="column.columnDef !== 'action'">{{column.cell(row)}}</span>
+                                        <span *ngIf="column.columnDef == 'action'">
+                                            <ng-container *ngFor="let menu of column.menu">
+                                                <ng-container *ngFor="let submenu of menu.subMenu">
+                                                    <button *ngIf="menu.name == 'otherActions'" mat-icon-button
+                                                        color="primary"
+                                                        (click)="commonEventEmitFunction(column.cell(row),submenu.name)">
+                                                        <mat-icon>{{submenu.icon}}</mat-icon>
+                                                        <!-- <mat-label>{{submenu.name}} </mat-label> -->
+                                                    </button>
+                                                </ng-container>
+                                            </ng-container>
+
+                                        </span>
+                                    </td>
+                                </ng-container>
+
+                            </thead>
+
+                            <tbody>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div #dynamicComponentContainer></div>
+<div class="row user-detail">
+    <div class="col-sm-12 mt-3 mb-3">
+        <div class="titleTabBoxCon">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-10 align-self-center">
+                    <div class="titleBoxCon">
+                        <h1><a href="user/list"><span
+                                    class="material-icons arrow_back">
+                                    arrow_back
+                                </span>User</a></h1>
+                    </div>
+                </div>    
+                    <div class="col-sm-12 col-md-12 col-lg-2 d-flex align-self-center">
+                        <ul class="filter-panel">
+                            <li>
+                                <div class="addNewBtnCon"><a (click)="edit()" class="addNewBtn"><span
+                                            class="material-icons-outlined">edit</span></a> </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 ">
+                        <div>
+                            <strong>Name : </strong>
+                            <span>{{userView.name}}</span>
+                        </div>
+                        <div>
+                            <strong>Email : </strong>
+                            <span>{{userView.email}}</span>
+                        </div>
+                        <div>
+                            <strong>Mobile Number : </strong>
+                            <span>{{userView.mobile}}</span>
+                        </div>
+                        <div>
+                            <strong>Customer Name : </strong>
+                            <span>{{userView.customerView?.name}}</span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

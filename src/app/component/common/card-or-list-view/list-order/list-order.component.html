@@ -1,0 +1,14 @@
+<div class="shorting-section">
+    <ng-template #ascOrderDiv>
+        <div class="shorting-btn" (click)=changeAscDes(orderTypeEnum.DESC)>
+            <span class="material-icons short-icon">sort</span><span class="material-icons short-arrow">north</span>
+        </div>
+    </ng-template>
+    <div class="shorting-btn" *ngIf="orderTypeEnum.DESC.key === selectedOederType?.key ;else ascOrderDiv"
+        (click)=changeAscDes(orderTypeEnum.ASC)>
+        <span class="material-icons short-icon">sort</span><span class="material-icons short-arrow">south</span>
+    </div>
+    <app-searchable-dropdown class="shorting-drp" [dropdownList]="orderParams" [initialValue]="selectedOrderParam"
+        (dropdownChangeEventEmitter)="selectedOrderParamEmitter.emit($event)">
+    </app-searchable-dropdown>
+</div>

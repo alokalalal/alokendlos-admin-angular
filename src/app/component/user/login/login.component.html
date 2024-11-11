@@ -1,0 +1,73 @@
+<video autoplay muted loop id="myVideo" preload="auto" onloadedmetadata="this.muted=true">
+    <source src="assets/video.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+</video>
+  
+<div class="formBoxCenter mt-5 content">
+    <div class="formBoxLogoCon">
+        <img src="assets/logo.png">
+    </div>
+    <div class="formBoxCon">
+        <form #fform="ngForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="row">                            
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        
+                        <mat-label>Email Id<span class="mandatory-star">*</span></mat-label>
+                        <mat-form-field class="form-control-mat"  floatLabel="never">
+                            <input type="text" class="iconInput userIcon" matInput formControlName="loginId" placeholder="Enter Email Id" tabindex="1">
+                            <mat-error>
+                                <app-error-message [errors]="f.loginId.errors" [submitted]="fform.submitted"
+                                    [touched]="f.loginId.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred"
+                                    [pattern]="errorMessage.patternLoginId">
+                                </app-error-message>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group" id="show_hide_password">
+                        <mat-label>Password<span class="mandatory-star">*</span></mat-label>
+                        <mat-form-field class="form-control-mat"  floatLabel="never">                           
+                            <div class="showHidePass">
+                                <a href="javascript:void(0)" (click)="hide = !hide" class="showPassword">
+                                    <i class="fa fa-eye-slash" *ngIf="!hide" aria-hidden="true"></i>
+                                    <i class="fa fa-eye" *ngIf="hide" aria-hidden="true"></i>
+                                </a>
+                                <input [type]="hide ? 'text' : 'password'" class="iconInput" matInput formControlName="password" placeholder='Enter Password' tabindex="2">
+                            </div>
+                            <mat-error>
+                                <app-error-message [errors]="f.password.errors" [submitted]="fform.submitted"
+                                    [touched]="f.password.touched" [required]="errorMessage.mandatory"></app-error-message>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12">
+                    <div class="form-group mb-0" >
+                        <div class="btnCon text-center">
+                            <span class="btnBlockUICon" *blockUI="'loginBtnBlockUI'">
+                            <button type="submit" mat-raised-button color="primary">Sign
+                                In</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-12 mt-3">
+                    <div class="form-group">
+                        <div class="formLinkText"><a [routerLink]="['/'+ appUrl.USER + '/' + appUrl.FORGOT_PASSWORD]">Forgot Password</a>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-sm-12 mt-3">
+                    <div class="form-group">
+                        <div class="formLinkText"><a [routerLink]="['/'+ appUrl.USER + '/' + appUrl.FORGOT_PASSWORD]">Forgot Password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

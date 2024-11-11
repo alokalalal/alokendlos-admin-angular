@@ -1,0 +1,59 @@
+.table-direction-icon{
+   position: relative;
+   border-bottom: 4px solid transparent;
+}
+.table-direction-icon:after{
+    content: "\f0d7";
+    font-family: "FontAwesome";
+    display: none;
+    font-size: 64px;
+    line-height: 30px;
+    color: #2D4EF5;
+    position: absolute;
+    bottom: -26px;
+    left: calc(50% - 18px);
+    z-index: 5;
+ }
+.table-direction-icon.active:after{
+    display: inline-block;
+}
+.table-direction-icon.active{
+    border-color: #2D4EF5;
+}
+.dashbord-counters-list-sm .counters-list li .icon-box{
+    width: 72px;
+    height: 72px;
+}
+.dashbord-counters-list-sm .counters-list li{
+    margin-bottom: 15px;
+}
+.dashbord-counters-list-sm .counters-list li span{
+    font-size: 18px;
+}
+@media only screen and (max-width: 1199px) {
+    .card-view{
+        margin-bottom: 15px;
+        height: calc(100% - 15px) !important;
+    }
+    .table-direction-icon.active:after {
+        display: none;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .table-direction-icon:after{
+        display: none;
+    }
+}
+.count-progess-bar{
+position: absolute;
+left: 0;
+right: 0;
+margin: auto;
+text-align: right;
+color: #2d4ef5;
+font-size: 10px;
+line-height: normal;
+}
+.count-progess-bar-con{
+    position: relative;
+}

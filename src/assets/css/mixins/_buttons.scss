@@ -1,0 +1,41 @@
+// from bs mixins/buttons button-variant
+@mixin bmd-button-variant($background-color:transparent,$color,$font-size:$btn-font-size) {
+    color:$color;
+    background-color: $background-color;
+    font-size: $font-size;
+}
+
+// .success-buttons{
+//     @include bmd-button-variant(green, red);
+// }
+// .delete-buttons{
+//     @include bmd-button-variant($color:red);
+// }
+button.mat-raised-button {
+    min-width: 150px;
+    padding: 3px 16px;
+    border: 1px solid $brand-neutral;
+}
+button.mat-button {
+    min-width: 150px;
+    padding: 3px 16px;
+}
+button.btn-secondary {
+    color: $brand-neutral;
+    &:hover {
+        background-color: $brand-neutral;
+    }
+}
+mat-card-actions{
+    button {
+        color: $brand-neutral !important;
+        &:hover {
+          background-color: $primary-blue-50 !important;
+        }
+        &.mat-button {
+          color: $brand-neutral !important;
+          min-width: auto;
+          border: 1px solid $table-border-color;
+        }
+      }
+}

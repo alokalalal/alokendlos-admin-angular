@@ -1,0 +1,96 @@
+<!-- <app-header></app-header> -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="breadcrumbCon">
+            <ul class="breadcrumbUl">
+                <li><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.DASHBOARD + '/' +this.appUrl.LIST_OPERATION]"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+                <li class="beforNone"><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.DASHBOARD + '/' +this.appUrl.LIST_OPERATION]">Dashboard</a></li>
+                <li><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.BARCODE_TEMPLATE + '/' +this.appUrl.LIST_OPERATION]">Barcode Template List</a></li>
+                <li>BarcodeTemplate {{addEditForm}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="titleTabBoxCon">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-6 align-self-center">
+                    <div class="titleBoxCon">
+                        <h1>{{addEditForm}} Barcode Template</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="employeesGridCol sameHight mt-3" pageSectionBlockUI>
+    <div class=" p-3">
+        <div class="row">
+            <div class="col-sm-12">
+                <form #fform="ngForm" [formGroup]="barcodeTemplateAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="formCon">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <mat-label> Barcode Template Name <sup>*</sup></mat-label>
+                                            <mat-form-field class="form-control-mat" floatLabel="never">
+                                                <input type="text" [readonly]="!isUpdate" matInput formControlName="name"
+                                                    [(ngModel)]="barcodeModel.name" placeholder='Enter Template Name' [ngClass]="{'override': isUpdate}">
+                                                <mat-error>
+                                                    <app-error-message [errors]="f.name.errors"
+                                                        [submitted]="fform.submitted" [touched]="f.name.touched"
+                                                        [required]="errorMessage.mandatory"
+                                                        [maxlength]="errorMessage.maxlengthHundred"
+                                                        [pattern]="errorMessage.patternAlphaNumericSpaceDot">
+                                                    </app-error-message>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <mat-label>Length <sup>*</sup></mat-label>
+                                            <mat-form-field class="form-control-mat" floatLabel="never">
+                                                <input type="number" [readonly]="!isUpdate"  matInput formControlName="totalLength"
+                                                [(ngModel)]="barcodeModel.totalLength" placeholder='Enter Length' [ngClass]="{'override': isUpdate}">
+                                                <mat-error>
+                                                    <app-error-message [errors]="f.totalLength.errors"
+                                                        [submitted]="fform.submitted" [touched]="f.totalLength.touched"
+                                                        [required]="errorMessage.mandatory"
+                                                        [max]="errorMessage.maxThirty"
+                                                        [min]="errorMessage.minlengtEight">
+                                                    </app-error-message>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="btnCon text-left mt-3">
+                                <span class="btnBlockUICon" *ngIf="isUpdate">
+                                    <button type="button"  mat-raised-button
+                                        [routerLink]="['/' + appUrl.BARCODE_TEMPLATE + '/' + appUrl.LIST_OPERATION]"
+                                        class="mr-2 btn-secondary" *blockUI="'pageSectionBlockUI'">Cancel</button>
+                                    <button type="submit"  mat-raised-button color="primary"
+                                        *blockUI="'pageSectionBlockUI'">{{saveUpdateBtn}}</button>
+                                </span>
+                                <span class="btnBlockUICon" *ngIf="!isUpdate">
+                                    <button type="button"  mat-raised-button color="primary"(click)="edit()"
+                                        class="mr-2 btn-secondary" *blockUI="'pageSectionBlockUI'">Edit</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <app-barcode-structure-list class="barcode-check-box-con"
+        *ngIf="barcodeModel.totalLength!=undefined && !isUpdate" [barcodeModel]="barcodeModel">
+    </app-barcode-structure-list>
+</div>

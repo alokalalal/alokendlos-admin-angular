@@ -1,0 +1,123 @@
+<ng-container>
+    <div class="editBoxDataCon" [ngClass]="{'active': isOpenModel == true}">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon">
+            <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+                <form #fform="ngForm" [formGroup]="systemSpecificationDetailAddEditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="editBoxFullTop">
+                                <div class="editBoxTitle">
+                                    {{addEditForm}} System Specification Detail</div>
+                                <a class="editBoxClose" (click)="closeModal()" href="javascript:void(0)">✖</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxEmployeesDetCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxMattersTasksCon">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Machine Id<sup>*</sup></mat-label>
+                                                                    <app-searchable-dropdown class="mat-select-label-none"
+                                                                        [filteredDataModel]="systemSpecificationDetailView.machineView"
+                                                                        [placeholder]="'Select a Machine Id'"
+                                                                        [dropdownList]="machineKeyValueViews"
+                                                                         [initialValue]="selectedMachine"
+                                                                        (dropdownChangeEventEmitter)="changePickupRoute($event)"
+                                                                        [searchableDropdownControl]="$any(systemSpecificationDetailAddEditForm).controls['machineView']">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.machineView.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.machineView.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </app-searchable-dropdown>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                    <mat-label>Anydesk Id<sup>*</sup></mat-label>
+                                                                    <mat-form-field class="form-control-mat"
+                                                                        floatLabel="never">
+                                                                        <input type="test" matInput
+                                                                            formControlName="anydeskId"
+                                                                            [(ngModel)]="systemSpecificationDetailView.anydeskId"
+                                                                            placeholder="Enter Anydesk Id" maxlength="100" [ngClass]="'override'">
+                                                                            <mat-error>
+                                                                                <app-error-message [errors]="f.anydeskId.errors" [submitted]="fform.submitted"
+                                                                                        [touched]="f.anydeskId.touched" [required]="errorMessage.mandatory">
+                                                                                </app-error-message>
+                                                                            </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6">
+                                                                <div class="form-group">
+                                                                        <mat-label>Anydesk Password<sup>*</sup></mat-label>  
+                                                                        <mat-form-field class="form-control-mat"
+                                                                            floatLabel="never">                                            
+                                                                        <input type="test" matInput formControlName="anydeskPassword" [(ngModel)]="systemSpecificationDetailView.anydeskPassword" placeholder='Enter Anydesk Password' [ngClass]="'override'">
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.anydeskPassword.errors" [submitted]="fform.submitted"
+                                                                                    [touched]="f.anydeskPassword.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                             </div>
+                                                        </div>                                                        
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group readonly-field">
+                                                                        <mat-label>Windows Activation Key</mat-label>
+                                                                        <mat-form-field class="form-control-mat">
+                                                                        <input type="text" ng-disabled="all"  matInput formControlName="windowsActivationKey" [(ngModel)]="systemSpecificationDetailView.windowsActivationKey" placeholder='Enter Windows Activation Key' [ngClass]="'override'">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Windows Production Key</mat-label>  
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                            
+                                                                        <input type="text" matInput formControlName="windowsProductionKey" [(ngModel)]="systemSpecificationDetailView.windowsProductionKey" placeholder='Enter Windows Production Key' [ngClass]="'override'">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <mat-label>Windows Password</mat-label>
+                                                                    <mat-form-field class="form-control-mat" floatLabel="never">                                            
+                                                                        <input type="text" matInput formControlName="windowsPassword" [(ngModel)]="systemSpecificationDetailView.windowsPassword" placeholder='Enter Windows Password' [ngClass]="'override'">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12" >
+                                                <div class="btnCon text-right mt-3 fixed-botton">
+                                                    <button type="button" mat-raised-button (click)="closeModal()"
+                                                        class="mr-2 btn-secondary" *blockUI="'saveUpdateBtnBlockUI'">Cancel</button>
+                                                    <button type="submit" mat-raised-button
+                                                        color="primary" *blockUI="'saveUpdateBtnBlockUI'">{{saveUpdateBtn}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

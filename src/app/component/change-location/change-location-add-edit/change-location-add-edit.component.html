@@ -1,0 +1,277 @@
+<ng-container>
+    <div class="editBoxDataCon active">
+        <div class="editBoxOpacityBg"></div>
+        <div class="editBoxCon editBoxCon-lg table-same-hight">
+            <div class="editBoxFull" *blockUI="'listContainerBlockUi'">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="editBoxFullTop">
+                            <div class="editBoxTitle">
+                                Assign New Location</div>
+                            <a class="editBoxClose" (click)="closeModal()" href="javascript:void(0)">✖</a>
+                        </div>
+                    </div>
+                    <form #fform="ngForm" [formGroup]="changeLocationAddEditForm" (ngSubmit)="submit()">
+                        <div class="col-sm-12">
+                            <div class="editBoxgRidDesTextCon">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 ">
+                                        <div class="editBoxMattersTasksCon">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-bordered mb-4">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><strong>Machine Id:</strong></td>
+                                                                <td>{{changeLocationView?.machineView?.machineId}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>status:</strong></td>
+                                                                <td>{{dynamicComponentData.status.value}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>Requested Timestamp:</strong></td>
+                                                                <td>{{dynamicComponentData.requestDate * 1000| date:'medium'}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>Response Timestamp:</strong></td>
+                                                                <td>{{dynamicComponentData.responseDate * 1000| date:'medium'}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="editBoxTitle mb-4">Select New Location To Assign</div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                                    <div class="editBoxTitle mb-4"> Current</div>
+                                                    <div class="table-con">
+                                                        <table class="table table-bordered mb-4">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><strong>Customer Name:</strong></td>
+                                                                    <td>{{changeLocationView?.oldCustomerView?.name}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Branch Name:</strong></td>
+                                                                    <td>{{changeLocationView?.oldLocationView?.name}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Branch Number:</strong></td>
+                                                                    <td>{{changeLocationView?.oldLocationView?.branchNumber}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Barcode Template Name:</strong></td>
+                                                                    <td>{{changeLocationView.oldBarcodeTemplateView?.name}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Branch Wise Machine No:</strong></td>
+                                                                    <td>{{changeLocationView.oldBranchMachineNumber}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Machine Barcode File Name:</strong></td>
+                                                                    <td>{{changeLocationView.oldMachineBarcodeFileView?.barcodeFileName}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                                    <div class="editBoxTitle mb-4"> New</div>
+                                                    <div class="table-con">
+                                                        <table class="table table-bordered mb-4" *ngIf="isAdd">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><strong>Customer Name:</strong></td>
+                                                                    <td>
+                                                                        <mat-form-field style="padding-top: 25px;" class="form-control-mat" floatLabel="never">
+                                                                        <mat-select placeholder="Select customer"
+                                                                            formControlName="customer"
+                                                                            [(ngModel)]="customer"
+                                                                            (selectionChange)="changeCustomer(customer)">
+                                                                            <mat-option
+                                                                                *ngFor="let customer of customerList"
+                                                                                [value]="customer">
+                                                                                {{customer.name}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.customer.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.customer.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                        </mat-form-field>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Branch Name:</strong></td>
+                                                                    <td>
+                                                                        <mat-form-field style="padding-top: 25px;" class="form-control-mat" floatLabel="never">
+                                                                        <mat-select placeholder="Select branch"
+                                                                            formControlName="location"
+                                                                            [(ngModel)]="location"
+                                                                            (selectionChange)="changeLocation(location)">
+                                                                            <mat-option
+                                                                                *ngFor="let location of locationList"
+                                                                                [value]="location">
+                                                                                {{location.name}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.location.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.location.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                        </mat-form-field>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Branch Number:</strong></td>
+                                                                    <td>{{locationView?.branchNumber}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Barcode Template Name:</strong></td>
+                                                                    <td>
+                                                                        <mat-form-field style="padding-top: 25px;" class="form-control-mat" floatLabel="never">
+                                                                        <mat-select placeholder="Select barcode template"
+                                                                            formControlName="barcodeTemplate"
+                                                                            [(ngModel)]="barcodeTemplate"
+                                                                            (selectionChange)="changeBarcodeTemplate(barcodeTemplate)">
+                                                                            <mat-option
+                                                                                *ngFor="let barcodeTemplate of barcodeTemplateList"
+                                                                                [value]="barcodeTemplate">
+                                                                                {{barcodeTemplate.name}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.barcodeTemplate.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.barcodeTemplate.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <strong>Branch Wise Machine No:</strong>
+                                                                    </td>
+                                                                    <!-- <td>
+                                                                        <mat-form-field style="padding-top: 25px;" class="form-control-mat" floatLabel="never">
+                                                                            <input type="text" formControlName="newBranchMachineNumber" placeholder="Branch Wise Machine Number" matInput [(ngModel)]="newBranchMachineNumber" (change)="branchNumber(newBranchMachineNumber)" />
+                                                                        </mat-form-field>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.newBranchMachineNumber.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.newBranchMachineNumber.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengtOne" [pattern]="errorMessage.patternNumeric">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </td> -->
+                                                                    <td>
+                                                                        <mat-form-field style="padding-top: 25px;" class="form-control-mat" floatLabel="never">
+                                                                           <!--  <mat-select placeholder="Select barcode template"
+                                                                                    formControlName="newBranchMachineNumber"
+                                                                                    [(ngModel)]="newBranchMachineNumber"
+                                                                                    (selectionChange)="changeBranchWiseMachineNumber($event.value?.branchMachineNumber)">
+                                                                            <mat-option *ngFor="let machineView of machineDropdownList" [value]="machineView">
+                                                                                {{machineView.branchMachineNumber}}
+                                                                            </mat-option>
+                                                                        </mat-select> -->
+                                                                        <mat-select placeholder="Branch Wise Machine Number"
+                                                                                formControlName="newBranchMachineNumber"
+                                                                                [(ngModel)]="newBranchMachineNumber"
+                                                                                (ngModelChange)="changeBranchWiseMachineNumber($event)">
+                                                                        <mat-option *ngFor="let number of staticNumbers" [value]="number" [disabled]="isNumberInDropdown(number)">
+                                                                            {{number}}
+                                                                        </mat-option>
+                                                                    </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.newBranchMachineNumber.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.newBranchMachineNumber.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Machine Barcode File Name:</strong></td>
+                                                                    <td>
+                                                                        <mat-form-field style="padding-top: 25px;" class="form-control-mat" floatLabel="never">
+                                                                        <mat-select placeholder="Select barcode template"
+                                                                            formControlName="machineBarcodeFile"
+                                                                            [(ngModel)]="machineBarcodeFile"
+                                                                            (selectionChange)="changeMachineBarcodeFile(machineBarcodeFile)">
+                                                                            <mat-option
+                                                                                *ngFor="let machineBarcodeFile of machineBarcodeFileList"
+                                                                                [value]="machineBarcodeFile">
+                                                                                <!-- {{machineBarcodeFile.fileView?.name}} -->
+                                                                                {{machineBarcodeFile.barcodeFileName}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                        <mat-error>
+                                                                            <app-error-message [errors]="f.machineBarcodeFile.errors" [submitted]="fform.submitted"
+                                                                                [touched]="f.machineBarcodeFile.touched" [required]="errorMessage.mandatory">
+                                                                            </app-error-message>
+                                                                        </mat-error>
+                                                                    </mat-form-field>
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                        <table class="table table-bordered mb-4" *ngIf="isView">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><strong>Customer Name:</strong></td>
+                                                                    <td>{{changeLocationView?.customerView?.name}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Branch Name:</strong></td>
+                                                                    <td>{{changeLocationView?.locationView?.name}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Branch Number:</strong></td>
+                                                                    <td>{{changeLocationView?.locationView?.branchNumber}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Barcode Template Name:</strong></td>
+                                                                    <td>{{changeLocationView?.barcodeTemplateView?.name}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Branch Wise Machine No:</strong></td>
+                                                                    <td>{{changeLocationView?.newBranchMachineNumber}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Machine Barcode File Name:</strong></td>
+                                                                    <!-- <td>{{changeLocationView?.oldMachineBarcodeFileView?.fileView?.name}}</td> -->
+                                                                    <td>{{changeLocationView?.barcodeMachineView?.barcodeFileName}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12" *ngIf="isAdd">
+                                        <div class="btnCon text-right mt-3 fixed-botton">
+                                            <button type="button" mat-raised-button (click)="closeModal()"
+                                                class="btn-secondary mr-2">Cancel</button>
+                                            <button type="submit" mat-raised-button color="primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

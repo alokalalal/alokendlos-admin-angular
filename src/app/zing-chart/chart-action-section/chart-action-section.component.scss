@@ -1,0 +1,14 @@
+.view-link-area {
+    display: flex;
+    align-items: center;
+    background: none;
+    border-top: 1px solid #eee;
+    flex-direction: row-reverse;
+    margin: 0px;
+    padding: 8px 0;
+    a {display: flex; align-items: center;
+        i {font-size: 20px;}
+        &:hover { background: rgba(0,0,0,0.1);}
+    }
+}
+

@@ -1,0 +1,54 @@
+<div #dynamicComponentContainer></div>
+<div class="row machine-detail">
+    <div class="col-sm-12 mt-3 mb-3">
+        <div class="titleTabBoxCon">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-10 align-self-center">
+                    <ul class="breadcrumbUl">
+                        <li><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.BARCODE_TEMPLATE + '/' +this.appUrl.LIST_OPERATION]"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+                        <li class="beforNone"><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.DASHBOARD + '/' +this.appUrl.LIST_OPERATION]">Dashboard</a></li>
+                        <li><a href="javascript:void(0)" [routerLink]="['/'+ appUrl.BARCODE_TEMPLATE + '/' +this.appUrl.LIST_OPERATION]">Barcode Template List</a></li>
+                        <li>Barcode Template Detail</li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-2 d-flex align-self-center">
+                    <ul class="filter-panel">
+                        <li>
+                            <div *ngIf="BarcodeTemplateView.completed==false" class="addNewBtnCon"><a (click)="edit()" class="addNewBtn"><span
+                                        class="material-icons-outlined">edit</span></a> </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="list-box-view-con">
+            <div class="row">
+                <div class="col-sm-12 d-flex">
+                    <div class="card-view  w-100 same-box mb-4">                       
+                        <div class="card-title-bar">
+                          <h1> Barcode Template Details</h1>
+                        </div> 
+                        <div class="row">                             
+                            <div class="col-12">
+                                <mat-card-subtitle>
+                                    <p><strong class="min-title-length">Barcode Template Name </strong> : {{BarcodeTemplateView.name}}</p>
+                                    <p><strong class="min-title-length">Barcode Length  </strong> : {{BarcodeTemplateView.totalLength}}</p>
+                                    <p><strong class="min-title-length">Number Of Machines Assigned </strong> : {{BarcodeTemplateView.numberOfMachineAssigned}}</p>
+                                    <p><strong class="min-title-length">Status  </strong> : <span *ngIf="BarcodeTemplateView.completed==true">Completed</span>
+                                    <span *ngIf="BarcodeTemplateView.completed==false" class="text-danger">Draft</span></p>
+                                </mat-card-subtitle>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="card-view  w-100 same-box mb-4">
+            <app-barcode-structure-list class="barcode-check-box-con" *ngIf="BarcodeTemplateView.name!=undefined" [barcodeModel]="BarcodeTemplateView"  [isViewPage]="true"></app-barcode-structure-list>
+        </div>
+    </div>
+</div>

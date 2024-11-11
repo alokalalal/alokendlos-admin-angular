@@ -1,0 +1,245 @@
+<ng-container>
+  <div class="editBoxDataCon" [ngClass]="{'active': isOpenModel == true}">
+      <div class="editBoxOpacityBg"></div>
+      <div class="editBoxCon" >            
+          <div class="editBoxFull" *blockUI="'pageSectionBlockUI'">
+              <form #fform="ngForm" [formGroup]="userAddEditForm" (ngSubmit)="onSubmit()">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <div class="editBoxFullTop">
+                              <div class="editBoxTitle">
+                                  <!-- <span class="editIconBox">
+                                      <i class="fa fa-plus" *ngIf="!isUserEdit" aria-hidden="true"></i>
+                                      <i class="fa fa-pencil" *ngIf="isUserEdit" aria-hidden="true"></i>
+                                  </span> -->
+                                  {{addEditForm}} Super Admin</div>
+                              <a class="editBoxClose" (click)="closeModal()" href="javascript:void(0)">✖</a>
+                          </div>
+                      </div>
+                      <div class="col-sm-12" >
+                          <div class="editBoxgRidDesTextCon">
+                              <div class="row">
+                                  <div class="col-12 col-sm-12 ">
+                                      <div class="editBoxEmployeesDetCon">
+                                          <div class="row">
+                                              <div class="col-sm-12">
+                                                  <div class="editBoxMattersTasksCon">
+                                                      <div class="row">   
+                                                          <div class="col-sm-12 col-md-6">
+                                                              <div class="form-group">
+                                                                  <mat-label>Name</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">                                                  
+                                                                      <input type="name" matInput formControlName="name" [(ngModel)]="userModel.name" placeholder="Enter Name">
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.name.errors" [submitted]="fform.submitted" [touched]="f.name.touched" 
+                                                                              [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred" [pattern]="errorMessage.patternAlphaNumericSpaceDot">
+                                                                          </app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6">
+                                                              <div class="form-group">
+                                                                  <mat-label>Email</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                  <input type="email" matInput formControlName="email"  [(ngModel)]="userModel.email" placeholder='Enter Email Id'>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.email.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.email.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred" [email]='errorMessage.patternEmail'>
+                                                                          </app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6" >
+                                                              <div class="form-group">
+                                                                  <mat-label>Role</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <mat-select [(ngModel)]="userModel.roleViews"  [compareWith]="comparer" formControlName="roleViews" name="roleViews" 
+                                                                          class="mat-input-element"  placeholder="Select a User Role" multiple>
+                                                                          <mat-option *ngFor="let role of roleList" [value]="role">
+                                                                          {{role.name}}
+                                                                          </mat-option>
+                                                                      </mat-select>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.roleViews.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.roleViews.touched" [required]="errorMessage.mandatory" 
+                                                                              ></app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6" *ngIf="userModel.countryCode != undefined">
+                                                              <div class="form-group">
+                                                                  <mat-label>Country Code </mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <mat-select [(ngModel)]="userModel.countryCode.key" (selectionChange)="setMobileValidation()" formControlName="countryCode" name="countryCode" 
+                                                                          class="mat-input-element" placeholder="Select Country Code">
+                                                                          <mat-option *ngFor="let countryCode of countryCodeList" [value]="countryCode.key">
+                                                                          {{countryCode.value}}
+                                                                          </mat-option>
+                                                                      </mat-select>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.countryCode.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.countryCode.touched" [required]="errorMessage.mandatory" 
+                                                                              ></app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6">
+                                                              <div class="form-group">
+                                                                  <mat-label>Mobile</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <input type="tel" matInput formControlName="mobile"  [(ngModel)]="userModel.mobile"  (change)="setCountryCodeValidation()" placeholder='Enter Mobile Number'>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.mobile.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.mobile.touched" [required]="errorMessage.mandatory" [pattern]="errorMessage.patternNumeric">
+                                                                          </app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6">
+                                                              <div class="form-group">
+                                                                  <mat-label>Address</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <input type="text" matInput formControlName="address"  [(ngModel)]="userModel.address" placeholder='Enter Address'>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.address.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.address.touched" [maxlength]="errorMessage.maxlengthHundred" [required]="errorMessage.mandatory">
+                                                                          </app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6">
+                                                              <div class="form-group">
+                                                                  <mat-label>Landmark</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <input type="text" matInput formControlName="landmark"  [(ngModel)]="userModel.landmark" placeholder='Enter Landmark'>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.landmark.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.landmark.touched" [maxlength]="errorMessage.maxlengthHundred" >
+                                                                          </app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6" *ngIf="userModel.countryView != undefined">
+                                                              <div class="form-group">
+                                                                  <mat-label>Country </mat-label>
+                                                                  <!-- <app-searchable-dropdown>
+                                                                  </app-searchable-dropdown> -->
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                  <mat-select [(ngModel)]="userModel.countryView.key" (selectionChange)="getState(userModel.countryView.key)" 
+                                                                      formControlName="countryView" name="countryView" class="mat-input-element" placeholder="Select a Country">
+                                                                          <mat-option *ngFor="let country of countrylist" [value]="country.key">
+                                                                          {{country.value}}
+                                                                          </mat-option>
+                                                                      </mat-select>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.countryView.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.couptntryView.touched" [required]="errorMessage.mandatory" 
+                                                                              ></app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6" *ngIf="userModel.stateView != undefined && userModel.countryView?.key != undefined && userModel.countryView?.key == 96">
+                                                              <div class="form-group">
+                                                                  <mat-label>State </mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <mat-select [(ngModel)]="userModel.stateView.key" (selectionChange)="getCity(userModel.stateView.key)" 
+                                                                          formControlName="stateView" name="countryView" class="mat-input-element" placeholder="Select a State">
+                                                                          <mat-option *ngFor="let state of statelist" [value]="state.key">
+                                                                          {{state.value}}
+                                                                          </mat-option>
+                                                                      </mat-select>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.stateView.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.stateView.touched" [required]="errorMessage.mandatory" 
+                                                                              ></app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6" *ngIf="userModel != undefined && userModel.countryView != undefined && userModel.countryView.key != 96">
+                                                              <div class="form-group">
+                                                                  <mat-label>State Name</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <input type="text" matInput formControlName="stateName" [(ngModel)]="userModel.stateName" placeholder='Enter State Name'>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.stateName.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.stateName.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                          </app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6" *ngIf="userModel.cityView != undefined && userModel.stateView?.key != undefined  && userModel.countryView?.key == 96">
+                                                              <div class="form-group">
+                                                                  <mat-label>City </mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <mat-select [(ngModel)]="userModel.cityView.key"  formControlName="cityView" name="cityView" 
+                                                                          class="mat-input-element"  placeholder="Select a City">
+                                                                          <mat-option *ngFor="let city of citylist" [value]="city.key">
+                                                                          {{city.value}}
+                                                                          </mat-option>
+                                                                      </mat-select>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.cityView.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.cityView.touched" [required]="errorMessage.mandatory" 
+                                                                              ></app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6" *ngIf="userModel != undefined && userModel.countryView != undefined && userModel.countryView.key != 96">
+                                                              <div class="form-group">
+                                                                  <mat-label>City Name</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <input type="text" matInput formControlName="cityName" [(ngModel)]="userModel.cityName" placeholder='Enter City Name'>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.cityName.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.cityName.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthHundred">
+                                                                          </app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-sm-12 col-md-6">
+                                                              <div class="form-group">
+                                                                  <mat-label>Pincode</mat-label>
+                                                                  <mat-form-field class="form-control-mat" floatLabel="never">
+                                                                      <input type="text" matInput formControlName="pincode" [(ngModel)]="userModel.pincode" placeholder='Enter Pincode'>
+                                                                      <mat-error>
+                                                                          <app-error-message [errors]="f.pincode.errors" [submitted]="fform.submitted"
+                                                                              [touched]="f.pincode.touched" [required]="errorMessage.mandatory" [maxlength]="errorMessage.maxlengthSix" [minlength]="errorMessage.minlengtSix" [pattern]="errorMessage.patternNumeric">
+                                                                          </app-error-message>
+                                                                      </mat-error>
+                                                                  </mat-form-field>
+                                                              </div>
+                                                          </div>
+                                                      </div>                
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-sm-12" *blockUI="'saveUpdateBtnBlockUI'">
+                                              <div class="btnCon text-right mt-3 fixed-botton">
+                                                  <button type="button" mat-raised-button (click)="closeModal()"  class="mr-2 btn-secondary">Cancel</button>
+                                                  <button type="submit" mat-raised-button color="primary">{{saveUpdateBtn}}</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</ng-container>

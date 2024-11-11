@@ -1,0 +1,40 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content>  
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="titleTabBoxCon">
+                                    <div class="row" style="margin-top: 15px;">
+                                        <div class="col-sm-12 col-md-12 col-lg-4 align-self-center">
+                                            <div class="titleBoxCon">
+                                                <h1>Role</h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-8 d-flex align-self-center">
+                                            <ul class="filter-panel">
+                                                <li> <app-full-text-search [placeHolder] = "'Search By Name'" (fulltextsearch) = "fulltextsearch($event)"></app-full-text-search></li>
+                                                <li>
+                                                    <div class="addNewBtnCon">
+                                                        <a *ngIf="accessRightsJson.isAccessRightAdd" [routerLink]="['/' + appUrl.ROLE + '/' + appUrl.ADD_OPERATION]" class="addNewBtn">
+                                                            <span class="material-icons-outlined">add</span></a> 
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>        
+                                </div>  
+                                <div style="margin-top: -17px;">
+                                    <app-list 
+                                        [service]="roleService"
+                                        [columns]="columns" 
+                                        (commonEventEmitterData)="getCommonEventEmitterFunction($event)"
+                                        (removeSearchObjectEventEmitterData) = "removeSearchObjectEvent($event)"
+                                        [accessRightsJson]="accessRightsJson"
+                                    ></app-list>  
+                                </div>
+                            </div>
+                        </div>                           
+        </mat-card-content>
+    </mat-card>
+</div>

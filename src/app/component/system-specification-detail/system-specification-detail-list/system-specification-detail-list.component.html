@@ -1,0 +1,101 @@
+<div #dynamicComponentContainer></div>
+<div class="col-sm-12 material-card">
+    <mat-card appMaterialElevation class="h-100">
+        <mat-card-content>
+            <card-or-list-view #cardOrListViewComponent *blockUI="'listContainerBlockUi'"
+                [listContainer]="listContainer" (addEventEmitter)="addEventEmitCall()"
+                [start]="start" [pageSize]="pageSize" (searchEventEmitter)="searchEventEmitCall()" (addExport)="export()"
+                [recordSize]="recordSize">
+                <ng-template listItem let-items>
+                    <div class="table-responsive" *ngIf="cardOrListViewComponent?.items != undefined">
+                        <table mat-table class="mat-elevation-z8" class="table"
+                            [dataSource]="cardOrListViewComponent.items" matSort (matSortChange)="sortData($event)">
+                            <thead>
+                                <ng-container matColumnDef="machineId">
+                                    <th mat-sort-header="machineId" id="machineId" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Machine Id</th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <span>{{item.machineView?.machineId}}</span>
+                                        </td>
+                                </ng-container>
+                                <ng-container matColumnDef="anydeskId">
+                                    <th mat-sort-header="anydeskId" id="anydeskId" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Anydesk Id </th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <span >{{item.anydeskId}}</span>
+                                        </td>
+                                </ng-container>
+                                <ng-container matColumnDef="anydeskPassword">
+                                    <th mat-sort-header="anydeskPassword" id="anydeskPassword" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Anydesk Password</th>
+                                        <td mat-cell *matCellDef="let item">
+                                            <span >{{item.anydeskPassword}}</span>
+                                        </td>
+                                </ng-container>
+                                <ng-container matColumnDef="windowsActivationKey">
+                                    <th mat-sort-header="windowsActivationKey" id="windowsActivationKey" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Windows Activation Key</th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.windowsActivationKey}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="windowsProductionKey">
+                                    <th mat-sort-header="windowsProductionKey" id="windowsProductionKey" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Windows Production Key</th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.windowsProductionKey}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="windowsPassword">
+                                    <th mat-sort-header="windowsPassword" id="windowsPassword" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Windows Password</th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <span>{{item.windowsPassword}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="createDate">
+                                    <th mat-sort-header="createDate" id="createDate" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Created On </th>
+                                    <td mat-cell *matCellDef="let item" >
+                                        <span>{{item.dateOfCreated  * 1000| date:'medium'}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="updateDate">
+                                    <th mat-sort-header="updateDate" id="updateDate" class="width-15" mat-header-cell *matHeaderCellDef style="color: black;font-weight: bold;">
+                                        Last Updated </th>
+                                    <td mat-cell *matCellDef="let item" >
+                                        <span>{{item.dateOfUpdated  * 1000| date:'medium'}}</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="action">
+                                    <th id="action" class="width-20" mat-header-cell *matHeaderCellDef  style="color: black;font-weight: bold;font-size: medium;">
+                                        Action </th>
+                                    <td mat-cell *matCellDef="let item">
+                                        <ng-container *ngIf="listContainer.accessRightsJson.isAccessRightEdit">
+                                            <button mat-icon-button (click)="edit(item)" color="primary"  matTooltip="Edit Detail" >
+                                                <mat-icon>mode_edit</mat-icon>
+                                            </button>    
+                                        </ng-container>
+                                        <ng-container *ngIf="listContainer.accessRightsJson.isAccessRightDelete">
+                                            <button mat-icon-button (click)="delete(item)" color="primary" matTooltip="Delete System Specification Detail">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </ng-container>
+                                    </td>
+                                </ng-container>
+                            </thead>
+                            <tbody>
+                                <tr mat-header-row
+                                    *matHeaderRowDef="['machineId','anydeskId','anydeskPassword','windowsActivationKey','windowsProductionKey','windowsPassword','createDate','updateDate','action']">
+                                </tr>
+                                <tr mat-row
+                                    *matRowDef="let row; columns: ['machineId','anydeskId','anydeskPassword','windowsActivationKey','windowsProductionKey','windowsPassword','createDate','updateDate','action'];">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-template>
+            </card-or-list-view>
+        </mat-card-content>
+    </mat-card>
+</div>
